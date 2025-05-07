@@ -1,23 +1,37 @@
 {
   "compilerOptions": {
     "module": "commonjs",
+    "target": "ES2023",
+    "lib": ["ES2023"],
     "declaration": true,
+    "sourceMap": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2023",
-    "sourceMap": true,
-    "outDir": "./dist",
+    "moduleResolution": "node",
     "baseUrl": "./",
+    "outDir": "./dist",
+    "paths": {
+      "@/*": ["src/*"]
+    },
     "incremental": true,
     "skipLibCheck": true,
-    "strictNullChecks": true,
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitAny": true,
+    "resolveJsonModule": true,
+
+    // ✅ Strict settings
     "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "strictPropertyInitialization": true,
+    "forceConsistentCasingInFileNames": true,
+
+    // ✅ Reasonable relaxations
     "strictBindCallApply": false,
-    "noFallthroughCasesInSwitch": false
-  }
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
 }
