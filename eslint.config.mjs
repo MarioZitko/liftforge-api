@@ -5,40 +5,39 @@ import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
+  // ✅ Ignore build + config files
   {
-    ignores: ['dist', 'node_modules'],
+    ignores: ['dist', 'node_modules', 'eslint.config.mjs'],
   },
+
+  // ✅ Base ESLint recommended config
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+
+  // ✅ Prettier formatting
   eslintPluginPrettierRecommended,
+
+  // ✅ Type-aware config — scoped only to TS files
   {
     languageOptions: {
       globals: {
         ...globals.node,
         ...globals.jest,
       },
-      sourceType: 'module', // if you're using ESM
+      sourceType: 'module',
       parserOptions: {
         project: ['./tsconfig.json'],
-        tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: new URL('.', import.meta.url).pathname,
         ecmaVersion: 'latest',
       },
     },
-  },
-  {
     rules: {
-      // TypeScript-specific rules
       '@typescript-eslint/no-explicit-any': 'off',
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-unsafe-call': 'off',
-
-      // Prettier should manage formatting
-      'prettier/prettier': 'warn',
-
-      // Optional: tune for NestJS
       '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/explicit-module-boundary-types': 'off',
+      'prettier/prettier': 'warn',
     },
   },
 );

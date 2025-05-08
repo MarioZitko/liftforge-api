@@ -1,20 +1,22 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AuthModule } from './modules/auth/auth.module';
-import { UserModule } from './modules/user/user.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { AccountController } from './modules/account/account.controller';
-import { AccountService } from './modules/account/account.service';
-import { SessionController } from './modules/session/session.controller';
-import { SessionService } from './modules/session/session.service';
-import { VerificationTokenController } from './modules/verification-token/verification-token.controller';
-import { VerificationTokenService } from './modules/verification-token/verification-token.service';
-import { PasswordResetTokenService } from './modules/password-reset-token/password-reset-token.service';
 
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './modules/auth/auth.module';
 @Module({
-  imports: [PrismaModule, AuthModule, UserModule],
-  controllers: [AppController, AccountController, SessionController, VerificationTokenController],
-  providers: [AppService, AccountService, SessionService, VerificationTokenService, PasswordResetTokenService],
+  imports: [
+    // ✅ Add ConfigModule globally
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+
+    // ✅ Core application modules
+    PrismaModule,
+    AuthModule,
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

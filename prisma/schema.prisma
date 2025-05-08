@@ -34,6 +34,7 @@ model User {
   accounts            Account[] // One-to-many (for OAuth or multiple methods)
   sessions            Session[]
   verificationTokens  VerificationToken[]
+  hashedRefreshToken String?
   passwordResetTokens PasswordResetToken[]
 }
 
