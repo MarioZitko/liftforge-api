@@ -59,6 +59,77 @@ export class AuthService {
     return { accessToken, refreshToken: rawRefreshToken };
   }
 
+  async requestEmailVerification(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user || user.emailVerified) return;
+
+    const token = randomUUID();
+    await this.prisma.verificationToken.create({
+      data: {
+        token,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 1000 * 60 * 30), // 30 minutes
+      },
+    });
+
+    // TODO: send token via email
+    console.log(`[DEBUG] Email verification token for ${email}: ${token}`);
+  }
+
+  async verifyEmail(token: string) {
+    const record = await this.prisma.verificationToken.findUnique({
+      where: { token },
+      include: { user: true },
+    });
+
+    if (!record || record.expiresAt < new Date()) {
+      throw new UnauthorizedException('Invalid or expired email verification token');
+    }
+
+    await this.prisma.user.update({
+      where: { id: record.userId },
+      data: { emailVerified: true },
+    });
+
+    await this.prisma.verificationToken.delete({ where: { token } });
+  }
+
+  async requestPasswordReset(email: string) {
+    const user = await this.prisma.user.findUnique({ where: { email } });
+    if (!user) return; // don't reveal user existence
+
+    const token = randomUUID();
+    await this.prisma.passwordResetToken.create({
+      data: {
+        token,
+        userId: user.id,
+        expiresAt: new Date(Date.now() + 1000 * 60 * 15), // 15 minutes
+      },
+    });
+
+    // TODO: send token via email
+    console.log(`[DEBUG] Password reset token for ${email}: ${token}`);
+  }
+
+  async resetPassword(token: string, newPassword: string) {
+    const record = await this.prisma.passwordResetToken.findUnique({
+      where: { token },
+      include: { user: true },
+    });
+
+    if (!record || record.expiresAt < new Date()) {
+      throw new UnauthorizedException('Invalid or expired reset token');
+    }
+
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await this.prisma.user.update({
+      where: { id: record.userId },
+      data: { password: hashed },
+    });
+
+    await this.prisma.passwordResetToken.delete({ where: { token } });
+  }
+
   async validateRefreshToken(email: string, token: string): Promise<User> {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user || !user.hashedRefreshToken) {
