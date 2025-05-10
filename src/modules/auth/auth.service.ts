@@ -6,12 +6,13 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { randomUUID } from 'crypto';
 import { User } from 'generated/prisma';
-
+import { EmailService } from '@/modules/email/email.service';
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService, // Injecting PrismaService
     private readonly jwtService: JwtService,
+    private readonly emailService: EmailService,
   ) {}
 
   async register(dto: RegisterDto): Promise<{ accessToken: string }> {
@@ -72,8 +73,7 @@ export class AuthService {
       },
     });
 
-    // TODO: send token via email
-    console.log(`[DEBUG] Email verification token for ${email}: ${token}`);
+    await this.emailService.sendVerificationEmail(email, token);
   }
 
   async verifyEmail(token: string) {
@@ -107,8 +107,7 @@ export class AuthService {
       },
     });
 
-    // TODO: send token via email
-    console.log(`[DEBUG] Password reset token for ${email}: ${token}`);
+    await this.emailService.sendPasswordResetEmail(email, token);
   }
 
   async resetPassword(token: string, newPassword: string) {
