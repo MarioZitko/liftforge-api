@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { randomUUID } from 'crypto';
-import { User } from 'generated/prisma';
+import { Role, User } from 'generated/prisma';
 import { EmailService } from '@/modules/email/email.service';
 @Injectable()
 export class AuthService {
@@ -33,6 +33,7 @@ export class AuthService {
         email: dto.email,
         password: hashedPassword,
         name: dto.name,
+        role: dto.role ?? Role.CLIENT, // fallback
       },
     });
 
@@ -46,6 +47,10 @@ export class AuthService {
 
     if (!user || !(await bcrypt.compare(dto.password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
+    }
+
+    if (!user.emailVerified) {
+      throw new UnauthorizedException('Please verify your email before logging in');
     }
 
     const accessToken = await this.generateToken(user);

@@ -8,8 +8,10 @@ import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
+import { Throttle } from '@nestjs/throttler';
 
 @Controller('auth')
+@Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
   constructor(private authService: AuthService) {}
 
