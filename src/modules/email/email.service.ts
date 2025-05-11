@@ -1,6 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Resend } from 'resend';
 import { ConfigService } from '@nestjs/config';
+import { getVerificationEmailHtml } from './templates/verification-email.template';
+import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
 
 @Injectable()
 export class EmailService {
@@ -12,23 +14,25 @@ export class EmailService {
 
   async sendVerificationEmail(to: string, token: string) {
     const url = `https://your-frontend.com/verify-email?token=${token}`;
+    const html = getVerificationEmailHtml(url);
 
     await this.resend.emails.send({
-      from: 'LiftForge <noreply@liftforge.dev>',
+      from: 'LiftForge <onboarding@resend.dev>',
       to,
-      subject: 'Verify your email – LiftForge',
-      html: `<p>Click <a href="${url}">here</a> to verify your email.</p>`,
+      subject: 'Verify Your Email – LiftForge',
+      html,
     });
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
     const url = `https://your-frontend.com/reset-password?token=${token}`;
+    const html = getPasswordResetEmailHtml(url);
 
     await this.resend.emails.send({
-      from: 'LiftForge <noreply@liftforge.dev>',
+      from: 'LiftForge <onboarding@resend.dev>',
       to,
-      subject: 'Reset your password – LiftForge',
-      html: `<p>Reset your password <a href="${url}">here</a>.</p>`,
+      subject: 'Reset Your Password – LiftForge',
+      html,
     });
   }
 }
