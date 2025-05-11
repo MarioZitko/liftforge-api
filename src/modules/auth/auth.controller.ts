@@ -9,6 +9,7 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
 import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { Throttle } from '@nestjs/throttler';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
@@ -32,6 +33,7 @@ export class AuthController {
     return { accessToken: await this.authService.generateToken(user) };
   }
 
+  @ApiBearerAuth()
   @Get('me')
   @UseGuards(JwtAuthGuard)
   getMe(@CurrentUser() user: { userId: string; email: string; role: string }) {

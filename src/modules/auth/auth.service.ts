@@ -15,8 +15,7 @@ export class AuthService {
     private readonly emailService: EmailService,
   ) {}
 
-  async register(dto: RegisterDto): Promise<{ accessToken: string }> {
-    // TypeScript knows the result will be User | null here due to Prisma's types
+  async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -27,18 +26,19 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-    // Similarly, TypeScript knows this will return a User
-    const user = await this.prisma.user.create({
+    await this.prisma.user.create({
       data: {
         email: dto.email,
         password: hashedPassword,
         name: dto.name,
-        role: dto.role ?? Role.CLIENT, // fallback
+        role: dto.role ?? Role.CLIENT,
       },
     });
 
+    await this.requestEmailVerification(dto.email);
+
     return {
-      accessToken: await this.generateToken(user),
+      message: 'Registration successful. Please verify your email before logging in.',
     };
   }
 
