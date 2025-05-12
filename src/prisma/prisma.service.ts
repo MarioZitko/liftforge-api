@@ -1,4 +1,3 @@
-// src/prisma/prisma.service.ts
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ClsService } from 'nestjs-cls';
 import { baseEntityExtension } from './extensions/base-entity.extension';
@@ -10,7 +9,6 @@ export class PrismaService extends ExtendedPrismaClient implements OnModuleInit 
     super();
     this.getUserIdFromContext = () => this.cls.get('userId') ?? null;
 
-    // 🧠 This is what was missing before
     const extended = baseEntityExtension(this) as ExtendedPrismaClient;
     Object.assign(this, extended);
   }
