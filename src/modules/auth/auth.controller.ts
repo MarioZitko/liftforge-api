@@ -1,23 +1,27 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { CurrentUser } from './decorators/current-user.decorator';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
-import { Throttle } from '@nestjs/throttler';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   @Post('register')
-  async register(@Body() dto: RegisterDto) {
+  @UseGuards(JwtAuthGuard) // optional: to allow authenticated admins to create users
+  async register(
+    @Body() dto: RegisterDto,
+    @CurrentUser() user?: { userId: string }
+  ) {
     return this.authService.register(dto);
   }
 
@@ -25,6 +29,7 @@ export class AuthController {
   async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
+
   @Post('refresh')
   async refreshToken(
     @Body() body: { email: string; refreshToken: string },
@@ -46,8 +51,12 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  async resetPassword(@Body() dto: ResetPasswordDto) {
-    return this.authService.resetPassword(dto.token, dto.newPassword);
+  @UseGuards(JwtAuthGuard) // Optional: allow logged-in users to reset password
+  async resetPassword(
+    @Body() dto: ResetPasswordDto,
+    @CurrentUser() user?: { userId: string }
+  ) {
+    return this.authService.resetPassword(dto.token, dto.newPassword, user?.userId);
   }
 
   @Post('request-email-verification')

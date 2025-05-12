@@ -31,6 +31,13 @@ model User {
   updatedAt     DateTime  @updatedAt
   deletedAt     DateTime?
 
+   // Self-relations for auditing
+  updatedBy     User?     @relation("UpdatedUsers", fields: [updatedById], references: [id])
+  updatedById   String?
+
+  // Reverse relations (optional, for access to lists)
+  updatedUsers  User[]    @relation("UpdatedUsers")
+
   accounts            Account[] // One-to-many (for OAuth or multiple methods)
   sessions            Session[]
   verificationTokens  VerificationToken[]

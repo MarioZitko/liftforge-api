@@ -1,19 +1,19 @@
+import { EmailService } from '@/modules/email/email.service';
 import { PrismaService } from '@/prisma/prisma.service'; // You inject PrismaService
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
 import { randomUUID } from 'crypto';
 import { Role, User } from 'generated/prisma';
-import { EmailService } from '@/modules/email/email.service';
+import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
 @Injectable()
 export class AuthService {
   constructor(
     private readonly prisma: PrismaService, // Injecting PrismaService
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
-  ) {}
+  ) { }
 
   async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({
@@ -26,7 +26,7 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-    await this.prisma.user.create({
+    const user = await this.prisma.user.create({
       data: {
         email: dto.email,
         password: hashedPassword,
@@ -35,12 +35,13 @@ export class AuthService {
       },
     });
 
-    await this.requestEmailVerification(dto.email);
+    await this.requestEmailVerification(user.email);
 
     return {
       message: 'Registration successful. Please verify your email before logging in.',
     };
   }
+
 
   async login(dto: LoginDto): Promise<{ accessToken: string; refreshToken: string }> {
     const user = await this.prisma.user.findUnique({ where: { email: dto.email } });
@@ -115,7 +116,7 @@ export class AuthService {
     await this.emailService.sendPasswordResetEmail(email, token);
   }
 
-  async resetPassword(token: string, newPassword: string) {
+  async resetPassword(token: string, newPassword: string, modifierUserId?: string) {
     const record = await this.prisma.passwordResetToken.findUnique({
       where: { token },
       include: { user: true },
@@ -128,11 +129,15 @@ export class AuthService {
     const hashed = await bcrypt.hash(newPassword, 10);
     await this.prisma.user.update({
       where: { id: record.userId },
-      data: { password: hashed },
+      data: {
+        password: hashed,
+        updatedById: modifierUserId ?? record.userId, // self-reset fallback
+      },
     });
 
     await this.prisma.passwordResetToken.delete({ where: { token } });
   }
+
 
   async validateRefreshToken(email: string, token: string): Promise<User> {
     const user = await this.prisma.user.findUnique({ where: { email } });
