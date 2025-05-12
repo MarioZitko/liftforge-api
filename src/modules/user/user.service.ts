@@ -45,12 +45,6 @@ export class UserService {
   }
 
   async delete(id: string) {
-    try {
-      console.log(id);
-      return await this.prisma.user.delete({ where: { id } });
-    } catch (error) {
-      console.error('❌ Delete failed:', error);
-      throw new InternalServerErrorException('Could not delete user');
-    }
+    return this.prisma.user.delete({ where: { id } });
   }
 }
