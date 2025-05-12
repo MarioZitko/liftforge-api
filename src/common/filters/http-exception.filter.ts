@@ -1,3 +1,4 @@
+// src/common/filters/http-exception.filter.ts
 import { ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 
@@ -12,9 +13,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
       exception instanceof HttpException ? exception.getStatus() : HttpStatus.INTERNAL_SERVER_ERROR;
 
     const message =
-      exception instanceof HttpException
-        ? this.extractMessage(exception.getResponse())
-        : 'Internal server error';
+      exception instanceof HttpException ? exception.getResponse() : 'Internal server error';
 
     response.status(status).json({
       statusCode: status,
@@ -22,11 +21,5 @@ export class AllExceptionsFilter implements ExceptionFilter {
       path: request.url,
       message,
     });
-  }
-
-  private extractMessage(response: any): string | string[] {
-    if (typeof response === 'string') return response;
-    if (Array.isArray(response?.message)) return response.message;
-    return response?.message || 'Unexpected error';
   }
 }

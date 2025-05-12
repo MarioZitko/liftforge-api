@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
+import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
@@ -9,6 +10,12 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
+    // ✅ Add ClsModule globally
+    // This module is used for request-scoped storage, useful for storing user sessions
+    ClsModule.forRoot({
+      middleware: { mount: true },
+    }),
+
     // ✅ Add ConfigModule globally
     ConfigModule.forRoot({
       isGlobal: true,

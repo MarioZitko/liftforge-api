@@ -4,7 +4,7 @@ import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/co
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { Role, User } from 'generated/prisma';
+import { Prisma, Role, User } from '@prisma/client'; // ✅ Correct
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly prisma: PrismaService, // Injecting PrismaService
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
-  ) { }
+  ) {}
 
   async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({
@@ -41,7 +41,6 @@ export class AuthService {
       message: 'Registration successful. Please verify your email before logging in.',
     };
   }
-
 
   async login(dto: LoginDto): Promise<{ accessToken: string; refreshToken: string }> {
     const user = await this.prisma.user.findUnique({ where: { email: dto.email } });
@@ -131,15 +130,12 @@ export class AuthService {
       where: { id: record.userId },
       data: {
         password: hashed,
-        updatedById: modifierUserId ?? record.userId, // self-reset fallback
       },
     });
-
     await this.prisma.passwordResetToken.delete({ where: { token } });
   }
 
-
-  async validateRefreshToken(email: string, token: string): Promise<User> {
+  async validateRefreshToken(email: string, token: string): Promise<Prisma.UserGetPayload<{}>> {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user || !user.hashedRefreshToken) {
       throw new UnauthorizedException('Refresh token invalid');

@@ -14,14 +14,10 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('register')
-  @UseGuards(JwtAuthGuard) // optional: to allow authenticated admins to create users
-  async register(
-    @Body() dto: RegisterDto,
-    @CurrentUser() user?: { userId: string }
-  ) {
+  async register(@Body() dto: RegisterDto, @CurrentUser() user?: { userId: string }) {
     return this.authService.register(dto);
   }
 
@@ -52,10 +48,7 @@ export class AuthController {
 
   @Post('reset-password')
   @UseGuards(JwtAuthGuard) // Optional: allow logged-in users to reset password
-  async resetPassword(
-    @Body() dto: ResetPasswordDto,
-    @CurrentUser() user?: { userId: string }
-  ) {
+  async resetPassword(@Body() dto: ResetPasswordDto, @CurrentUser() user?: { userId: string }) {
     return this.authService.resetPassword(dto.token, dto.newPassword, user?.userId);
   }
 

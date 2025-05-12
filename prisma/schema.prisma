@@ -31,18 +31,33 @@ model User {
   updatedAt     DateTime  @updatedAt
   deletedAt     DateTime?
 
-   // Self-relations for auditing
-  updatedBy     User?     @relation("UpdatedUsers", fields: [updatedById], references: [id])
-  updatedById   String?
+  // Self-relations for auditing
+  createdBy    User?   @relation("CreatedUsers", fields: [createdById], references: [id])
+  createdById  String?
+  createdUsers User[]  @relation("CreatedUsers")
 
-  // Reverse relations (optional, for access to lists)
-  updatedUsers  User[]    @relation("UpdatedUsers")
+  updatedBy    User?   @relation("UpdatedUsers", fields: [updatedById], references: [id])
+  updatedById  String?
+  updatedUsers User[]  @relation("UpdatedUsers")
 
-  accounts            Account[] // One-to-many (for OAuth or multiple methods)
+  accounts            Account[]
   sessions            Session[]
   verificationTokens  VerificationToken[]
-  hashedRefreshToken String?
+  hashedRefreshToken  String?
   passwordResetTokens PasswordResetToken[]
+
+  // Reverse auditing relations
+  createdAccounts Account[] @relation("AccountCreatedBy")
+  updatedAccounts Account[] @relation("AccountUpdatedBy")
+
+  createdSessions Session[] @relation("SessionCreatedBy")
+  updatedSessions Session[] @relation("SessionUpdatedBy")
+
+  createdVerificationTokens VerificationToken[] @relation("VerificationTokenCreatedBy")
+  updatedVerificationTokens VerificationToken[] @relation("VerificationTokenUpdatedBy")
+
+  createdPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenCreatedBy")
+  updatedPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenUpdatedBy")
 }
 
 model Account {
@@ -58,6 +73,11 @@ model Account {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String
 
+  createdBy   User?   @relation("AccountCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("AccountUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+
   @@unique([provider, providerAccountId])
 }
 
@@ -68,6 +88,11 @@ model Session {
   token     String   @unique
   createdAt DateTime @default(now())
   expiresAt DateTime
+
+  createdBy   User?   @relation("SessionCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("SessionUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
 }
 
 model VerificationToken {
@@ -77,6 +102,11 @@ model VerificationToken {
   token     String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())
+
+  createdBy   User?   @relation("VerificationTokenCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("VerificationTokenUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
 }
 
 model PasswordResetToken {
@@ -86,4 +116,9 @@ model PasswordResetToken {
   token     String   @unique
   expiresAt DateTime
   createdAt DateTime @default(now())
+
+  createdBy   User?   @relation("PasswordResetTokenCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("PasswordResetTokenUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
 }
