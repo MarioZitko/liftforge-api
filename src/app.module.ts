@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ThrottlerModule } from '@nestjs/throttler';
+import { UserModule } from './modules/user/user.module';
 @Module({
   imports: [
     // ✅ Add ConfigModule globally
@@ -16,6 +17,7 @@ import { ThrottlerModule } from '@nestjs/throttler';
     // ✅ Core application modules
     PrismaModule,
     AuthModule,
+    UserModule,
     ThrottlerModule.forRoot({
       throttlers: [
         {
