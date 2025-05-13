@@ -1,0 +1,93 @@
+model TrainingBlock {
+  id          Int          @id @default(autoincrement())
+  description String
+  weeks       TrainingWeek[]
+
+  createdBy   User?   @relation("TrainingBlockCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("TrainingBlockUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model TrainingWeek {
+  id         Int         @id @default(autoincrement())
+  number     Int
+  blockId    Int
+  block      TrainingBlock @relation(fields: [blockId], references: [id])
+  trainings  Training[]
+
+  createdBy   User?   @relation("TrainingWeekCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("TrainingWeekUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model Training {
+  id                Int               @id @default(autoincrement())
+  date              DateTime
+  weekId            Int
+  week              TrainingWeek      @relation(fields: [weekId], references: [id])
+  trainingExercises TrainingExercise[]
+
+  createdBy   User?   @relation("TrainingCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("TrainingUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model TrainingExercise {
+  id               Int       @id @default(autoincrement())
+  trainingId       Int
+  exerciseId       Int
+  sortOrder        Int
+  sets             Int
+  reps             Int
+  weight           Float
+  rpePlanned       Float?
+  rpeActual        Float?
+  estimated1RM     Float?
+  intensity        Float?
+  percentageOfMax  Float?
+  volume           Float?
+  note             String?
+  videoUrl         String?
+
+  training         Training  @relation(fields: [trainingId], references: [id])
+  exercise         Exercise  @relation("TrainingExerciseToExercise", fields: [exerciseId], references: [id])
+
+  createdBy   User?   @relation("TrainingExerciseCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("TrainingExerciseUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model Exercise {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  tutorialUrl String?
+  volumeId    Int     @unique
+
+  volume Volume? @relation("ExerciseVolume")
+
+  trainingExercises TrainingExercise[] @relation("TrainingExerciseToExercise")
+
+  createdBy   User?   @relation("ExerciseCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("ExerciseUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
+model Volume {
+  id         Int      @id @default(autoincrement())
+  exerciseId Int      @unique
+
+  exercise   Exercise? @relation("ExerciseVolume", fields: [exerciseId], references: [id])
+
+  volumeTotal Float
+
+  createdBy   User?   @relation("VolumeCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("VolumeUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}

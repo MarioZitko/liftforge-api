@@ -18,7 +18,9 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "postinstall": "prisma generate",
+    "prisma:merge": "node ./prisma/scripts/mergeSchemas.js",
+    "prisma:generate": "npm run prisma:merge && prisma generate",
+    "postinstall": "npm run prisma:generate",
     "seed": "ts-node src/seed/seed.ts"
   },
   "dependencies": {
