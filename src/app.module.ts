@@ -19,6 +19,7 @@ import { UserModule } from './modules/user/user.module';
     // ✅ Add ConfigModule globally
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: `.env.${process.env.NODE_ENV || 'development'}`,
     }),
 
     // ✅ Core application modules
