@@ -1,6 +1,12 @@
 import { EmailService } from '@/modules/email/email.service';
 import { PrismaService } from '@/prisma/prisma.service'; // You inject PrismaService
-import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  ConflictException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
@@ -67,7 +73,14 @@ export class AuthService {
 
   async requestEmailVerification(email: string) {
     const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user || user.emailVerified) return;
+
+    if (!user) {
+      throw new NotFoundException('No user found with this email');
+    }
+
+    if (user.emailVerified) {
+      throw new BadRequestException('Email is already verified');
+    }
 
     const token = randomUUID();
     await this.prisma.verificationToken.create({
@@ -91,12 +104,18 @@ export class AuthService {
       throw new UnauthorizedException('Invalid or expired email verification token');
     }
 
+    if (record.user.emailVerified) {
+      return { message: 'Email is already verified.' };
+    }
+
+    console.log('Now:', new Date(), 'Token Expires:', record.expiresAt);
+
     await this.prisma.user.update({
       where: { id: record.userId },
       data: { emailVerified: true },
     });
 
-    await this.prisma.verificationToken.delete({ where: { token } });
+    await this.prisma.verificationToken.deleteMany({ where: { token } });
   }
 
   async requestPasswordReset(email: string) {

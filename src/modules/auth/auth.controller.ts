@@ -54,6 +54,7 @@ export class AuthController {
 
   @Post('request-email-verification')
   async requestEmailVerification(@Body() dto: RequestEmailVerificationDto) {
+    console.log('[RequestEmailVerification]', dto);
     return this.authService.requestEmailVerification(dto.email);
   }
 
