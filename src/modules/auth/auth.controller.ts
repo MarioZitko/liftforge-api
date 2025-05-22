@@ -1,27 +1,31 @@
 import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
+import { ApiBearerAuth } from '@nestjs/swagger';
+import { Throttle } from '@nestjs/throttler';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { CurrentUser } from './decorators/current-user.decorator';
-import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
+import { JwtAuthGuard } from './guards/jwt-auth.guard';
 
 @Controller('auth')
+@Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
-  register(@Body() dto: RegisterDto) {
+  async register(@Body() dto: RegisterDto, @CurrentUser() user?: { userId: string }) {
     return this.authService.register(dto);
   }
 
   @Post('login')
-  login(@Body() dto: LoginDto) {
+  async login(@Body() dto: LoginDto) {
     return this.authService.login(dto);
   }
+
   @Post('refresh')
   async refreshToken(
     @Body() body: { email: string; refreshToken: string },
@@ -30,6 +34,7 @@ export class AuthController {
     return { accessToken: await this.authService.generateToken(user) };
   }
 
+  @ApiBearerAuth()
   @Get('me')
   @UseGuards(JwtAuthGuard)
   getMe(@CurrentUser() user: { userId: string; email: string; role: string }) {
@@ -37,22 +42,23 @@ export class AuthController {
   }
 
   @Post('request-password-reset')
-  requestPasswordReset(@Body() dto: RequestPasswordResetDto) {
+  async requestPasswordReset(@Body() dto: RequestPasswordResetDto) {
     return this.authService.requestPasswordReset(dto.email);
   }
 
   @Post('reset-password')
-  resetPassword(@Body() dto: ResetPasswordDto) {
-    return this.authService.resetPassword(dto.token, dto.newPassword);
+  @UseGuards(JwtAuthGuard) // Optional: allow logged-in users to reset password
+  async resetPassword(@Body() dto: ResetPasswordDto, @CurrentUser() user?: { userId: string }) {
+    return this.authService.resetPassword(dto.token, dto.newPassword, user?.userId);
   }
 
   @Post('request-email-verification')
-  requestEmailVerification(@Body() dto: RequestEmailVerificationDto) {
+  async requestEmailVerification(@Body() dto: RequestEmailVerificationDto) {
     return this.authService.requestEmailVerification(dto.email);
   }
 
   @Post('verify-email')
-  verifyEmail(@Body() dto: VerifyEmailDto) {
+  async verifyEmail(@Body() dto: VerifyEmailDto) {
     return this.authService.verifyEmail(dto.token);
   }
 }

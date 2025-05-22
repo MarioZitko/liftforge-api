@@ -1,12 +1,12 @@
+import { EmailService } from '@/modules/email/email.service';
 import { PrismaService } from '@/prisma/prisma.service'; // You inject PrismaService
 import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
+import { randomUUID } from 'crypto';
+import { Prisma, Role, User } from '@prisma/client'; // ✅ Correct
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { randomUUID } from 'crypto';
-import { User } from 'generated/prisma';
-import { EmailService } from '@/modules/email/email.service';
 @Injectable()
 export class AuthService {
   constructor(
@@ -15,8 +15,7 @@ export class AuthService {
     private readonly emailService: EmailService,
   ) {}
 
-  async register(dto: RegisterDto): Promise<{ accessToken: string }> {
-    // TypeScript knows the result will be User | null here due to Prisma's types
+  async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({
       where: { email: dto.email },
     });
@@ -27,17 +26,19 @@ export class AuthService {
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
 
-    // Similarly, TypeScript knows this will return a User
     const user = await this.prisma.user.create({
       data: {
         email: dto.email,
         password: hashedPassword,
         name: dto.name,
+        role: dto.role ?? Role.CLIENT,
       },
     });
 
+    await this.requestEmailVerification(user.email);
+
     return {
-      accessToken: await this.generateToken(user),
+      message: 'Registration successful. Please verify your email before logging in.',
     };
   }
 
@@ -46,6 +47,10 @@ export class AuthService {
 
     if (!user || !(await bcrypt.compare(dto.password, user.password))) {
       throw new UnauthorizedException('Invalid credentials');
+    }
+
+    if (!user.emailVerified) {
+      throw new UnauthorizedException('Please verify your email before logging in');
     }
 
     const accessToken = await this.generateToken(user);
@@ -110,7 +115,7 @@ export class AuthService {
     await this.emailService.sendPasswordResetEmail(email, token);
   }
 
-  async resetPassword(token: string, newPassword: string) {
+  async resetPassword(token: string, newPassword: string, modifierUserId?: string) {
     const record = await this.prisma.passwordResetToken.findUnique({
       where: { token },
       include: { user: true },
@@ -123,13 +128,14 @@ export class AuthService {
     const hashed = await bcrypt.hash(newPassword, 10);
     await this.prisma.user.update({
       where: { id: record.userId },
-      data: { password: hashed },
+      data: {
+        password: hashed,
+      },
     });
-
     await this.prisma.passwordResetToken.delete({ where: { token } });
   }
 
-  async validateRefreshToken(email: string, token: string): Promise<User> {
+  async validateRefreshToken(email: string, token: string): Promise<Prisma.UserGetPayload<{}>> {
     const user = await this.prisma.user.findUnique({ where: { email } });
     if (!user || !user.hashedRefreshToken) {
       throw new UnauthorizedException('Refresh token invalid');
