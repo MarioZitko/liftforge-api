@@ -16,6 +16,7 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { Response } from 'express';
 import { setAuthCookies } from './helpers/set-auth-cookies';
+import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 
 @Injectable()
 export class AuthService {
@@ -52,27 +53,27 @@ export class AuthService {
     return { message: 'Login successful' };
   }
 
-  async loginOAuthUser(profile: { email: string; name?: string }, res: Response): Promise<void> {
+  async loginOAuthUser(profile: { email: string; name?: string }, res: Response) {
     const email = profile.email;
-
     let user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
-      user = await this.prisma.user.create({
-        data: {
-          email,
-          name: profile.name ?? '',
-          password: '', // Set a default or random password for OAuth users
-          emailVerified: true,
-          role: Role.CLIENT,
-        },
+      // ⚠️ Do NOT create yet — wait for frontend to call /auth/oauth-finalize
+      res.cookie('pending_oauth_email', email, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 5, // 5 min
       });
+
+      return res.redirect(`${process.env.FRONTEND_URL}/oauth-finalize`);
     }
 
     const accessToken = await this.generateToken(user);
     const refreshToken = await this.generateRefreshToken(user);
 
     setAuthCookies(res, accessToken, refreshToken);
+    return res.redirect(`${process.env.FRONTEND_URL}/oauth-callback`);
   }
 
   private async validateUser(email: string, password: string) {
@@ -182,5 +183,57 @@ export class AuthService {
       email: user.email,
       role: user.role,
     });
+  }
+
+  async handleOAuthRedirect(req: AuthenticatedRequest, res: Response) {
+    if (!req.user?.email) {
+      return res.status(400).send('OAuth user info not found');
+    }
+
+    const { email, name } = req.user;
+    let user = await this.prisma.user.findUnique({ where: { email } });
+
+    if (!user) {
+      res.cookie('pending_oauth_email', email, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 1000 * 60 * 5, // 5 min
+      });
+
+      return res.redirect(`${process.env.FRONTEND_URL}/oauth-finalize`);
+    }
+
+    const accessToken = await this.generateToken(user);
+    const refreshToken = await this.generateRefreshToken(user);
+
+    setAuthCookies(res, accessToken, refreshToken);
+    return res.redirect(`${process.env.FRONTEND_URL}/oauth-callback`);
+  }
+
+  async finalizeOAuth(req: AuthenticatedRequest, res: Response, role: Role, name: string) {
+    const email = req.cookies['pending_oauth_email'];
+    if (!email) throw new BadRequestException('OAuth session expired');
+
+    const existing = await this.prisma.user.findUnique({ where: { email } });
+    if (existing) throw new ConflictException('User already exists');
+
+    const user = await this.prisma.user.create({
+      data: {
+        email,
+        name: name,
+        password: '', // no password for OAuth users
+        role,
+        emailVerified: true,
+      },
+    });
+
+    res.clearCookie('pending_oauth_email');
+
+    const accessToken = await this.generateToken(user);
+    const refreshToken = await this.generateRefreshToken(user);
+
+    setAuthCookies(res, accessToken, refreshToken);
+    return { message: 'OAuth account finalized' };
   }
 }

@@ -12,6 +12,8 @@ import { CurrentUser } from './decorators/current-user.decorator';
 import { Throttle } from '@nestjs/throttler';
 import { Response, Request } from 'express';
 import { AuthGuard } from '@nestjs/passport';
+import { Role } from '@prisma/client';
+import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
@@ -75,23 +77,28 @@ export class AuthController {
 
   @Get('google/redirect')
   @UseGuards(AuthGuard('google'))
-  async googleRedirect(@Req() req: Request, @Res() res: Response) {
-    if (!req.user || typeof req.user !== 'object' || !('email' in req.user)) {
-      return res.status(400).send('OAuth user info not found');
-    }
-    const { email, name } = req.user as { email: string; name?: string };
-    await this.authService.loginOAuthUser({ email, name }, res);
-    return res.redirect(`${process.env.FRONTEND_URL}/oauth-callback`);
+  async googleRedirect(@Req() req: AuthenticatedRequest, @Res() res: Response) {
+    return this.authService.handleOAuthRedirect(req, res);
   }
 
   @Get('facebook')
   @UseGuards(AuthGuard('facebook'))
-  async facebookRedirect(@Req() req: Request, @Res() res: Response) {
-    if (!req.user || typeof req.user !== 'object' || !('email' in req.user)) {
-      return res.status(400).send('OAuth user info not found');
-    }
-    const { email, name } = req.user as { email: string; name?: string };
-    await this.authService.loginOAuthUser({ email, name }, res);
-    return res.redirect(`${process.env.FRONTEND_URL}/oauth-callback`);
+  facebookLogin() {
+    // Passport handles the redirect to Facebook
+  }
+
+  @Get('facebook/redirect')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookRedirect(@Req() req: AuthenticatedRequest, @Res() res: Response) {
+    return this.authService.handleOAuthRedirect(req, res);
+  }
+
+  @Post('oauth-finalize')
+  async finalizeOAuth(
+    @Res({ passthrough: true }) res: Response,
+    @Body() dto: { name: string; role: Role },
+    @Req() req: AuthenticatedRequest,
+  ) {
+    return this.authService.finalizeOAuth(req, res, dto.role, dto.name);
   }
 }
