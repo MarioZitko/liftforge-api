@@ -1,5 +1,5 @@
 import { EmailService } from '@/modules/email/email.service';
-import { PrismaService } from '@/prisma/prisma.service'; // You inject PrismaService
+import { PrismaService } from '@/prisma/prisma.service';
 import {
   BadRequestException,
   ConflictException,
@@ -10,7 +10,7 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { Prisma, Role, User } from '@prisma/client'; // ✅ Correct
+import { Prisma, Role } from '../../../generated/prisma';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 @Injectable()
