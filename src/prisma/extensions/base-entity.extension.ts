@@ -1,11 +1,12 @@
 import { ExtendedPrismaClient } from '../extendedPrismaClient';
+import { PrismaHookParams } from './utils';
 
 export const baseEntityExtension = (prisma: ExtendedPrismaClient) =>
   prisma.$extends({
     name: 'BaseEntityAuditing',
     query: {
       $allModels: {
-        async create({ model, args, query }) {
+        async create({ model, args, query }: PrismaHookParams) {
           const userId = prisma.getUserIdFromContext?.();
           if (!userId) return query(args);
 
@@ -19,7 +20,7 @@ export const baseEntityExtension = (prisma: ExtendedPrismaClient) =>
           return query(args);
         },
 
-        async update({ model, args, query }) {
+        async update({ model, args, query }: PrismaHookParams) {
           const userId = prisma.getUserIdFromContext?.();
           if (!userId) return query(args);
 
