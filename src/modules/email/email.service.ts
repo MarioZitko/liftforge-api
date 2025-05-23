@@ -7,13 +7,15 @@ import { getPasswordResetEmailHtml } from './templates/password-reset-email.temp
 @Injectable()
 export class EmailService {
   private resend: Resend;
+  private frontendUrl: string;
 
   constructor(private config: ConfigService) {
     this.resend = new Resend(this.config.get<string>('RESEND_API_KEY'));
+    this.frontendUrl = this.config.get<string>('FRONTEND_URL') ?? 'http://localhost:5173';
   }
 
   async sendVerificationEmail(to: string, token: string) {
-    const url = `https://your-frontend.com/verify-email?token=${token}`;
+    const url = `${this.frontendUrl}/confirm-email?token=${token}`;
     const html = getVerificationEmailHtml(url);
 
     await this.resend.emails.send({
@@ -25,7 +27,7 @@ export class EmailService {
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
-    const url = `https://your-frontend.com/reset-password?token=${token}`;
+    const url = `${this.frontendUrl}/reset-password?token=${token}`;
     const html = getPasswordResetEmailHtml(url);
 
     await this.resend.emails.send({
