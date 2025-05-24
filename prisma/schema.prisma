@@ -55,6 +55,9 @@ model User {
   createdPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenCreatedBy")
   updatedPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenUpdatedBy")
 
+  programsCreated      Program[]      @relation("ProgramCreatedBy")
+  programsUpdated      Program[]      @relation("ProgramUpdatedBy")
+
   trainingBlocksCreated TrainingBlock[] @relation("TrainingBlockCreatedBy")
   trainingBlocksUpdated TrainingBlock[] @relation("TrainingBlockUpdatedBy")
 
@@ -72,6 +75,8 @@ model User {
 
   volumesCreated      Volume[]      @relation("VolumeCreatedBy")
   volumesUpdated      Volume[]      @relation("VolumeUpdatedBy")
+
+  clientPrograms ClientProgram[] @relation("ClientProgramClient")
 }
 
 model Account {
@@ -138,10 +143,38 @@ model PasswordResetToken {
 }
 
 
+model Program {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  isPublic    Boolean       @default(false) // optional: allow sharing
+  clientProgram ClientProgram? 
+  trainingBlocks TrainingBlock[]
+
+  createdBy   User?         @relation("ProgramCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?         @relation("ProgramUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+
+}
+
+model ClientProgram {
+id         Int      @id @default(autoincrement())
+client     User     @relation("ClientProgramClient",fields: [clientId], references: [id])
+clientId   String
+program    Program  @relation(fields: [programId], references: [id])
+programId  Int @unique
+startDate  DateTime
+endDate DateTime
+status     String   // "active", "completed", "draft", etc.
+}
+
 model TrainingBlock {
   id          Int          @id @default(autoincrement())
   description String
   weeks       TrainingWeek[]
+  program     Program?      @relation(fields: [programId], references: [id])
+  programId   Int?
 
   createdBy   User?   @relation("TrainingBlockCreatedBy", fields: [createdById], references: [id])
   createdById String?
@@ -188,9 +221,12 @@ model TrainingExercise {
   estimated1RM     Float?
   intensity        Float?
   percentageOfMax  Float?
-  volume           Float?
   note             String?
   videoUrl         String?
+  volumeId    Int     @unique
+
+  volume Volume? @relation("TrainingExerciseVolume")
+
 
   training         Training  @relation(fields: [trainingId], references: [id])
   exercise         Exercise  @relation("TrainingExerciseToExercise", fields: [exerciseId], references: [id])
@@ -206,9 +242,6 @@ model Exercise {
   name        String
   description String?
   tutorialUrl String?
-  volumeId    Int     @unique
-
-  volume Volume? @relation("ExerciseVolume")
 
   trainingExercises TrainingExercise[] @relation("TrainingExerciseToExercise")
 
@@ -220,9 +253,9 @@ model Exercise {
 
 model Volume {
   id         Int      @id @default(autoincrement())
-  exerciseId Int      @unique
+  trainingExerciseId Int      @unique
 
-  exercise   Exercise? @relation("ExerciseVolume", fields: [exerciseId], references: [id])
+  trainingExercise   TrainingExercise? @relation("TrainingExerciseVolume", fields: [trainingExerciseId], references: [id])
 
   volumeTotal Float
 

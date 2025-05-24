@@ -43,6 +43,9 @@ model User {
   createdPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenCreatedBy")
   updatedPasswordResetTokens PasswordResetToken[] @relation("PasswordResetTokenUpdatedBy")
 
+  programsCreated      Program[]      @relation("ProgramCreatedBy")
+  programsUpdated      Program[]      @relation("ProgramUpdatedBy")
+
   trainingBlocksCreated TrainingBlock[] @relation("TrainingBlockCreatedBy")
   trainingBlocksUpdated TrainingBlock[] @relation("TrainingBlockUpdatedBy")
 
@@ -60,6 +63,8 @@ model User {
 
   volumesCreated      Volume[]      @relation("VolumeCreatedBy")
   volumesUpdated      Volume[]      @relation("VolumeUpdatedBy")
+
+  clientPrograms ClientProgram[] @relation("ClientProgramClient")
 }
 
 model Account {
