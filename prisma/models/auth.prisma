@@ -64,7 +64,8 @@ model User {
   volumesCreated      Volume[]      @relation("VolumeCreatedBy")
   volumesUpdated      Volume[]      @relation("VolumeUpdatedBy")
 
-  clientPrograms ClientProgram[] @relation("ClientProgramClient")
+  client Client?
+  coach  Coach?
 }
 
 model Account {

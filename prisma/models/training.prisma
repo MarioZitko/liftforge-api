@@ -1,3 +1,36 @@
+model Client {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @unique
+
+  // Example: extra fields for Client
+  dateOfBirth DateTime?
+  // Add more client-specific fields here
+
+  // Relation to ClientPrograms
+  clientPrograms ClientProgram[] @relation("ClientProgramClient")
+
+  // Relation to Coach (optional, if you want to link to a coach)
+  coachId String?
+  coach   Coach?   @relation(fields: [coachId], references: [id])
+}
+
+model Coach {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @unique
+
+  // Example: extra fields for Coach
+  certification String?
+  // Add more coach-specific fields here
+
+  // Relation to Clients
+  clients Client[]
+
+  // Relation to ClientPrograms (all programs managed by this coach)
+  clientPrograms ClientProgram[] @relation("ClientProgramCoach")
+}
+
 model Program {
   id          Int           @id @default(autoincrement())
   name        String
@@ -15,13 +48,16 @@ model Program {
 
 model ClientProgram {
 id         Int      @id @default(autoincrement())
-client     User     @relation("ClientProgramClient",fields: [clientId], references: [id])
+client     Client     @relation("ClientProgramClient",fields: [clientId], references: [id])
 clientId   String
 program    Program  @relation(fields: [programId], references: [id])
 programId  Int @unique
 startDate  DateTime
 endDate DateTime
 status     String   // "active", "completed", "draft", etc.
+
+coachId String?
+coach   Coach?   @relation("ClientProgramCoach",fields: [coachId], references: [id])
 }
 
 model TrainingBlock {
