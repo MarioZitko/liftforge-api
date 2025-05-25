@@ -6,6 +6,9 @@ import {
   UseGuards,
   NotFoundException,
   Query,
+  Post,
+  Put,
+  Body,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
@@ -13,6 +16,7 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from 'generated/prisma';
 import { ApiBearerAuth, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { CreateUserDto, UpdateUserDto } from './user.dto';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -44,6 +48,16 @@ export class UserController {
     const user = await this.userService.findOne(id);
     if (!user) throw new NotFoundException('User not found');
     return user;
+  }
+
+  @Post()
+  async create(@Body() dto: CreateUserDto) {
+    return this.userService.create(dto);
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
+    return this.userService.update(id, dto);
   }
 
   @Delete(':id')
