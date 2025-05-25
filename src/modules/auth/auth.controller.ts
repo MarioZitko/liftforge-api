@@ -47,7 +47,6 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  @UseGuards(JwtAuthGuard)
   async resetPassword(@Body() dto: ResetPasswordDto, @CurrentUser() user?: { userId: string }) {
     return this.authService.resetPassword(dto.token, dto.newPassword, user?.userId);
   }
