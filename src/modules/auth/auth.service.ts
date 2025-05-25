@@ -16,6 +16,7 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { setAuthCookies } from './helpers/set-auth-cookies';
 import { AuthenticatedRequest } from './interfaces/auth-request.interface';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -23,20 +24,19 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
-  ) { }
+    private readonly userService: UserService,
+  ) {}
 
   async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
     if (existing) throw new ConflictException('User already exists');
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user = await this.prisma.user.create({
-      data: {
-        email: dto.email,
-        password: hashedPassword,
-        name: dto.name,
-        role: dto.role ?? Role.CLIENT,
-      },
+    const user = await this.userService.create({
+      email: dto.email,
+      password: hashedPassword,
+      name: dto.name,
+      role: dto.role ?? Role.CLIENT,
     });
 
     await this.requestEmailVerification(user.email);
@@ -217,14 +217,12 @@ export class AuthService {
     const existing = await this.prisma.user.findUnique({ where: { email } });
     if (existing) throw new ConflictException('User already exists');
 
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        name: name,
-        password: '', // no password for OAuth users
-        role,
-        emailVerified: true,
-      },
+    const user = await this.userService.create({
+      email,
+      name: name,
+      password: '', // no password for OAuth users
+      role,
+      emailVerified: true,
     });
 
     res.clearCookie('pending_oauth_email');

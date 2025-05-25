@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
@@ -10,6 +10,8 @@ import { ThrottlerModule } from '@nestjs/throttler';
 import { UserModule } from './modules/user/user.module';
 import { ClientModule } from './modules/client/client.module';
 import { CoachModule } from './modules/coach/coach.module';
+import { ExerciseModule } from './modules/exercise/exercise.module';
+import { ClsUserMiddleware } from './middleware/cls-user.middleware';
 @Module({
   imports: [
     // ✅ Add ClsModule globally
@@ -39,9 +41,14 @@ import { CoachModule } from './modules/coach/coach.module';
     }),
     ClientModule,
     CoachModule,
+    ExerciseModule,
   ],
 
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ClsUserMiddleware).forRoutes('*'); // ✅ apply the middleware globally
+  }
+}
