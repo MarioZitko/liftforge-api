@@ -8,6 +8,8 @@ import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { UserModule } from './modules/user/user.module';
+import { ClientModule } from './modules/client/client.module';
+import { CoachModule } from './modules/coach/coach.module';
 @Module({
   imports: [
     // ✅ Add ClsModule globally
@@ -35,6 +37,8 @@ import { UserModule } from './modules/user/user.module';
       ],
       errorMessage: 'Too many requests. Please try again later.',
     }),
+    ClientModule,
+    CoachModule,
   ],
 
   controllers: [AppController],
