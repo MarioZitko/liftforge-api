@@ -1,3 +1,5 @@
+import { EmailService } from '@/modules/email/email.service';
+import { PrismaService } from '@/prisma/prisma.service';
 import {
   BadRequestException,
   ConflictException,
@@ -8,12 +10,10 @@ import {
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
-import { PrismaService } from '@/prisma/prisma.service';
-import { EmailService } from '@/modules/email/email.service';
-import { Prisma, Role } from '@prisma/client';
+import { Response } from 'express';
+import { Role } from 'generated/prisma/client';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { Response } from 'express';
 import { setAuthCookies } from './helpers/set-auth-cookies';
 import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 
@@ -23,7 +23,7 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
-  ) {}
+  ) { }
 
   async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });

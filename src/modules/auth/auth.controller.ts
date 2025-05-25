@@ -1,24 +1,24 @@
 // src/modules/auth/auth.controller.ts
 import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Throttle } from '@nestjs/throttler';
+import { Response } from 'express';
+import { Role } from 'generated/prisma/client';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
-import { RequestEmailVerificationDto } from './dto/request-email-verification.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import { CurrentUser } from './decorators/current-user.decorator';
-import { Throttle } from '@nestjs/throttler';
-import { Response, Request } from 'express';
-import { AuthGuard } from '@nestjs/passport';
-import { Role } from '@prisma/client';
 import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService) { }
 
   @Post('register')
   async register(@Body() dto: RegisterDto) {
