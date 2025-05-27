@@ -2,10 +2,11 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { User } from 'generated/prisma';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
     return this.prisma.user.findMany({
@@ -77,34 +78,35 @@ export class UserService {
   }
 
   async update(id: string, dto: UpdateUserDto) {
-    const data: any = {
+    const updateData: Partial<UpdateUserDto> = {
       email: dto.email,
       name: dto.name,
       role: dto.role,
+      emailVerified: dto.emailVerified,
     };
 
     if (dto.password) {
-      data.password = await bcrypt.hash(dto.password, 10);
+      updateData.password = await bcrypt.hash(dto.password, 10);
     }
 
     const user = await this.prisma.user.update({
       where: { id },
-      data,
+      data: updateData,
     });
 
-    // Update related Client or Coach profile if role matches and extra fields exist
+    // Optional: update extended profile data
     if (dto.role === 'CLIENT') {
       await this.prisma.client.updateMany({
         where: { userId: id },
         data: {
-          // Add other client fields from dto if needed
+          // Extend with Client-specific fields if needed
         },
       });
     } else if (dto.role === 'COACH') {
       await this.prisma.coach.updateMany({
         where: { userId: id },
         data: {
-          // Add other coach fields from dto if needed
+          // Extend with Coach-specific fields if needed
         },
       });
     }

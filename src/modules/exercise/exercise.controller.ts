@@ -16,12 +16,12 @@ import { ExerciseService } from './exercise.service';
 import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
 import { RolesGuard } from '@/modules/auth/guards/roles.guard';
 import { Roles } from '@/modules/auth/decorators/roles.decorator';
-import { Role } from '@prisma/client';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
 import { AuthenticatedRequest } from '../auth/interfaces/auth-request.interface';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { Role } from 'generated/prisma';
 
 @ApiTags('Exercises')
 @ApiBearerAuth()
