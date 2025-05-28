@@ -164,24 +164,46 @@ export class AuthService {
     await this.prisma.passwordResetToken.delete({ where: { token } });
   }
 
-  async validateRefreshToken(email: string, token: string): Promise<{ accessToken: string }> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user || !user.hashedRefreshToken) {
-      throw new UnauthorizedException('Refresh token invalid');
+  async refreshTokens(res: Response, refreshToken: string): Promise<{ message: string }> {
+    const users = await this.prisma.user.findMany({
+      where: { hashedRefreshToken: { not: null } },
+    });
+
+    for (const user of users) {
+      if (!user.hashedRefreshToken) continue;
+
+      const isValid = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
+      if (isValid) {
+        const accessToken = await this.generateToken(user);
+        const newRefreshToken = await this.generateRefreshToken(user);
+        setAuthCookies(res, accessToken, newRefreshToken);
+        return { message: 'Token refreshed' };
+      }
     }
 
-    const isValid = await bcrypt.compare(token, user.hashedRefreshToken);
-    if (!isValid) throw new UnauthorizedException('Refresh token invalid');
-
-    return { accessToken: await this.generateToken(user) };
+    throw new UnauthorizedException('Invalid refresh token');
   }
 
-  async generateToken(user: any): Promise<string> {
-    return this.jwtService.signAsync({
-      sub: user.id,
-      email: user.email,
-      role: user.role,
+  private async generateToken(user: any): Promise<string> {
+    return this.jwtService.signAsync(
+      { sub: user.id, email: user.email, role: user.role },
+      { expiresIn: '15m' },
+    );
+  }
+
+  async getUserFromRefreshToken(token: string) {
+    const users = await this.prisma.user.findMany({
+      where: { hashedRefreshToken: { not: null } },
     });
+
+    for (const user of users) {
+      if (!user.hashedRefreshToken) continue;
+
+      const isValid = await bcrypt.compare(token, user.hashedRefreshToken);
+      if (isValid) return user;
+    }
+
+    throw new UnauthorizedException('User not found for refresh token');
   }
 
   async handleOAuthRedirect(req: AuthenticatedRequest, res: Response) {
