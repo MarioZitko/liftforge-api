@@ -26,7 +26,7 @@ import { Role } from 'generated/prisma';
 @ApiTags('Exercises')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.COACH)
+@Roles(Role.COACH, Role.ADMIN)
 @Controller('exercises')
 export class ExerciseController {
   constructor(private readonly service: ExerciseService) {}
