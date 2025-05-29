@@ -36,13 +36,6 @@ export class ExerciseController {
     return this.service.findAll();
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const exercise = await this.service.findOne(+id);
-    if (!exercise) throw new NotFoundException('Exercise not found');
-    return exercise;
-  }
-
   @Get('my')
   async getCoachExercises(
     @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
@@ -53,6 +46,13 @@ export class ExerciseController {
       throw new UnauthorizedException('Missing user ID in token.');
     }
     return this.service.findForCoach(user.userId, onlyMyExercises);
+  }
+
+  @Get(':id')
+  async findOne(@Param('id') id: string) {
+    const exercise = await this.service.findOne(+id);
+    if (!exercise) throw new NotFoundException('Exercise not found');
+    return exercise;
   }
 
   @Post()
