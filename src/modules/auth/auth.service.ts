@@ -16,6 +16,7 @@ import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { setAuthCookies } from './helpers/set-auth-cookies';
 import { AuthenticatedRequest } from './interfaces/auth-request.interface';
+import { UserService } from '../user/user.service';
 
 @Injectable()
 export class AuthService {
@@ -23,20 +24,19 @@ export class AuthService {
     private readonly prisma: PrismaService,
     private readonly jwtService: JwtService,
     private readonly emailService: EmailService,
-  ) { }
+    private readonly userService: UserService,
+  ) {}
 
   async register(dto: RegisterDto): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
     if (existing) throw new ConflictException('User already exists');
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user = await this.prisma.user.create({
-      data: {
-        email: dto.email,
-        password: hashedPassword,
-        name: dto.name,
-        role: dto.role ?? Role.CLIENT,
-      },
+    const user = await this.userService.create({
+      email: dto.email,
+      password: hashedPassword,
+      name: dto.name,
+      role: dto.role ?? Role.CLIENT,
     });
 
     await this.requestEmailVerification(user.email);
@@ -164,24 +164,46 @@ export class AuthService {
     await this.prisma.passwordResetToken.delete({ where: { token } });
   }
 
-  async validateRefreshToken(email: string, token: string): Promise<{ accessToken: string }> {
-    const user = await this.prisma.user.findUnique({ where: { email } });
-    if (!user || !user.hashedRefreshToken) {
-      throw new UnauthorizedException('Refresh token invalid');
+  async refreshTokens(res: Response, refreshToken: string): Promise<{ message: string }> {
+    const users = await this.prisma.user.findMany({
+      where: { hashedRefreshToken: { not: null } },
+    });
+
+    for (const user of users) {
+      if (!user.hashedRefreshToken) continue;
+
+      const isValid = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
+      if (isValid) {
+        const accessToken = await this.generateToken(user);
+        const newRefreshToken = await this.generateRefreshToken(user);
+        setAuthCookies(res, accessToken, newRefreshToken);
+        return { message: 'Token refreshed' };
+      }
     }
 
-    const isValid = await bcrypt.compare(token, user.hashedRefreshToken);
-    if (!isValid) throw new UnauthorizedException('Refresh token invalid');
-
-    return { accessToken: await this.generateToken(user) };
+    throw new UnauthorizedException('Invalid refresh token');
   }
 
-  async generateToken(user: any): Promise<string> {
-    return this.jwtService.signAsync({
-      sub: user.id,
-      email: user.email,
-      role: user.role,
+  private async generateToken(user: any): Promise<string> {
+    return this.jwtService.signAsync(
+      { sub: user.id, email: user.email, role: user.role },
+      { expiresIn: '15m' },
+    );
+  }
+
+  async getUserFromRefreshToken(token: string) {
+    const users = await this.prisma.user.findMany({
+      where: { hashedRefreshToken: { not: null } },
     });
+
+    for (const user of users) {
+      if (!user.hashedRefreshToken) continue;
+
+      const isValid = await bcrypt.compare(token, user.hashedRefreshToken);
+      if (isValid) return user;
+    }
+
+    throw new UnauthorizedException('User not found for refresh token');
   }
 
   async handleOAuthRedirect(req: AuthenticatedRequest, res: Response) {
@@ -217,14 +239,12 @@ export class AuthService {
     const existing = await this.prisma.user.findUnique({ where: { email } });
     if (existing) throw new ConflictException('User already exists');
 
-    const user = await this.prisma.user.create({
-      data: {
-        email,
-        name: name,
-        password: '', // no password for OAuth users
-        role,
-        emailVerified: true,
-      },
+    const user = await this.userService.create({
+      email,
+      name: name,
+      password: '', // no password for OAuth users
+      role,
+      emailVerified: true,
     });
 
     res.clearCookie('pending_oauth_email');

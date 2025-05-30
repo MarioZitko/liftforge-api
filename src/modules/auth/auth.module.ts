@@ -10,6 +10,7 @@ import { EmailModule } from '../email/email.module';
 import { ConfigService } from '@nestjs/config';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { FacebookStrategy } from './strategies/facebook.strategy';
+import { UserService } from '../user/user.service';
 
 @Module({
   imports: [
@@ -24,7 +25,15 @@ import { FacebookStrategy } from './strategies/facebook.strategy';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, JwtStrategy, GoogleStrategy, FacebookStrategy, JwtAuthGuard, RolesGuard],
+  providers: [
+    AuthService,
+    UserService,
+    JwtStrategy,
+    GoogleStrategy,
+    FacebookStrategy,
+    JwtAuthGuard,
+    RolesGuard,
+  ],
   exports: [AuthService], // optional
 })
 export class AuthModule {}

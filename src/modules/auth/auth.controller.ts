@@ -1,8 +1,17 @@
 // src/modules/auth/auth.controller.ts
-import { Body, Controller, Get, Post, Req, Res, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Throttle } from '@nestjs/throttler';
-import { Response } from 'express';
+import { Response, Request } from 'express';
 import { Role } from 'generated/prisma/client';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
@@ -18,7 +27,7 @@ import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
 export class AuthController {
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService) {}
 
   @Post('register')
   async register(@Body() dto: RegisterDto) {
@@ -31,8 +40,11 @@ export class AuthController {
   }
 
   @Post('refresh')
-  async refreshToken(@Body() dto: { email: string; refreshToken: string }) {
-    return this.authService.validateRefreshToken(dto.email, dto.refreshToken);
+  async refreshToken(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    const refreshToken = req.cookies['refreshToken'];
+    if (!refreshToken) throw new UnauthorizedException('No refresh token in cookies');
+
+    return this.authService.refreshTokens(res, refreshToken);
   }
 
   @Get('me')
