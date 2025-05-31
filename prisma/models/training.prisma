@@ -133,6 +133,9 @@ model Exercise {
   name        String
   description String?
   tutorialUrl String?
+  
+  primaryMuscles   String[]
+  secondaryMuscles String[]
 
   trainingExercises TrainingExercise[] @relation("TrainingExerciseToExercise")
 

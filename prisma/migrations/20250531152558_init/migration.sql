@@ -181,6 +181,8 @@ CREATE TABLE "Exercise" (
     "name" TEXT NOT NULL,
     "description" TEXT,
     "tutorialUrl" TEXT,
+    "primaryMuscles" TEXT[],
+    "secondaryMuscles" TEXT[],
     "createdById" TEXT,
     "updatedById" TEXT,
 
