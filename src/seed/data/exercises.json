@@ -13,7 +13,7 @@
       "Lie down on the floor and secure your feet. Your legs should be bent at the knees.",
       "Place your hands behind or to the side of your head. You will begin with your back on the ground. This will be your starting position.",
       "Flex your hips and spine to raise your torso toward your knees.",
-      "At the top of the contraction your torso should be perpendicular to the ground. Reverse the motion, going only ¾ of the way down.",
+      "At the top of the contraction your torso should be perpendicular to the ground. Reverse the motion, going only \u00be of the way down.",
       "Repeat for the recommended amount of repetitions."
     ],
     "category": "strength",
@@ -47,29 +47,6 @@
       "90_90_Hamstring/1.jpg"
     ],
     "id": "90_90_Hamstring"
-  },
-  {
-    "name": "Ab Crunch Machine",
-    "force": "pull",
-    "level": "intermediate",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "abdominals"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Select a light resistance and sit down on the ab machine placing your feet under the pads provided and grabbing the top handles. Your arms should be bent at a 90 degree angle as you rest the triceps on the pads provided. This will be your starting position.",
-      "At the same time, begin to lift the legs up as you crunch your upper torso. Breathe out as you perform this movement. Tip: Be sure to use a slow and controlled motion. Concentrate on using your abs to move the weight while relaxing your legs and feet.",
-      "After a second pause, slowly return to the starting position as you breathe in.",
-      "Repeat the movement for the prescribed amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Ab_Crunch_Machine/0.jpg",
-      "Ab_Crunch_Machine/1.jpg"
-    ],
-    "id": "Ab_Crunch_Machine"
   },
   {
     "name": "Ab Roller",
@@ -293,35 +270,6 @@
       "Alternate_Incline_Dumbbell_Curl/1.jpg"
     ],
     "id": "Alternate_Incline_Dumbbell_Curl"
-  },
-  {
-    "name": "Alternate Leg Diagonal Bound",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Assume a comfortable stance with one foot slightly in front of the other.",
-      "Begin by pushing off with the front leg, driving the opposite knee forward and as high as possible before landing. Attempt to cover as much distance to each side with each bound.",
-      "It may help to use a line on the ground to guage distance from side to side.",
-      "Repeat the sequence with the other leg."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Alternate_Leg_Diagonal_Bound/0.jpg",
-      "Alternate_Leg_Diagonal_Bound/1.jpg"
-    ],
-    "id": "Alternate_Leg_Diagonal_Bound"
   },
   {
     "name": "Alternating Cable Shoulder Press",
@@ -820,29 +768,6 @@
     "id": "Backward_Drag"
   },
   {
-    "name": "Backward Medicine Ball Throw",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "This exercise is best done with a partner. If you lack a partner, the ball can be thrown and retrieved or thrown against a wall.",
-      "Begin standing a few meters in front of your partner, both facing the same direction. Begin holding the ball between your legs.",
-      "Squat down and then forcefully reverse direction, coming to full extension and you toss the ball over your head to your partner.",
-      "Your partner can then roll the ball back to you. Repeat for the desired number of repetitions."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Backward_Medicine_Ball_Throw/0.jpg",
-      "Backward_Medicine_Ball_Throw/1.jpg"
-    ],
-    "id": "Backward_Medicine_Ball_Throw"
-  },
-  {
     "name": "Balance Board",
     "force": null,
     "level": "beginner",
@@ -893,33 +818,6 @@
       "Ball_Leg_Curl/1.jpg"
     ],
     "id": "Ball_Leg_Curl"
-  },
-  {
-    "name": "Band Assisted Pull-Up",
-    "force": null,
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "lats"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "forearms",
-      "middle back"
-    ],
-    "instructions": [
-      "Choke the band around the center of the pullup bar. You can use different bands to provide varying levels of assistance.",
-      "Pull the end of the band down, and place one bent knee into the loop, ensuring it won't slip out. Take a medium to wide grip on the bar. This will be your starting position.",
-      "Pull yourself upward by contracting the lats as you flex the elbow. The elbow should be driven to your side. Pull to the front, attempting to get your chin over the bar. Avoid swinging or jerking movements.",
-      "After a brief pause, return to the starting position."
-    ],
-    "category": "strength",
-    "images": [
-      "Band_Assisted_Pull-Up/0.jpg",
-      "Band_Assisted_Pull-Up/1.jpg"
-    ],
-    "id": "Band_Assisted_Pull-Up"
   },
   {
     "name": "Band Good Morning",
@@ -1847,34 +1745,6 @@
     "id": "Bench_Dips"
   },
   {
-    "name": "Bench Jump",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Begin with a box or bench 1-2 feet in front of you. Stand with your feet shoulder width apart. This will be your starting position.",
-      "Perform a short squat in preparation for the jump; swing your arms behind you.",
-      "Rebound out of this position, extending through the hips, knees, and ankles to jump as high as possible. Swing your arms forward and up.",
-      "Jump over the bench, landing with the knees bent, absorbing the impact through the legs.",
-      "Turn around and face the opposite direction, then jump back over the bench."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Bench_Jump/0.jpg",
-      "Bench_Jump/1.jpg"
-    ],
-    "id": "Bench_Jump"
-  },
-  {
     "name": "Bench Press - Powerlifting",
     "force": "push",
     "level": "intermediate",
@@ -1957,33 +1827,6 @@
       "Bench_Press_with_Chains/1.jpg"
     ],
     "id": "Bench_Press_with_Chains"
-  },
-  {
-    "name": "Bench Sprint",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand on the ground with one foot resting on a bench or box with your heel close to the edge.",
-      "Push off with your foot on top of the bench, extending through the hip and knee.",
-      "Land with the opposite foot on top of the box, returning your other foot back to the start position.",
-      "Continue alternating from one foot to another to complete the set."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Bench_Sprint/0.jpg",
-      "Bench_Sprint/1.jpg"
-    ],
-    "id": "Bench_Sprint"
   },
   {
     "name": "Bent-Arm Barbell Pullover",
@@ -2519,35 +2362,6 @@
     "id": "Bodyweight_Walking_Lunge"
   },
   {
-    "name": "Bosu Ball Cable Crunch With Side Bends",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "cable",
-    "primaryMuscles": [
-      "abdominals"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Connect a standard handle to each arm of a cable machine, and position them in the most downward position.",
-      "Grab a Bosu Ball and position it in front and center of the cable machine.",
-      "Lie down on the Bosu Ball with the small of your back arched around the ball. Your rear end should be close to the floor without touching it.",
-      "With both hands, reach back and grab the handle of each cable.",
-      "With your feet positioned in a wide stance, extend your arms straight out in front of you and in between your knees. Your hands should be at knee level.",
-      "Keep your arms straight and in-line with the upward angle of the cable. Elevate your torso in a crunching motion without dropping or bending your arms.",
-      "Maintain the rigid position with your arms. Slowly descend back to the starting position with your back arched around the Bosu Ball and your abdominals elongated.",
-      "Repeat the same series of movements to failure.",
-      "Once you reach failure, keep your abs tight and raise your torso into plank position so your back is elevated off the Bosu Ball.",
-      "Lower your arms down to your side; keep them straight. Start doing alternating side bends; reach for your heels! This finishing movement will focus on your obliques."
-    ],
-    "category": "strength",
-    "images": [
-      "Bosu_Ball_Cable_Crunch_With_Side_Bends/0.jpg",
-      "Bosu_Ball_Cable_Crunch_With_Side_Bends/1.jpg"
-    ],
-    "id": "Bosu_Ball_Cable_Crunch_With_Side_Bends"
-  },
-  {
     "name": "Bottoms-Up Clean From The Hang Position",
     "force": "pull",
     "level": "intermediate",
@@ -2592,64 +2406,6 @@
       "Bottoms_Up/1.jpg"
     ],
     "id": "Bottoms_Up"
-  },
-  {
-    "name": "Box Jump (Multiple Response)",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Assume a relaxed stance facing the box or platform approximately an arm's length away. Arms should be down at the sides and legs slightly bent.",
-      "Using the arms to aid in the initial burst, jump upward and forward, landing with feet simultaneously on top of the box or platform.",
-      "Immediately drop or jump back down to the original starting place; then repeat the sequence."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Box_Jump_Multiple_Response/0.jpg",
-      "Box_Jump_Multiple_Response/1.jpg"
-    ],
-    "id": "Box_Jump_Multiple_Response"
-  },
-  {
-    "name": "Box Skip",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "quadriceps"
-    ],
-    "instructions": [
-      "You will need several boxes lined up about 8 feet apart.",
-      "Begin facing the first box with one leg slightly behind the other.",
-      "Drive off the back leg, attempting to gain as much height with the hips as possible.",
-      "Immediately upon landing on the box, drive the other leg forward and upward to gain height and distance, leaping from the box. Land between the first two boxes with the same leg that landed on the first box.",
-      "Then, step to the next box and repeat."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Box_Skip/0.jpg",
-      "Box_Skip/1.jpg"
-    ],
-    "id": "Box_Skip"
   },
   {
     "name": "Box Squat",
@@ -3077,7 +2833,7 @@
     "secondaryMuscles": [],
     "instructions": [
       "Sit next to a low pulley sideways (with legs stretched in front of you or crossed) and grasp the single hand cable attachment with the arm nearest to the cable. Tip: If you can adjust the pulley's height, you can use a flat bench to sit on instead.",
-      "Position the elbow against your side with the elbow bent at 90° and the arm pointing towards the pulley. This will be your starting position.",
+      "Position the elbow against your side with the elbow bent at 90\u00b0 and the arm pointing towards the pulley. This will be your starting position.",
       "Pull the single hand cable attachment toward your body by internally rotating your shoulder until your forearm is across your abs. You will be creating an imaginary semi-circle. Tip: The forearm should be perpendicular to your torso at all times.",
       "Slowly go back to the initial position.",
       "Repeat for the recommended amount of repetitions and then repeat the movement with the next arm."
@@ -3468,29 +3224,6 @@
     "id": "Cable_Wrist_Curl"
   },
   {
-    "name": "Calf-Machine Shoulder Shrug",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "traps"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Position yourself on the calf machine so that the shoulder pads are above your shoulders. Your torso should be straight with the arms extended normally by your side. This will be your starting position.",
-      "Raise your shoulders up towards your ears as you exhale and hold the contraction for a full second.",
-      "Slowly return to the starting position as you inhale.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Calf-Machine_Shoulder_Shrug/0.jpg",
-      "Calf-Machine_Shoulder_Shrug/1.jpg"
-    ],
-    "id": "Calf-Machine_Shoulder_Shrug"
-  },
-  {
     "name": "Calf Press",
     "force": "push",
     "level": "beginner",
@@ -3512,30 +3245,6 @@
       "Calf_Press/1.jpg"
     ],
     "id": "Calf_Press"
-  },
-  {
-    "name": "Calf Press On The Leg Press Machine",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "calves"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Using a leg press machine, sit down on the machine and place your legs on the platform directly in front of you at a medium (shoulder width) foot stance.",
-      "Lower the safety bars holding the weighted platform in place and press the platform all the way up until your legs are fully extended in front of you without locking your knees. (Note: In some leg press units you can leave the safety bars on for increased safety. If your leg press unit allows for this, then this is the preferred method of performing the exercise.) Your torso and the legs should make perfect 90-degree angle. Now carefully place your toes and balls of your feet on the lower portion of the platform with the heels extending off. Toes should be facing forward, outwards or inwards as described at the beginning of the chapter. This will be your starting position.",
-      "Press on the platform by raising your heels as you breathe out by extending your ankles as high as possible and flexing your calf. Ensure that the knee is kept stationary at all times. There should be no bending at any time. Hold the contracted position by a second before you start to go back down.",
-      "Go back slowly to the starting position as you breathe in by lowering your heels as you bend the ankles until calves are stretched.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Calf_Press_On_The_Leg_Press_Machine/0.jpg",
-      "Calf_Press_On_The_Leg_Press_Machine/1.jpg"
-    ],
-    "id": "Calf_Press_On_The_Leg_Press_Machine"
   },
   {
     "name": "Calf Raise On A Dumbbell",
@@ -3705,35 +3414,6 @@
     "id": "Car_Drivers"
   },
   {
-    "name": "Carioca Quick Step",
-    "force": null,
-    "level": "beginner",
-    "mechanic": null,
-    "equipment": null,
-    "primaryMuscles": [
-      "adductors"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "abductors",
-      "calves",
-      "glutes",
-      "hamstrings",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Begin with your feet a few inches apart and your left arm up in a relaxed, athletic position.",
-      "With your right foot, quick step behind and pull the knee up.",
-      "Fire your arms back up when you pull the right knee, being sure that your knee goes straight up and down. Avoid turning your feet as you move and continue to look forward as you move to the side."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Carioca_Quick_Step/0.jpg",
-      "Carioca_Quick_Step/1.jpg"
-    ],
-    "id": "Carioca_Quick_Step"
-  },
-  {
     "name": "Cat Stretch",
     "force": "static",
     "level": "beginner",
@@ -3757,32 +3437,6 @@
       "Cat_Stretch/1.jpg"
     ],
     "id": "Cat_Stretch"
-  },
-  {
-    "name": "Catch and Overhead Throw",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "lats"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "chest",
-      "shoulders"
-    ],
-    "instructions": [
-      "Begin standing while facing a wall or a partner.",
-      "Using both hands, position the ball behind your head, stretching as much as possible, and forcefully throw the ball forward.",
-      "Ensure that you follow your throw through, being prepared to receive your rebound from your throw. If you are throwing against the wall, make sure that you stand close enough to the wall to receive the rebound, and aim a little higher than you would with a partner."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Catch_and_Overhead_Throw/0.jpg",
-      "Catch_and_Overhead_Throw/1.jpg"
-    ],
-    "id": "Catch_and_Overhead_Throw"
   },
   {
     "name": "Chain Handle Extension",
@@ -3956,111 +3610,6 @@
       "Chest_And_Front_Of_Shoulder_Stretch/1.jpg"
     ],
     "id": "Chest_And_Front_Of_Shoulder_Stretch"
-  },
-  {
-    "name": "Chest Push from 3 point stance",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Begin in a three point stance, squatted down with your back flat and one hand on the ground. Place the medicine ball directly in front of you.",
-      "To begin, take your first step as you pull the ball to your chest, positioning both hands to prepare for the throw.",
-      "As you execute the second step, explosively release the ball forward as hard as possible."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Chest_Push_from_3_point_stance/0.jpg",
-      "Chest_Push_from_3_point_stance/1.jpg"
-    ],
-    "id": "Chest_Push_from_3_point_stance"
-  },
-  {
-    "name": "Chest Push (multiple response)",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Begin in a kneeling position facing a wall or utilize a partner. Hold the ball with both hands tight into the chest.",
-      "Execute the pass by exploding forward and outward with the hips while pushing the ball as hard as possible.",
-      "Follow through by falling forward, catching yourself with your hands.",
-      "Immediately return to an upright position. Repeat for the desired number of repetitions."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Chest_Push_multiple_response/0.jpg",
-      "Chest_Push_multiple_response/1.jpg"
-    ],
-    "id": "Chest_Push_multiple_response"
-  },
-  {
-    "name": "Chest Push (single response)",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Begin in a kneeling position holding the medicine ball with both hands tightly into the chest.",
-      "Execute the pass by exploding forward and outward with the hips while pushing the ball as far as possible.",
-      "Follow through by falling forward, catching yourself with your hands."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Chest_Push_single_response/0.jpg",
-      "Chest_Push_single_response/1.jpg"
-    ],
-    "id": "Chest_Push_single_response"
-  },
-  {
-    "name": "Chest Push with Run Release",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Begin in an athletic stance with the knees bent, hips back, and back flat. Hold the medicine ball near your legs. This will be your starting position.",
-      "While taking your first step draw the medicine ball into your chest.",
-      "As you take the second step, explosively push the ball forward, immediately sprinting for 10 yards after the release. If you are really fast, you can catch your own pass!"
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Chest_Push_with_Run_Release/0.jpg",
-      "Chest_Push_with_Run_Release/1.jpg"
-    ],
-    "id": "Chest_Push_with_Run_Release"
   },
   {
     "name": "Chest Stretch on Stability Ball",
@@ -5323,33 +4872,6 @@
     "id": "Decline_Reverse_Crunch"
   },
   {
-    "name": "Decline Smith Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Place a decline bench underneath the Smith machine. Now place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Using a pronated grip that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms extended. This will be your starting position.",
-      "As you inhale, lower the bar under control by allowing the elbows to flex, lightly contacting the torso.",
-      "After a brief pause, bring the bar back to the starting position by extending the elbows, exhaling as you do so.",
-      "Repeat the movement for the prescribed amount of repetitions.",
-      "When the set is complete, lock the bar back in the rack."
-    ],
-    "category": "strength",
-    "images": [
-      "Decline_Smith_Press/0.jpg",
-      "Decline_Smith_Press/1.jpg"
-    ],
-    "id": "Decline_Smith_Press"
-  },
-  {
     "name": "Deficit Deadlift",
     "force": "pull",
     "level": "intermediate",
@@ -5377,62 +4899,6 @@
       "Deficit_Deadlift/1.jpg"
     ],
     "id": "Deficit_Deadlift"
-  },
-  {
-    "name": "Depth Jump Leap",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "For this drill you will need two boxes or benches, one 12 to 16 inches high and the other 22 to 26 inches high.",
-      "Stand on one of the two boxes with arms at the sides; feet should be together and slightly off the edge as in the depth jump. Place the other box approximately two or three feet in front of and facing the performer.",
-      "Begin by dropping off the initial box, landing and simultaneously taking off with both feet.",
-      "Rebound by driving upward and outward as intensely as possible, using the arms and full extension of the body to jump onto the higher box. Again, allow the legs to absorb the impact."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Depth_Jump_Leap/0.jpg",
-      "Depth_Jump_Leap/1.jpg"
-    ],
-    "id": "Depth_Jump_Leap"
-  },
-  {
-    "name": "Dip Machine",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "triceps"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "shoulders"
-    ],
-    "instructions": [
-      "Sit securely in a dip machine, select the weight and firmly grasp the handles.",
-      "Now keep your elbows in at your sides in order to place emphasis on the triceps. The elbows should be bent at a 90 degree angle.",
-      "As you contract the triceps, extend your arms downwards as you exhale. Tip: At the bottom of the movement, focus on keeping a little bend in your arms to keep tension on the triceps muscle.",
-      "Now slowly let your arms come back up to the starting position as you inhale.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Dip_Machine/0.jpg",
-      "Dip_Machine/1.jpg"
-    ],
-    "id": "Dip_Machine"
   },
   {
     "name": "Dips - Chest Version",
@@ -5651,35 +5117,6 @@
     "id": "Double_Kettlebell_Windmill"
   },
   {
-    "name": "Double Leg Butt Kick",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Begin standing with your knees slightly bent.",
-      "Quickly squat a short distance, flexing the hips and knees, and immediately extend to jump for maximum vertical height.",
-      "As you go up, tuck your heels by flexing the knees, attempting to touch the buttocks.",
-      "Finish the motion by landing with the knees only partially bent, using your legs to absorb the impact."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Double_Leg_Butt_Kick/0.jpg",
-      "Double_Leg_Butt_Kick/1.jpg"
-    ],
-    "id": "Double_Leg_Butt_Kick"
-  },
-  {
     "name": "Downward Facing Balance",
     "force": "static",
     "level": "intermediate",
@@ -5727,31 +5164,6 @@
       "Drag_Curl/1.jpg"
     ],
     "id": "Drag_Curl"
-  },
-  {
-    "name": "Drop Push",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Position low boxes or other platforms 2-3 feet apart.",
-      "Move to a pushup position between them, supporting yourself by placing your hands on the boxes.",
-      "With good posture, drop from the platforms by pressing up and moving your hands to shoulder width, cushioning your landing by absorbing the impact through the arm."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Drop_Push/0.jpg",
-      "Drop_Push/1.jpg"
-    ],
-    "id": "Drop_Push"
   },
   {
     "name": "Dumbbell Alternate Bicep Curl",
@@ -6298,33 +5710,6 @@
       "Dumbbell_Scaption/1.jpg"
     ],
     "id": "Dumbbell_Scaption"
-  },
-  {
-    "name": "Dumbbell Seated Box Jump",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "dumbbell",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Position a box a couple feet to the side of a bench. Hold a dumbbell to your chest with both hands and seat yourself on the bench facing the box. This will be your starting position.",
-      "Plant your feet firmly on the ground as you lean forward, extending through the hips and knees to jump up and forward.",
-      "Land on the box with both feet, absorbing the impact by allowing the hips and knees to bend.",
-      "Step down and return to the starting position."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Dumbbell_Seated_Box_Jump/0.jpg",
-      "Dumbbell_Seated_Box_Jump/1.jpg"
-    ],
-    "id": "Dumbbell_Seated_Box_Jump"
   },
   {
     "name": "Dumbbell Seated One-Leg Calf Raise",
@@ -6971,34 +6356,6 @@
     "id": "Farmers_Walk"
   },
   {
-    "name": "Fast Skipping",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Start in a relaxed position with one leg slightly forward. This will be your starting position.",
-      "Skip by executing a step-hop pattern of right-right-step to left-left-step, and so on, alternating back and forth.",
-      "Perform fast skips by maintaining close contact with the ground and reduce air time, moving as quickly as possible."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Fast_Skipping/0.jpg",
-      "Fast_Skipping/1.jpg"
-    ],
-    "id": "Fast_Skipping"
-  },
-  {
     "name": "Finger Curls",
     "force": "pull",
     "level": "beginner",
@@ -7438,35 +6795,6 @@
     "id": "Front_Barbell_Squat_To_A_Bench"
   },
   {
-    "name": "Front Box Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Begin with a box of an appropriate height 1-2 feet in front of you. Stand with your feet should width apart. This will be your starting position.",
-      "Perform a short squat in preparation for jumping, swinging your arms behind you.",
-      "Rebound out of this position, extending through the hips, knees, and ankles to jump as high as possible. Swing your arms forward and up.",
-      "Land on the box with the knees bent, absorbing the impact through the legs. You can jump from the box back to the ground, or preferably step down one leg at a time."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Front_Box_Jump/0.jpg",
-      "Front_Box_Jump/1.jpg"
-    ],
-    "id": "Front_Box_Jump"
-  },
-  {
     "name": "Front Cable Raise",
     "force": "push",
     "level": "beginner",
@@ -7489,36 +6817,6 @@
       "Front_Cable_Raise/1.jpg"
     ],
     "id": "Front_Cable_Raise"
-  },
-  {
-    "name": "Front Cone Hops (or hurdle hops)",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Set up a row of cones or other small barriers, placing them a few feet apart.",
-      "Stand in front of the first cone with your feet shoulder width apart. This will be your starting position.",
-      "Begin by jumping with both feet over the first cone, swinging both arms as you jump.",
-      "Absorb the impact of landing by bending the knees, rebounding out of the first leap by jumping over the next cone.",
-      "Continue until you have jumped over all of the cones."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Front_Cone_Hops_or_hurdle_hops/0.jpg",
-      "Front_Cone_Hops_or_hurdle_hops/1.jpg"
-    ],
-    "id": "Front_Cone_Hops_or_hurdle_hops"
   },
   {
     "name": "Front Dumbbell Raise",
@@ -8348,32 +7646,6 @@
     "id": "Heaving_Snatch_Balance"
   },
   {
-    "name": "Heavy Bag Thrust",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Utilize a heavy bag for this exercise. Assume an upright stance next to the bag, with your feet staggered, fairly wide apart. Place your hand on the bag at about chest height. This will be your starting position.",
-      "Begin by twisting at the waist, pushing the bag forward as hard as possible. Perform this move quickly, pushing the bag away from your body.",
-      "Receive the bag as it swings back by reversing these steps."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Heavy_Bag_Thrust/0.jpg",
-      "Heavy_Bag_Thrust/1.jpg"
-    ],
-    "id": "Heavy_Bag_Thrust"
-  },
-  {
     "name": "High Cable Curls",
     "force": "pull",
     "level": "intermediate",
@@ -8542,35 +7814,6 @@
       "Hug_Knees_To_Chest/1.jpg"
     ],
     "id": "Hug_Knees_To_Chest"
-  },
-  {
-    "name": "Hurdle Hops",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Set up a row of hurdles or other small barriers, placing them a few feet apart.",
-      "Stand in front of the first hurdle with your feet shoulder width apart. This will be your starting position.",
-      "Begin by jumping with both feet over the first hurdle, swinging both arms as you jump.",
-      "Absorb the impact of landing by bending the knees, rebounding out of the first leap by jumping over the next hurdle. Continue until you have jumped over all of the hurdles."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Hurdle_Hops/0.jpg",
-      "Hurdle_Hops/1.jpg"
-    ],
-    "id": "Hurdle_Hops"
   },
   {
     "name": "Hyperextensions (Back Extensions)",
@@ -8749,58 +7992,6 @@
       "Incline_Bench_Pull/1.jpg"
     ],
     "id": "Incline_Bench_Pull"
-  },
-  {
-    "name": "Incline Cable Chest Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "cable",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Adjust the weight to an appropriate amount and be seated, grasping the handles. Your upper arms should be about 45 degrees to the body, with your head and chest up. The elbows should be bent to about 90 degrees. This will be your starting position.",
-      "Begin by extending through the elbow, pressing the handles together straight in front of you. Keep your shoulder blades retracted as you execute the movement.",
-      "After pausing at full extension, return to the starting position, keeping tension on the cables."
-    ],
-    "category": "strength",
-    "images": [
-      "Incline_Cable_Chest_Press/0.jpg",
-      "Incline_Cable_Chest_Press/1.jpg"
-    ],
-    "id": "Incline_Cable_Chest_Press"
-  },
-  {
-    "name": "Incline Cable Flye",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "isolation",
-    "equipment": "cable",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders"
-    ],
-    "instructions": [
-      "To get yourself into the starting position, set the pulleys at the floor level (lowest level possible on the machine that is below your torso).",
-      "Place an incline bench (set at 45 degrees) in between the pulleys, select a weight on each one and grab a pulley on each hand.",
-      "With a handle on each hand, lie on the incline bench and bring your hands together at arms length in front of your face. This will be your starting position.",
-      "With a slight bend of your elbows (in order to prevent stress at the biceps tendon), lower your arms out at both sides in a wide arc until you feel a stretch on your chest. Breathe in as you perform this portion of the movement. Tip: Keep in mind that throughout the movement, the arms should remain stationary. The movement should only occur at the shoulder joint.",
-      "Return your arms back to the starting position as you squeeze your chest muscles and exhale. Hold the contracted position for a second. Tip: Make sure to use the same arc of motion used to lower the weights.",
-      "Repeat the movement for the prescribed amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Incline_Cable_Flye/0.jpg",
-      "Incline_Cable_Flye/1.jpg"
-    ],
-    "id": "Incline_Cable_Flye"
   },
   {
     "name": "Incline Dumbbell Bench With Palms Facing In",
@@ -9034,32 +8225,6 @@
       "Incline_Push-Up_Close-Grip/1.jpg"
     ],
     "id": "Incline_Push-Up_Close-Grip"
-  },
-  {
-    "name": "Incline Push-Up Depth Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "For this drill you will need a box about 12 inches high, and two thick mats or aerobics steps.",
-      "Place the steps just outside of your shoulders, and place your feet on top of the box so that you are in an incline pushup position, your hands just inside the steps. This will be your starting position.",
-      "Begin by bending at the elbows to lower your body, quickly reversing position to push your body off of the ground. As you leave the ground, move your hands onto the steps, bending your elbows to absorb the impact.",
-      "Repeat the motion to return to the starting position."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Incline_Push-Up_Depth_Jump/0.jpg",
-      "Incline_Push-Up_Depth_Jump/1.jpg"
-    ],
-    "id": "Incline_Push-Up_Depth_Jump"
   },
   {
     "name": "Incline Push-Up Medium",
@@ -9309,108 +8474,6 @@
       "Iron_Crosses_stretch/1.jpg"
     ],
     "id": "Iron_Crosses_stretch"
-  },
-  {
-    "name": "Isometric Chest Squeezes",
-    "force": "static",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "While either seating or standing, bend your arms at a 90-degree angle and place the palms of your hands together in front of your chest. Tip: Your hands should be open with the palms together and fingers facing forward (perpendicular to your torso).",
-      "Push both hands against each other as you contract your chest. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.",
-      "Hold for the recommended number of seconds.",
-      "Now release the tension slowly.",
-      "Rest for the recommended amount of time and repeat."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Isometric_Chest_Squeezes/0.jpg",
-      "Isometric_Chest_Squeezes/1.jpg"
-    ],
-    "id": "Isometric_Chest_Squeezes"
-  },
-  {
-    "name": "Isometric Neck Exercise - Front And Back",
-    "force": "static",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "neck"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "With your head and neck in a neutral position (normal position with head erect facing forward), place both of your hands on the front side of your head.",
-      "Now gently push forward as you contract the neck muscles but resisting any movement of your head. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.",
-      "Hold for the recommended number of seconds.",
-      "Now release the tension slowly.",
-      "Rest for the recommended amount of time and repeat with your hands placed on the back side of your head."
-    ],
-    "category": "strength",
-    "images": [
-      "Isometric_Neck_Exercise_-_Front_And_Back/0.jpg",
-      "Isometric_Neck_Exercise_-_Front_And_Back/1.jpg"
-    ],
-    "id": "Isometric_Neck_Exercise_-_Front_And_Back"
-  },
-  {
-    "name": "Isometric Neck Exercise - Sides",
-    "force": "static",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "neck"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "With your head and neck in a neutral position (normal position with head erect facing forward), place your left hand on the left side of your head.",
-      "Now gently push towards the left as you contract the left neck muscles but resisting any movement of your head. Start with slow tension and increase slowly. Keep breathing normally as you execute this contraction.",
-      "Hold for the recommended number of seconds.",
-      "Now release the tension slowly.",
-      "Rest for the recommended amount of time and repeat with your right hand placed on the right side of your head."
-    ],
-    "category": "strength",
-    "images": [
-      "Isometric_Neck_Exercise_-_Sides/0.jpg",
-      "Isometric_Neck_Exercise_-_Sides/1.jpg"
-    ],
-    "id": "Isometric_Neck_Exercise_-_Sides"
-  },
-  {
-    "name": "Isometric Wipers",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Assume a push-up position, supporting your weight on your hands and toes while keeping your body straight. Your hands should be just outside of shoulder width. This will be your starting position.",
-      "Begin by shifting your body weight as far to one side as possible, allowing the elbow on that side to flex as you lower your body.",
-      "Reverse the motion by extending the flexed arm, pushing yourself up and then dropping to the other side.",
-      "Repeat for the desired number of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Isometric_Wipers/0.jpg",
-      "Isometric_Wipers/1.jpg"
-    ],
-    "id": "Isometric_Wipers"
   },
   {
     "name": "JM Press",
@@ -10122,59 +9185,6 @@
     "id": "Knee_Hip_Raise_On_Parallel_Bars"
   },
   {
-    "name": "Knee Tuck Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "glutes",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Begin in a comfortable standing position with your knees slightly bent. Hold your hands in front of you, palms down with your fingertips together at chest height. This will be your starting position.",
-      "Rapidly dip down into a quarter squat and immediately explode upward. Drive the knees towards the chest, attempting to touch them to the palms of the hands.",
-      "Jump as high as you can, raising your knees up, and then ensure a good land be re-extending your legs, absorbing impact through be allowing the knees to rebend."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Knee_Tuck_Jump/0.jpg",
-      "Knee_Tuck_Jump/1.jpg"
-    ],
-    "id": "Knee_Tuck_Jump"
-  },
-  {
-    "name": "Kneeling Arm Drill",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": null,
-    "equipment": null,
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "abdominals"
-    ],
-    "instructions": [
-      "This drill helps increase arm efficiency during the run. Begin kneeling, left foot in front, right knee down. Apply pressure through the front heel to keep your glutes and hamstrings activated.",
-      "Begin by blocking the arms in long, pendulum like swings. Close the arm angle, blocking with the arms as you would when jogging, progressing to a run and finally a sprint.",
-      "As soon as your hands pass the hip, accelerate them forward during the sprinting motion to move them as quickly as possible.",
-      "Switch knees and repeat."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Kneeling_Arm_Drill/0.jpg",
-      "Kneeling_Arm_Drill/1.jpg"
-    ],
-    "id": "Kneeling_Arm_Drill"
-  },
-  {
     "name": "Kneeling Cable Crunch With Alternating Oblique Twists",
     "force": "pull",
     "level": "beginner",
@@ -10436,95 +9446,6 @@
     "id": "Landmine_Linear_Jammer"
   },
   {
-    "name": "Lateral Bound",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "adductors"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "calves",
-      "glutes",
-      "hamstrings",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Assume a half squat position facing 90 degrees from your direction of travel. This will be your starting position.",
-      "Allow your lead leg to do a countermovement inward as you shift your weight to the outside leg.",
-      "Immediately push off and extend, attempting to bound to the side as far as possible.",
-      "Upon landing, immediately push off in the opposite direction, returning to your original start position.",
-      "Continue back and forth for several repetitions."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Lateral_Bound/0.jpg",
-      "Lateral_Bound/1.jpg"
-    ],
-    "id": "Lateral_Bound"
-  },
-  {
-    "name": "Lateral Box Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "adductors"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "calves",
-      "glutes",
-      "hamstrings",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Assume a comfortable standing position, with a short box positioned next to you. This will be your starting position.",
-      "Quickly dip into a quarter squat to initiate the stretch reflex, and immediately reverse direction to jump up and to the side.",
-      "Bring your knees high enough to ensure your feet have good clearance over the box.",
-      "Land on the center of the box, using your legs to absorb the impact.",
-      "Carefully jump down to the other side of the box, and continue going back and forth for several repetitions."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Lateral_Box_Jump/0.jpg",
-      "Lateral_Box_Jump/1.jpg"
-    ],
-    "id": "Lateral_Box_Jump"
-  },
-  {
-    "name": "Lateral Cone Hops",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "adductors"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "calves",
-      "glutes",
-      "hamstrings",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Position a number of cones in a row several feet apart.",
-      "Stand next to the end of the cones, facing 90 degrees to the direction of travel. This will be your starting position.",
-      "Begin the jump by dipping with the knees to initiate a stretch reflex, and immediately reverse direction to push off the ground, jumping up and sideways over the cone.",
-      "Use your legs to absorb impact upon landing, and rebound into the next jump, continuing down the row of cones."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Lateral_Cone_Hops/0.jpg",
-      "Lateral_Cone_Hops/1.jpg"
-    ],
-    "id": "Lateral_Cone_Hops"
-  },
-  {
     "name": "Lateral Raise - With Bands",
     "force": "push",
     "level": "beginner",
@@ -10714,286 +9635,6 @@
       "Leg_Pull-In/1.jpg"
     ],
     "id": "Leg_Pull-In"
-  },
-  {
-    "name": "Leverage Chest Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the bottom or middle of the pectorals at the beginning of the motion.",
-      "Your chest and head should be up and your shoulder blades retracted. This will be your starting position.",
-      "Press the handles forward by extending through the elbow.",
-      "After a brief pause at the top, return the weight just above the start position, keeping tension on the muscles by not returning the weight to the stops until the set is complete."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Chest_Press/0.jpg",
-      "Leverage_Chest_Press/1.jpg"
-    ],
-    "id": "Leverage_Chest_Press"
-  },
-  {
-    "name": "Leverage Deadlift",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Load the pins to an appropriate weight. Position yourself directly between the handles. Grasp the bottom handles with a comfortable grip, and then lower your hips as you take a breath. Look forward with your head and keep your chest up. This will be your starting position.",
-      "Return the weight to the starting position."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Deadlift/0.jpg",
-      "Leverage_Deadlift/1.jpg"
-    ],
-    "id": "Leverage_Deadlift"
-  },
-  {
-    "name": "Leverage Decline Chest Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the bottom of the pectorals at the beginning of the motion. Your chest and head should be up and your shoulder blades retracted. This will be your starting position.",
-      "Press the handles forward by extending through the elbow.",
-      "After a brief pause at the top, return the weight just above the start position, keeping tension on the muscles by not returning the weight to the stops until the set is complete."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Decline_Chest_Press/0.jpg",
-      "Leverage_Decline_Chest_Press/1.jpg"
-    ],
-    "id": "Leverage_Decline_Chest_Press"
-  },
-  {
-    "name": "Leverage High Row",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "middle back"
-    ],
-    "secondaryMuscles": [
-      "lats"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat height so that you can just reach the handles above you. Adjust the knee pad to help keep you down. Grasp the handles with a pronated grip. This will be your starting position.",
-      "Pull the handles towards your torso, retracting your shoulder blades as you flex the elbow.",
-      "Pause at the bottom of the motion, and then slowly return the handles to the starting position.",
-      "For multiple repetitions, avoid completely returning the weight to the stops to keep tension on the muscles being worked."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_High_Row/0.jpg",
-      "Leverage_High_Row/1.jpg"
-    ],
-    "id": "Leverage_High_Row"
-  },
-  {
-    "name": "Leverage Incline Chest Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the top of the pectorals at the beginning of the motion. Your chest and head should be up and your shoulder blades retracted. This will be your starting position.",
-      "Press the handles forward by extending through the elbow.",
-      "After a brief pause at the top, return the weight just above the start position, keeping tension on the muscles by not returning the weight to the stops until the set is complete."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Incline_Chest_Press/0.jpg",
-      "Leverage_Incline_Chest_Press/1.jpg"
-    ],
-    "id": "Leverage_Incline_Chest_Press"
-  },
-  {
-    "name": "Leverage Iso Row",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "lats"
-    ],
-    "secondaryMuscles": [
-      "biceps",
-      "middle back"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat height so that the handles are at chest level. Grasp the handles with either a neutral or pronated grip. This will be your starting position.",
-      "Pull the handles towards your torso, retracting your shoulder blades as you flex the elbow.",
-      "Pause at the bottom of the motion, and then slowly return the handles to the starting position. For multiple repetitions, avoid completely returning the weight to the stops to keep tension on the muscles being worked."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Iso_Row/0.jpg",
-      "Leverage_Iso_Row/1.jpg"
-    ],
-    "id": "Leverage_Iso_Row"
-  },
-  {
-    "name": "Leverage Shoulder Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "triceps"
-    ],
-    "instructions": [
-      "Load an appropriate weight onto the pins and adjust the seat for your height. The handles should be near the top of the shoulders at the beginning of the motion. Your chest and head should be up and handles held with a pronated grip. This will be your starting position.",
-      "Press the handles upward by extending through the elbow.",
-      "After a brief pause at the top, return the weight to just above the start position, keeping tension on the muscles by not returning the weight to the stops until the set is complete."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Shoulder_Press/0.jpg",
-      "Leverage_Shoulder_Press/1.jpg"
-    ],
-    "id": "Leverage_Shoulder_Press"
-  },
-  {
-    "name": "Leverage Shrug",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "traps"
-    ],
-    "secondaryMuscles": [
-      "forearms"
-    ],
-    "instructions": [
-      "Load the pins to an appropriate weight. Position yourself directly between the handles.",
-      "Grasp the top handles with a comfortable grip, and then lower your hips as you take a breath. Look forward with your head and keep your chest up.",
-      "Drive through the floor with your heels, extending your hips and knees as you rise to a standing position. Keep your arms straight throughout the movement, finishing with your shoulders back. This will be your starting position.",
-      "Raise the weight by shrugging the shoulders towards your ears, moving straight up and down.",
-      "Pause at the top of the motion, and then return the weight to the starting position."
-    ],
-    "category": "strength",
-    "images": [
-      "Leverage_Shrug/0.jpg",
-      "Leverage_Shrug/1.jpg"
-    ],
-    "id": "Leverage_Shrug"
-  },
-  {
-    "name": "Linear 3-Part Start Technique",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "quadriceps"
-    ],
-    "instructions": [
-      "This drill helps you accelerate as quickly as possible into a sprint from a dead stop. It helps to use a line to start from. Begin with two feet on the line. Place your left foot with the toe next to your right ankle. Place your right foot 4-6 inches behind the left.",
-      "Place your right hand onto the line, and thing bring your nose close to your left knee.",
-      "Squat down as you lean foward, your head being lower than your hips and your weight loaded onto the left leg. This will be your starting position.",
-      "Take your left hand up so that it is parallel to the ground, pointing behind you, and explode out when ready."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Linear_3-Part_Start_Technique/0.jpg",
-      "Linear_3-Part_Start_Technique/1.jpg"
-    ],
-    "id": "Linear_3-Part_Start_Technique"
-  },
-  {
-    "name": "Linear Acceleration Wall Drill",
-    "force": null,
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Lean at around 45 degrees against a wall. Your feet should be together, glutes contracted.",
-      "Begin by lifting your right knee quickly, pausing, and then driving it straight down into the ground.",
-      "Switch legs, raising the opposite knee, and then attacking the ground straight down.",
-      "Repeat once more with your right leg, and as soon as the right foot strikes the ground hammer them out rapidly, alternating left and right as fast as you can."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Linear_Acceleration_Wall_Drill/0.jpg",
-      "Linear_Acceleration_Wall_Drill/1.jpg"
-    ],
-    "id": "Linear_Acceleration_Wall_Drill"
-  },
-  {
-    "name": "Linear Depth Jump",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "You will need two boxes or benches spaced a few feet away from each other. Begin by standing on one box facing towards the other platform.",
-      "To initiate the movement, gently drop down to the ground between your platforms, allowing the knees and hips to flex.",
-      "Reverse the motion by exploding, extending through the hips, knees, and ankles to jump onto the other platform.",
-      "Land softly, asborbing the impact through the legs."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Linear_Depth_Jump/0.jpg",
-      "Linear_Depth_Jump/1.jpg"
-    ],
-    "id": "Linear_Depth_Jump"
   },
   {
     "name": "Log Lift",
@@ -11273,31 +9914,6 @@
     "id": "Lying_Bent_Leg_Groin"
   },
   {
-    "name": "Lying Cable Curl",
-    "force": "pull",
-    "level": "intermediate",
-    "mechanic": "isolation",
-    "equipment": "cable",
-    "primaryMuscles": [
-      "biceps"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Grab a straight bar or E-Z bar attachment that is attached to the low pulley with both hands, using an underhand (palms facing up) shoulder-width grip.",
-      "Lie flat on your back on top of an exercise mat in front of the weight stack with your feet flat against the frame of the pulley machine and your legs straight.",
-      "With your arms extended and your elbows close to your body slightly bend your arms. This will be your starting position.",
-      "While keeping your upper arms stationary and the elbows close to your body, curl the bar up slowly toward your chest as you breathe out and you squeeze the biceps.",
-      "After a second squeeze at the top of the movement, slowly return to the starting position.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Lying_Cable_Curl/0.jpg",
-      "Lying_Cable_Curl/1.jpg"
-    ],
-    "id": "Lying_Cable_Curl"
-  },
-  {
     "name": "Lying Cambered Barbell Row",
     "force": "pull",
     "level": "beginner",
@@ -11566,58 +10182,6 @@
     "id": "Lying_High_Bench_Barbell_Curl"
   },
   {
-    "name": "Lying Leg Curls",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Adjust the machine lever to fit your height and lie face down on the leg curl machine with the pad of the lever on the back of your legs (just a few inches under the calves). Tip: Preferably use a leg curl machine that is angled as opposed to flat since an angled position is more favorable for hamstrings recruitment.",
-      "Keeping the torso flat on the bench, ensure your legs are fully stretched and grab the side handles of the machine. Position your toes straight (or you can also use any of the other two stances described on the foot positioning section). This will be your starting position.",
-      "As you exhale, curl your legs up as far as possible without lifting the upper legs from the pad. Once you hit the fully contracted position, hold it for a second.",
-      "As you inhale, bring the legs back to the initial position. Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Lying_Leg_Curls/0.jpg",
-      "Lying_Leg_Curls/1.jpg"
-    ],
-    "id": "Lying_Leg_Curls"
-  },
-  {
-    "name": "Lying Machine Squat",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Adjust the leg machine to a height that will allow you to get inside it with your knees bent and the thighs slightly below parallel.",
-      "Once you select the weight, position yourself inside the machine face up with the knees bent and thighs slightly below parallel to the platform. Make sure that the knees do not go past the toes. The angle created between the hamstrings and the calves should be one that is slightly less than 90 degrees (since your starting position requires you to start slightly below parallel). Your back and your head should be resting on the machine while your shoulders are pressed under the shoulder pads.",
-      "Place your hands by the handles and position your feet slightly pointing out at a shoulder width position. This will be your starting position.",
-      "While pressing with the balls of the feet as you breathe out, make your whole body erect as you squeeze the quads. Hold the contracted position for a second. Tip: Since you are starting below parallel, you can opt to use your hands to help you up by pressing on your thighs only on the first repetition.",
-      "Slowly squat down as you inhale but instead of going all the way down to the starting position, just stop once your thighs are parallel to the platform. The angle between your hamstrings and calves should be a 90-degree angle.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Lying_Machine_Squat/0.jpg",
-      "Lying_Machine_Squat/1.jpg"
-    ],
-    "id": "Lying_Machine_Squat"
-  },
-  {
     "name": "Lying One-Arm Lateral Raise",
     "force": "pull",
     "level": "intermediate",
@@ -11765,158 +10329,6 @@
     "id": "Lying_Triceps_Press"
   },
   {
-    "name": "Machine Bench Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Sit down on the Chest Press Machine and select the weight.",
-      "Step on the lever provided by the machine since it will help you to bring the handles forward so that you can grab the handles and fully extend the arms.",
-      "Grab the handles with a palms-down grip and lift your elbows so that your upper arms are parallel to the floor to the sides of your torso. Tip: Your forearms will be pointing forward since you are grabbing the handles. Once you bring the handles forward and extend the arms you will be at the starting position.",
-      "Now bring the handles back towards you as you breathe in.",
-      "Push the handles away from you as you flex your pecs and you breathe out. Hold the contraction for a second before going back to the starting position.",
-      "Repeat for the recommended amount of reps.",
-      "When finished step on the lever again and slowly get the handles back to their original place."
-    ],
-    "category": "strength",
-    "images": [
-      "Machine_Bench_Press/0.jpg",
-      "Machine_Bench_Press/1.jpg"
-    ],
-    "id": "Machine_Bench_Press"
-  },
-  {
-    "name": "Machine Bicep Curl",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "biceps"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Adjust the seat to the appropriate height and make your weight selection. Place your upper arms against the pads and grasp the handles. This will be your starting position.",
-      "Perform the movement by flexing the elbow, pulling your lower arm towards your upper arm.",
-      "Pause at the top of the movement, and then slowly return the weight to the starting position.",
-      "Avoid returning the weight all the way to the stops until the set is complete to keep tension on the muscles being worked."
-    ],
-    "category": "strength",
-    "images": [
-      "Machine_Bicep_Curl/0.jpg",
-      "Machine_Bicep_Curl/1.jpg"
-    ],
-    "id": "Machine_Bicep_Curl"
-  },
-  {
-    "name": "Machine Preacher Curls",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "biceps"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Sit down on the Preacher Curl Machine and select the weight.",
-      "Place the back of your upper arms (your triceps) on the preacher pad provided and grab the handles using an underhand grip (palms facing up). Tip: Make sure that when you place the arms on the pad you keep the elbows in. This will be your starting position.",
-      "Now lift the handles as you exhale and you contract the biceps. At the top of the position make sure that you hold the contraction for a second. Tip: Only the forearms should move. The upper arms should remain stationary and on the pad at all times.",
-      "Lower the handles slowly back to the starting position as you inhale.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Machine_Preacher_Curls/0.jpg",
-      "Machine_Preacher_Curls/1.jpg"
-    ],
-    "id": "Machine_Preacher_Curls"
-  },
-  {
-    "name": "Machine Shoulder (Military) Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "triceps"
-    ],
-    "instructions": [
-      "Sit down on the Shoulder Press Machine and select the weight.",
-      "Grab the handles to your sides as you keep the elbows bent and in line with your torso. This will be your starting position.",
-      "Now lift the handles as you exhale and you extend the arms fully. At the top of the position make sure that you hold the contraction for a second.",
-      "Lower the handles slowly back to the starting position as you inhale.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Machine_Shoulder_Military_Press/0.jpg",
-      "Machine_Shoulder_Military_Press/1.jpg"
-    ],
-    "id": "Machine_Shoulder_Military_Press"
-  },
-  {
-    "name": "Machine Triceps Extension",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "triceps"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Adjust the seat to the appropriate height and make your weight selection. Place your upper arms against the pads and grasp the handles. This will be your starting position.",
-      "Perform the movement by extending the elbow, pulling your lower arm away from your upper arm.",
-      "Pause at the completion of the movement, and then slowly return the weight to the starting position.",
-      "Avoid returning the weight all the way to the stops until the set is complete to keep tension on the muscles being worked."
-    ],
-    "category": "strength",
-    "images": [
-      "Machine_Triceps_Extension/0.jpg",
-      "Machine_Triceps_Extension/1.jpg"
-    ],
-    "id": "Machine_Triceps_Extension"
-  },
-  {
-    "name": "Medicine Ball Chest Pass",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "You will need a partner for this exercise. Lacking one, this movement can be performed against a wall.",
-      "Begin facing your partner holding the medicine ball at your torso with both hands.",
-      "Pull the ball to your chest, and reverse the motion by extending through the elbows. For sports applications, you can take a step as you throw.",
-      "Your partner should catch the ball, and throw it back to you.",
-      "Receive the throw with both hands at chest height."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Medicine_Ball_Chest_Pass/0.jpg",
-      "Medicine_Ball_Chest_Pass/1.jpg"
-    ],
-    "id": "Medicine_Ball_Chest_Pass"
-  },
-  {
     "name": "Medicine Ball Full Twist",
     "force": "pull",
     "level": "beginner",
@@ -11940,32 +10352,6 @@
       "Medicine_Ball_Full_Twist/1.jpg"
     ],
     "id": "Medicine_Ball_Full_Twist"
-  },
-  {
-    "name": "Medicine Ball Scoop Throw",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "abdominals",
-      "hamstrings",
-      "quadriceps"
-    ],
-    "instructions": [
-      "Assume a semisquat stance with a medicine ball in your hands. Your arms should hang so the ball is near your feet.",
-      "Begin by thrusting the hips forward as you extend through the legs, jumping up.",
-      "As you do, swing your arms up and over your head, keeping them extended, releasing the ball at the peak of your movement. The goal is to throw the ball the greatest distance behind you."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Medicine_Ball_Scoop_Throw/0.jpg",
-      "Medicine_Ball_Scoop_Throw/1.jpg"
-    ],
-    "id": "Medicine_Ball_Scoop_Throw"
   },
   {
     "name": "Middle Back Shrug",
@@ -12063,56 +10449,6 @@
       "Monster_Walk/1.jpg"
     ],
     "id": "Monster_Walk"
-  },
-  {
-    "name": "Mountain Climbers",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "hamstrings",
-      "shoulders"
-    ],
-    "instructions": [
-      "Begin in a pushup position, with your weight supported by your hands and toes. Flexing the knee and hip, bring one leg until the knee is approximately under the hip. This will be your starting position.",
-      "Explosively reverse the positions of your legs, extending the bent leg until the leg is straight and supported by the toe, and bringing the other foot up with the hip and knee flexed. Repeat in an alternating fashion for 20-30 seconds."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Mountain_Climbers/0.jpg",
-      "Mountain_Climbers/1.jpg"
-    ],
-    "id": "Mountain_Climbers"
-  },
-  {
-    "name": "Moving Claw Series",
-    "force": null,
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "quadriceps"
-    ],
-    "instructions": [
-      "This move helps prepare your running form to help you excel at sprinting. As you run, be sure to flex the knee, aiming to kick your glutes as the hip extends.",
-      "Reload the quad as the leg moves back forward, attacking the ground on the next step.",
-      "Ensure that as you run, you block with the arms, punching through in a rapid 1-2 motion."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Moving_Claw_Series/0.jpg",
-      "Moving_Claw_Series/1.jpg"
-    ],
-    "id": "Moving_Claw_Series"
   },
   {
     "name": "Muscle Snatch",
@@ -13482,29 +11818,6 @@
     "id": "Overhead_Lat"
   },
   {
-    "name": "Overhead Slam",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "lats"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Hold a medine ball with both hands and stand with your feet at shoulder width. This will be your starting position.",
-      "Initiate the countermovement by raising the ball above your head and fully extending your body.",
-      "Reverse the motion, slamming the ball into the ground directly in front of you as hard as you can.",
-      "Receive the ball with both hands on the bounce and repeat the movement."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Overhead_Slam/0.jpg",
-      "Overhead_Slam/1.jpg"
-    ],
-    "id": "Overhead_Slam"
-  },
-  {
     "name": "Overhead Squat",
     "force": "push",
     "level": "expert",
@@ -13602,7 +11915,7 @@
       "triceps"
     ],
     "instructions": [
-      "Connect a standard handle to a tower, and—if possible—position the cable to shoulder height. If not, a low pulley will suffice.",
+      "Connect a standard handle to a tower, and\u2014if possible\u2014position the cable to shoulder height. If not, a low pulley will suffice.",
       "With your side to the cable, grab the handle with both hands and step away from the tower. You should be approximately arm's length away from the pulley, with the tension of the weight on the cable.",
       "With your feet positioned hip-width apart and knees slightly bent, hold the cable to the middle of your chest. This will be your starting position.",
       "Press the cable away from your chest, fully extending both arms. You core should be tight and engaged.",
@@ -14065,34 +12378,6 @@
       "Plyo_Kettlebell_Pushups/1.jpg"
     ],
     "id": "Plyo_Kettlebell_Pushups"
-  },
-  {
-    "name": "Plyo Push-up",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Move into a prone position on the floor, supporting your weight on your hands and toes.",
-      "Your arms should be fully extended with the hands around shoulder width. Keep your body straight throughout the movement. This will be your starting position.",
-      "Descend by flexing at the elbow, lowering your chest towards the ground.",
-      "At the bottom, reverse the motion by pushing yourself up through elbow extension as quickly as possible. Attempt to push your upper body up until your hands leave the ground.",
-      "Return to the starting position and repeat the exercise.",
-      "For added difficulty, add claps into the movement while you are air borne."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Plyo_Push-up/0.jpg",
-      "Plyo_Push-up/1.jpg"
-    ],
-    "id": "Plyo_Push-up"
   },
   {
     "name": "Posterior Tibialis Stretch",
@@ -14651,32 +12936,6 @@
     "id": "Push_Press"
   },
   {
-    "name": "Push Press - Behind the Neck",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "barbell",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "quadriceps",
-      "triceps"
-    ],
-    "instructions": [
-      "Standing with the weight racked on the back of the shoulders, begin with the dip. With your feet directly under your hips, flex the knees without moving the hips backward. Go down only slightly, and reverse direction as powerfully as possible. Drive through the heels create as much speed and force as possible, moving the bar in a vertical path.",
-      "Using the momentum generated, finish pressing the weight overhead be extending through the arms.",
-      "Return to the starting position, using your legs to absorb the impact."
-    ],
-    "category": "olympic weightlifting",
-    "images": [
-      "Push_Press_-_Behind_the_Neck/0.jpg",
-      "Push_Press_-_Behind_the_Neck/1.jpg"
-    ],
-    "id": "Push_Press_-_Behind_the_Neck"
-  },
-  {
     "name": "Push Up to Side Plank",
     "force": "push",
     "level": "beginner",
@@ -14822,32 +13081,6 @@
     "id": "Quadriceps-SMR"
   },
   {
-    "name": "Quick Leap",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "You will need a box for this exerise.",
-      "Begin facing the box standing 1-2 feet from its edge.",
-      "By utilizing your hips, hop onto the box, landing on both legs. Ensure that you land with your legs bent and your feet flat.",
-      "Immediately upon landing, fully extend through the entire body and swing your arms overhead to explode off of the box. Use your legs to absorb the impact of landing."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Quick_Leap/0.jpg",
-      "Quick_Leap/1.jpg"
-    ],
-    "id": "Quick_Leap"
-  },
-  {
     "name": "Rack Delivery",
     "force": "pull",
     "level": "intermediate",
@@ -14973,33 +13206,6 @@
       "Recumbent_Bike/1.jpg"
     ],
     "id": "Recumbent_Bike"
-  },
-  {
-    "name": "Return Push from Stance",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "triceps"
-    ],
-    "instructions": [
-      "You will need a partner for this drill.",
-      "Begin in an athletic 2 or 3 point stance.",
-      "At the signal, move into a position to receive the pass from your partner.",
-      "Catch the medicine ball with both hands and immediately throw it back to your partner.",
-      "You can modify this drill by running different routes."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Return_Push_from_Stance/0.jpg",
-      "Return_Push_from_Stance/1.jpg"
-    ],
-    "id": "Return_Push_from_Stance"
   },
   {
     "name": "Reverse Band Bench Press",
@@ -15358,56 +13564,6 @@
     "id": "Reverse_Grip_Triceps_Pushdown"
   },
   {
-    "name": "Reverse Hyperextension",
-    "force": "pull",
-    "level": "intermediate",
-    "mechanic": null,
-    "equipment": "machine",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes"
-    ],
-    "instructions": [
-      "Place your feet between the pads after loading an appropriate weight. Lay on the top pad, allowing your hips to hang off the back, while grasping the handles to hold your position.",
-      "To begin the movement, flex the hips, pulling the legs forward.",
-      "Reverse the motion by extending the hips, kicking the leg back. It is very important not to over-extend the hip on this movement, stopping short of your full range of motion.",
-      "Return by again flexing the hip, pulling the carriage forward as far as you can.",
-      "Repeat for the desired number of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Reverse_Hyperextension/0.jpg",
-      "Reverse_Hyperextension/1.jpg"
-    ],
-    "id": "Reverse_Hyperextension"
-  },
-  {
-    "name": "Reverse Machine Flyes",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Adjust the handles so that they are fully to the rear. Make an appropriate weight selection and adjust the seat height so the handles are at shoulder level. Grasp the handles with your hands facing inwards. This will be your starting position.",
-      "In a semicircular motion, pull your hands out to your side and back, contracting your rear delts.",
-      "Keep your arms slightly bent throughout the movement, with all of the motion occurring at the shoulder joint.",
-      "Pause at the rear of the movement, and slowly return the weight to the starting position."
-    ],
-    "category": "strength",
-    "images": [
-      "Reverse_Machine_Flyes/0.jpg",
-      "Reverse_Machine_Flyes/1.jpg"
-    ],
-    "id": "Reverse_Machine_Flyes"
-  },
-  {
     "name": "Reverse Plate Curls",
     "force": "pull",
     "level": "beginner",
@@ -15565,31 +13721,6 @@
       "Ring_Dips/1.jpg"
     ],
     "id": "Ring_Dips"
-  },
-  {
-    "name": "Rocket Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Begin in a relaxed stance with your feet shoulder width apart and hold your arms close to the body.",
-      "To initiate the move, squat down halfway and explode back up as high as possible.",
-      "Fully extend your entire body, reaching overhead as far as possible. As you land, absorb your impact through the legs."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Rocket_Jump/0.jpg",
-      "Rocket_Jump/1.jpg"
-    ],
-    "id": "Rocket_Jump"
   },
   {
     "name": "Rocking Standing Calf Raise",
@@ -16013,32 +14144,6 @@
       "Scissor_Kick/1.jpg"
     ],
     "id": "Scissor_Kick"
-  },
-  {
-    "name": "Scissors Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Assume a lunge stance position with one foot forward with the knee bent, and the rear knee nearly touching the ground.",
-      "Ensure that the front knee is over the midline of the foot. Extending through both legs, jump as high as possible, swinging your arms to gain lift.",
-      "As you jump as high as you can, switch the position of your legs, moving your front leg to the back and the rear leg to the front.",
-      "As you land, absorb the impact through the legs by adopting the lunge position, and repeat."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Scissors_Jump/0.jpg",
-      "Scissors_Jump/1.jpg"
-    ],
-    "id": "Scissors_Jump"
   },
   {
     "name": "Seated Band Hamstring Curl",
@@ -17117,33 +15222,6 @@
     "id": "Side_Bridge"
   },
   {
-    "name": "Side Hop-Sprint",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand to the side of a cone or hurdle.",
-      "Begin this drill by hopping sideways over the obstacle, rebounding out of your landing to hop back to where you started.",
-      "Hop for a prescribed number or repetitions as quickly as possible, and finish this drill by sprinting a short distance upon landing the last hop."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Side_Hop-Sprint/0.jpg",
-      "Side_Hop-Sprint/1.jpg"
-    ],
-    "id": "Side_Hop-Sprint"
-  },
-  {
     "name": "Side Jackknife",
     "force": "pull",
     "level": "beginner",
@@ -17279,32 +15357,6 @@
     "id": "Side_Neck_Stretch"
   },
   {
-    "name": "Side Standing Long Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": null,
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Begin standing with your feet hip width apart in an athletic stance. Your head and chest should be up, knees and hips slightly bent. This will be your starting position.",
-      "Leaning to your right, extend through your hips, knees, and ankles to jump into the air. Block with the arms to lead the movement, jumping as far to your right as you can.",
-      "Land facing the same direction with your feet hip width apart, absorbing the impact through your lower body."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Side_Standing_Long_Jump/0.jpg",
-      "Side_Standing_Long_Jump/1.jpg"
-    ],
-    "id": "Side_Standing_Long_Jump"
-  },
-  {
     "name": "Side To Side Chins",
     "force": "pull",
     "level": "intermediate",
@@ -17358,33 +15410,6 @@
       "Side_Wrist_Pull/1.jpg"
     ],
     "id": "Side_Wrist_Pull"
-  },
-  {
-    "name": "Side to Side Box Shuffle",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand to one side of the box with your left foot resting on the middle of it.",
-      "To begin, jump up and over to the other side of the box, landing with your right foot on top of the box and your left foot on the floor. Swing your arms to aid your movement.",
-      "Continue shuffling back and forth across the box."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Side_to_Side_Box_Shuffle/0.jpg",
-      "Side_to_Side_Box_Shuffle/1.jpg"
-    ],
-    "id": "Side_to_Side_Box_Shuffle"
   },
   {
     "name": "Single-Arm Cable Crossover",
@@ -17463,32 +15488,6 @@
     "id": "Single-Arm_Push-Up"
   },
   {
-    "name": "Single-Cone Sprint Drill",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": null,
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "This drill teaches quick foot action. You need a single cone. Begin standing next to the cone with one arm back and one arm forward.",
-      "Chop the feet as quickly as possible, blocking with the arms. Circle the cone, keep your knees up, with violent foot action.",
-      "Rest after three trips around the cone."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single-Cone_Sprint_Drill/0.jpg",
-      "Single-Cone_Sprint_Drill/1.jpg"
-    ],
-    "id": "Single-Cone_Sprint_Drill"
-  },
-  {
     "name": "Single-Leg High Box Squat",
     "force": "push",
     "level": "beginner",
@@ -17514,62 +15513,6 @@
     "id": "Single-Leg_High_Box_Squat"
   },
   {
-    "name": "Single-Leg Hop Progression",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Arrange a line of cones in front of you. Assume a relaxed standing position, balanced on one leg. Raise the knee of your opposite leg. This will be your starting position.",
-      "Hop forward, jumping and landing with the same leg over the cone.",
-      "Use a countermovement jump to hop from cone to cone.",
-      "At the end, turn around and go back on the other leg."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single-Leg_Hop_Progression/0.jpg",
-      "Single-Leg_Hop_Progression/1.jpg"
-    ],
-    "id": "Single-Leg_Hop_Progression"
-  },
-  {
-    "name": "Single-Leg Lateral Hop",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand to the side of a cone or hurdle. To get into the start position, stand on one leg with your knee slightly bent.",
-      "To begin, execute a counterjump to hop sideways over the cone.",
-      "Land on your jumping leg, and immediately rebound out of it by jumping back to the start position.",
-      "Continue hopping back and forth."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single-Leg_Lateral_Hop/0.jpg",
-      "Single-Leg_Lateral_Hop/1.jpg"
-    ],
-    "id": "Single-Leg_Lateral_Hop"
-  },
-  {
     "name": "Single-Leg Leg Extension",
     "force": "push",
     "level": "beginner",
@@ -17591,33 +15534,6 @@
       "Single-Leg_Leg_Extension/1.jpg"
     ],
     "id": "Single-Leg_Leg_Extension"
-  },
-  {
-    "name": "Single-Leg Stride Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand to the side of a box with your inside foot on top of it, close to the edge.",
-      "Begin by swinging the arms upward as you push through the top leg, jumping upward as high as possible. Attempt to drive the opposite knee upward.",
-      "Land in the same position that you started, using your inside leg to decelerate the impact."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single-Leg_Stride_Jump/0.jpg",
-      "Single-Leg_Stride_Jump/1.jpg"
-    ],
-    "id": "Single-Leg_Stride_Jump"
   },
   {
     "name": "Single Dumbbell Raise",
@@ -17645,32 +15561,6 @@
     "id": "Single_Dumbbell_Raise"
   },
   {
-    "name": "Single Leg Butt Kick",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Begin by standing on one leg, with the bent knee raised. This will be your start position.",
-      "Using a countermovement jump, take off upward by extending the hip, knee, and ankle of the grounded leg.",
-      "Immediately flex the knee and attempt to touch your butt with the heel of your jumping leg.",
-      "Return the leg to a partially bent position underneath the hips and land. Your opposite leg should stay in relatively the same position throughout the drill."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single_Leg_Butt_Kick/0.jpg",
-      "Single_Leg_Butt_Kick/1.jpg"
-    ],
-    "id": "Single_Leg_Butt_Kick"
-  },
-  {
     "name": "Single Leg Glute Bridge",
     "force": "push",
     "level": "beginner",
@@ -17694,31 +15584,6 @@
       "Single_Leg_Glute_Bridge/1.jpg"
     ],
     "id": "Single_Leg_Glute_Bridge"
-  },
-  {
-    "name": "Single Leg Push-off",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand on the ground with one foot resting on the box, heel close to the edge.",
-      "Push off with your foot on top of the box, trying to gain as much height as possible by extending through the hip and knee.",
-      "Land with the same foot on top of the box, returning your other foot back to the start position."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Single_Leg_Push-off/0.jpg",
-      "Single_Leg_Push-off/1.jpg"
-    ],
-    "id": "Single_Leg_Push-off"
   },
   {
     "name": "Sit-Up",
@@ -17788,7 +15653,7 @@
     ],
     "instructions": [
       "Roller skating is a fun activity which can be effective in improving cardiorespiratory fitness and muscular endurance. It requires relatively good balance and coordination. It is necessary to learn the basics of skating including turning and stopping and to wear protective gear to avoid possible injury.",
-      "You can skate at a comfortable pace for 30 minutes straight. If you want a cardio challenge, do interval skating — speed skate two minutes of every five minutes, using the remaining three minutes to recover. A 150 lb person will typically burn about 175 calories in 30 minutes skating at a comfortable pace, similar to brisk walking."
+      "You can skate at a comfortable pace for 30 minutes straight. If you want a cardio challenge, do interval skating \u2014 speed skate two minutes of every five minutes, using the remaining three minutes to recover. A 150 lb person will typically burn about 175 calories in 30 minutes skating at a comfortable pace, similar to brisk walking."
     ],
     "category": "cardio",
     "images": [
@@ -17946,550 +15811,6 @@
       "Sled_Row/1.jpg"
     ],
     "id": "Sled_Row"
-  },
-  {
-    "name": "Sledgehammer Swings",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "abdominals"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "forearms",
-      "lats",
-      "middle back",
-      "shoulders"
-    ],
-    "instructions": [
-      "You will need a tire and a sledgehammer for this exercise. Stand in front of the tire about two feet away from it with a staggered stance. Grip the sledgehammer.",
-      "If you are right handed, your left hand should be at the bottom of the handle, and your right hand should be choking up closer to the head.",
-      "As you bring the sledge up, your right hand slides toward the head; as you swing down, your right hand will slide down to join your left hand. Slam it down as hard as you can against the tire. Control the bounce of the hammer off of the tire.",
-      "Repeat on the other side."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Sledgehammer_Swings/0.jpg",
-      "Sledgehammer_Swings/1.jpg"
-    ],
-    "id": "Sledgehammer_Swings"
-  },
-  {
-    "name": "Smith Incline Shoulder Raise",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "barbell",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "chest"
-    ],
-    "instructions": [
-      "Place an incline bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the incline bench and make sure your shoulders are aligned right under the barbell.",
-      "Using a shoulder width pronated (palms forward) grip, lift the bar from the rack and hold it straight over you with a slight bend at the elbows. This will be your starting position.",
-      "As you breathe out, lift the bar up until your arms are fully extended. Note: The contraction should be felt around the shoulders.",
-      "After a second pause, bring the bar back down to the starting position as you breathe in.",
-      "Repeat the movement for the prescribed amount of repetitions.",
-      "When you are done, place the bar back in the rack."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Incline_Shoulder_Raise/0.jpg",
-      "Smith_Incline_Shoulder_Raise/1.jpg"
-    ],
-    "id": "Smith_Incline_Shoulder_Raise"
-  },
-  {
-    "name": "Smith Machine Behind the Back Shrug",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "traps"
-    ],
-    "secondaryMuscles": [
-      "shoulders"
-    ],
-    "instructions": [
-      "With the bar at thigh level, load an appropriate weight.",
-      "Stand with the bar behind you, taking a shoulder-width, pronated grip on the bar and unhook the weight. You should be standing up straight with your head and chest up and your arms extended. This will be your starting position.",
-      "Initiate the movement by shrugging your shoulders straight up. Do not flex the arms or wrist during the movement.",
-      "After a brief pause return the weight to the starting position.",
-      "Repeat for the desired number of repetitions before engaging the hooks to rack the weight."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Behind_the_Back_Shrug/0.jpg",
-      "Smith_Machine_Behind_the_Back_Shrug/1.jpg"
-    ],
-    "id": "Smith_Machine_Behind_the_Back_Shrug"
-  },
-  {
-    "name": "Smith Machine Bench Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Place a flat bench underneath the smith machine. Now place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the flat bench. Using a pronated grip that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.",
-      "As you breathe in, come down slowly until you feel the bar on your middle chest.",
-      "After a second pause, bring the bar back to the starting position as you breathe out and push the bar using your chest muscles. Lock your arms in the contracted position, hold for a second and then start coming down slowly again. Tip: It should take at least twice as long to go down than to come up.",
-      "Repeat the movement for the prescribed amount of repetitions.",
-      "When you are done, lock the bar back in the rack."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Bench_Press/0.jpg",
-      "Smith_Machine_Bench_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Bench_Press"
-  },
-  {
-    "name": "Smith Machine Bent Over Row",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "middle back"
-    ],
-    "secondaryMuscles": [
-      "biceps",
-      "lats",
-      "shoulders"
-    ],
-    "instructions": [
-      "Set the barbell attached to the smith machine to a height that is about 2 inches below your knees.",
-      "Bend your knees slightly and bring your torso forward, by bending at the waist, while keeping the back straight until it is almost parallel to the floor. Tip: Make sure that you keep the head up.",
-      "Now grasp the barbell using an overhand (pronated) grip and unlock it from the smith machine rack. Then let it hang directly in front of you as your arms hang extended perpendicular to the floor and your torso. This is your starting position.",
-      "While keeping the torso stationary, lift the barbell as you breathe out, keeping the elbows close to the body and not doing any force with the forearm other than holding the weights. On the top contracted position, squeeze the back muscles and hold for a second.",
-      "Slowly lower the weight again to the starting position as you inhale.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Bent_Over_Row/0.jpg",
-      "Smith_Machine_Bent_Over_Row/1.jpg"
-    ],
-    "id": "Smith_Machine_Bent_Over_Row"
-  },
-  {
-    "name": "Smith Machine Calf Raise",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "calves"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Place a block or weight plate below the bar on the Smith machine. Set the bar to a position that best matches your height. Once the correct height is chosen and the bar is loaded, step onto the plates with the balls of your feet and place the bar on the back of your shoulders.",
-      "Take the bar with both hands facing forward. Rotate the bar to unrack it. This will be your starting position.",
-      "Raise your heels as high as possible by pushing off of the balls of your feet, flexing your calf at the top of the contraction. Your knees should remain extended. Hold the contracted position for a second before you start to go back down.",
-      "Return slowly to the starting position as you breathe in while lowering your heels.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Calf_Raise/0.jpg",
-      "Smith_Machine_Calf_Raise/1.jpg"
-    ],
-    "id": "Smith_Machine_Calf_Raise"
-  },
-  {
-    "name": "Smith Machine Close-Grip Bench Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "triceps"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "shoulders"
-    ],
-    "instructions": [
-      "Place a flat bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the flat bench. Using a close and pronated grip (palms facing forward) that is around shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.",
-      "As you breathe in, come down slowly until you feel the bar on your middle chest. Tip: Make sure that as opposed to a regular bench press, you keep the elbows close to the torso at all times in order to maximize triceps involvement.",
-      "After a second pause, bring the bar back to the starting position as you breathe out and push the bar using your triceps muscles. Lock your arms in the contracted position, hold for a second and then start coming down slowly again. Tip: It should take at least twice as long to go down than to come up.",
-      "Repeat the movement for the prescribed amount of repetitions.",
-      "When you are done, lock the bar back in the rack."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Close-Grip_Bench_Press/0.jpg",
-      "Smith_Machine_Close-Grip_Bench_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Close-Grip_Bench_Press"
-  },
-  {
-    "name": "Smith Machine Decline Press",
-    "force": null,
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Position a decline bench in the rack so that the bar will be above your chest. Load an appropriate weight and take your place on the bench.",
-      "Rotate the bar to unhook it from the rack and fully extend your arms. Your back should be slightly arched and your shoulder blades retracted. This will be your starting position.",
-      "Begin the movement by flexing your arms, lowering the bar to your chest.",
-      "Pause briefly, and then extend your arms to push the weight back to the starting position.",
-      "After completing the desired number of repetitions, rotate the bar to rack the weight."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Decline_Press/0.jpg",
-      "Smith_Machine_Decline_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Decline_Press"
-  },
-  {
-    "name": "Smith Machine Hang Power Clean",
-    "force": "pull",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "glutes",
-      "lower back",
-      "quadriceps",
-      "shoulders",
-      "traps"
-    ],
-    "instructions": [
-      "Position the bar at knee height and load it to an appropriate weight.",
-      "Take a pronated grip on the bar outside of shoulder width and unhook the bar from the machine. Your arms should be fully extended with your head and chest up. Your elbows should be pointed out with your shoulders back and down. Your hips should be back, loading the tension into the hamstrings. This will be your starting position.",
-      "Initate the movement by forcefully extending the hips and knees, accelerating into the bar. Ensure that you keep your arms straight during this part of the motion.",
-      "Upon full extension, rebend the hips and knees to lower your receiving position.",
-      "Allow the arms to flex at this point, rotating the elbows around the bar to receive it on your shoulders.",
-      "Extend through the hips and knees to come to a standing position with the bar racked on your shoulders to complete the movement."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Hang_Power_Clean/0.jpg",
-      "Smith_Machine_Hang_Power_Clean/1.jpg"
-    ],
-    "id": "Smith_Machine_Hang_Power_Clean"
-  },
-  {
-    "name": "Smith Machine Hip Raise",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "abdominals"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Position a bench in the rack and load the bar to an appropriate weight. Lie down on the bench, placing the bottom of your feet against the bar. Unlock the bar and extend your legs. You may need to use your hands to assist you. For added stability grasp the sides of the Smith Machine. This will be your starting position.",
-      "Initiate the movement by rotating your pelvis, flexing your spine to raise your hips off of the bench. Maintain a slight bend in the knees throughout the motion.",
-      "After a brief pause, return the hips to the bench.",
-      "Repeat for the desired number of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Hip_Raise/0.jpg",
-      "Smith_Machine_Hip_Raise/1.jpg"
-    ],
-    "id": "Smith_Machine_Hip_Raise"
-  },
-  {
-    "name": "Smith Machine Incline Bench Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "chest"
-    ],
-    "secondaryMuscles": [
-      "shoulders",
-      "triceps"
-    ],
-    "instructions": [
-      "Place an incline bench underneath the smith machine. Place the barbell at a height that you can reach when lying down and your arms are almost fully extended. Once the weight you need is selected, lie down on the incline bench and make sure your upper chest is aligned with the barbell. Using a pronated grip (palms facing forward) that is wider than shoulder width, unlock the bar from the rack and hold it straight over you with your arms locked. This will be your starting position.",
-      "As you breathe in, come down slowly until you feel the bar on your upper chest.",
-      "After a second pause, bring the bar back to the starting position as you breathe out and push the bar using your chest muscles. Lock your arms in the contracted position, hold for a second and then start coming down slowly again. Tip: It should take at least twice as long to go down than to come up.",
-      "Repeat the movement for the prescribed amount of repetitions.",
-      "When you are done, place the bar back in the rack."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Incline_Bench_Press/0.jpg",
-      "Smith_Machine_Incline_Bench_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Incline_Bench_Press"
-  },
-  {
-    "name": "Smith Machine Leg Press",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Position a Smith machine bar a couple feet off of the ground. Ensure that it is resting on the safeties. After loading the bar to an appropriate weight, lie underneath the bar. Place the middle of your feet on the bar, tucking your knees to your chest. This will be your starting position.",
-      "Begin the movement by driving through your feet to move the bar upward, extending the hips and knees. Do not lock out your knees.",
-      "At the top of the motion, pause briefly before returning to the starting position."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Leg_Press/0.jpg",
-      "Smith_Machine_Leg_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Leg_Press"
-  },
-  {
-    "name": "Smith Machine One-Arm Upright Row",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "biceps",
-      "traps"
-    ],
-    "instructions": [
-      "With the bar at thigh level, load an appropriate weight.",
-      "Take a wide grip on the bar and unhook the weight, removing your off hand from the bar. Your arm should be extended as you stand up straight with your head and chest up. This will be your starting position.",
-      "Begin the movement by flexing the elbow, raising the upper arm with the elbow pointed out. Continue until your upper arm is parallel to the floor.",
-      "After a brief pause, return the weight to the starting position.",
-      "Repeat for the desired number of repetitions before engaging the hooks to rack the weight."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_One-Arm_Upright_Row/0.jpg",
-      "Smith_Machine_One-Arm_Upright_Row/1.jpg"
-    ],
-    "id": "Smith_Machine_One-Arm_Upright_Row"
-  },
-  {
-    "name": "Smith Machine Overhead Shoulder Press",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "triceps"
-    ],
-    "instructions": [
-      "To begin, place a flat bench (or preferably one with back support) underneath a smith machine. Position the barbell at a height so that when seated on the flat bench, the arms must be almost fully extended to reach the barbell.",
-      "Once you have the correct height, sit slightly in behind the barbell so that there is an imaginary straight line from the tip of your nose to the barbell. Your feet should be stationary. Grab the barbell with the palms facing forward, unlock it and lift it up so that your arms are fully extended. This is the starting position.",
-      "Slowly begin to lower the barbell until it is level with your chin while inhaling.",
-      "Then lift the barbell back to the starting position using your shoulders while exhaling.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Overhead_Shoulder_Press/0.jpg",
-      "Smith_Machine_Overhead_Shoulder_Press/1.jpg"
-    ],
-    "id": "Smith_Machine_Overhead_Shoulder_Press"
-  },
-  {
-    "name": "Smith Machine Pistol Squat",
-    "force": "push",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "To begin, first set the bar to a position that best matches your height. Step under it and position the bar across the back of your shoulders.",
-      "Take the bar with your hands facing forward, unlock it and lift it off the rack by extending your legs. 3",
-      "Move one foot forward about 12 inches in front of the bar. Extend the other leg out in front of you, holding it off the ground. Look forward at all times and maintain a neutral or slightly arched spine. This will be your starting position.",
-      "Maintaining good posture, lower yourself by flexing the knee and hip, going down as far as flexibility allows.",
-      "Pause briefly at the bottom and then return to the starting position by driving through the heel of your foot, extending the knee and hip."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Pistol_Squat/0.jpg",
-      "Smith_Machine_Pistol_Squat/1.jpg"
-    ],
-    "id": "Smith_Machine_Pistol_Squat"
-  },
-  {
-    "name": "Smith Machine Reverse Calf Raises",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "isolation",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "calves"
-    ],
-    "secondaryMuscles": [],
-    "instructions": [
-      "Adjust the barbell on the smith machine to fit your height and align a raised platform right under the bar.",
-      "Stand on the platform with the heels of your feet secured on top of it with the balls of your feet extending off it. Position your toes facing forward with a shoulder width stance.",
-      "Now, place your shoulders under the barbell while maintaining the foot positioning described and push the barbell up by extending your hips and knees until your torso is standing erect. The knees should be kept with a slight bend; never locked. This will be your starting position. Tip: The barbell on your back is only for balance purposes.",
-      "Raise the balls of your feet as you breathe out by extending your toes as high as possible and flexing your calf. Ensure that the knee is kept stationary at all times. There should be no bending at any time. Hold the contracted position for a second before you start to go back down.",
-      "Slowly go back down to the starting position as you breathe in by lowering the balls of your feet and toes.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Reverse_Calf_Raises/0.jpg",
-      "Smith_Machine_Reverse_Calf_Raises/1.jpg"
-    ],
-    "id": "Smith_Machine_Reverse_Calf_Raises"
-  },
-  {
-    "name": "Smith Machine Squat",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings",
-      "lower back"
-    ],
-    "instructions": [
-      "To begin, first set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
-      "Hold on to the bar using both arms at each side (palms facing forward), unlock it and lift it off the rack by first pushing with your legs and at the same time straightening your torso.",
-      "Position your legs using a shoulder width medium stance with the toes slightly pointed out. Keep your head up at all times and also maintain a straight back. This will be your starting position. (Note: For the purposes of this discussion we will use the medium stance which targets overall development; however you can choose any of the three stances discussed in the foot stances section).",
-      "Begin to slowly lower the bar by bending the knees as you maintain a straight posture with the head up. Continue down until the angle between the upper leg and the calves becomes slightly less than 90-degrees (which is the point in which the upper legs are below parallel to the floor). Inhale as you perform this portion of the movement. Tip: If you performed the exercise correctly, the front of the knees should make an imaginary straight line with the toes that is perpendicular to the front. If your knees are past that imaginary line (if they are past your toes) then you are placing undue stress on the knee and the exercise has been performed incorrectly.",
-      "Begin to raise the bar as you exhale by pushing the floor with the heel of your foot as you straighten the legs again and go back to the starting position.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Squat/0.jpg",
-      "Smith_Machine_Squat/1.jpg"
-    ],
-    "id": "Smith_Machine_Squat"
-  },
-  {
-    "name": "Smith Machine Stiff-Legged Deadlift",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "glutes",
-      "lower back"
-    ],
-    "instructions": [
-      "To begin, set the bar on the smith machine to a height that is around the middle of your thighs. Once the correct height is chosen and the bar is loaded, grasp the bar using a pronated (palms forward) grip that is shoulder width apart. You may need some wrist wraps if using a significant amount of weight.",
-      "Lift the bar up by fully extending your arms while keeping your back straight. Stand with your torso straight and your legs spaced using a shoulder width or narrower stance. The knees should be slightly bent. This is your starting position.",
-      "Keeping the knees stationary, lower the barbell to over the top of your feet by bending at the waist while keeping your back straight. Keep moving forward as if you were going to pick something from the floor until you feel a stretch on the hamstrings. Exhale as you perform this movement",
-      "Start bringing your torso up straight again as soon as you feel the hamstrings stretch by extending your hips and waist until you are back at the starting position. Inhale as you perform this movement.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Stiff-Legged_Deadlift/0.jpg",
-      "Smith_Machine_Stiff-Legged_Deadlift/1.jpg"
-    ],
-    "id": "Smith_Machine_Stiff-Legged_Deadlift"
-  },
-  {
-    "name": "Smith Machine Upright Row",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "traps"
-    ],
-    "secondaryMuscles": [
-      "biceps",
-      "middle back",
-      "shoulders"
-    ],
-    "instructions": [
-      "To begin, set the bar on the smith machine to a height that is around the middle of your thighs. Once the correct height is chosen and the bar is loaded, grasp the bar using a pronated (palms forward) grip that is shoulder width apart. You may need some wrist wraps if using a significant amount of weight.",
-      "Lift the barbell up and fully extend your arms with your back straight. There should be a slight bend at the elbows. This is the starting position.",
-      "Use your side shoulders to lift the bar as you exhale. The bar should be close to the body as you move it up. Continue to lift it until it nearly touches your chin. Tip: Your elbows should drive the motion. As you lift the bar, your elbows should always be higher than your forearms. Also, keep your torso stationary and pause for a second at the top of the movement.",
-      "Lower the bar back down slowly to the starting position. Inhale as you perform this portion of the movement.",
-      "Repeat for the recommended amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Machine_Upright_Row/0.jpg",
-      "Smith_Machine_Upright_Row/1.jpg"
-    ],
-    "id": "Smith_Machine_Upright_Row"
-  },
-  {
-    "name": "Smith Single-Leg Split Squat",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "machine",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "To begin, place a flat bench 2-3 feet behind the smith machine. Then, set the bar on the height that best matches your height. Once the correct height is chosen and the bar is loaded, step under the bar and place the back of your shoulders (slightly below the neck) across it.",
-      "Hold on to the bar using both arms at each side (palms facing forward), unlock it and lift it off the rack by first pushing with your legs and at the same time straightening your torso.",
-      "Position your legs by placing one foot slightly forward under the bar and extending your other leg back and place the top of your foot on the bench. This will be your starting position",
-      "Begin to slowly lower the bar by bending the knee as you maintain a straight posture with the head up. Continue down until the angle between the upper leg and the calf becomes slightly less than 90-degrees (which is the point in which the upper legs are below parallel to the floor). Inhale as you perform this portion of the movement. Tip: If you performed the exercise correctly, the front of the knee should make an imaginary straight line with the toes that is perpendicular to the front. If your knee is past that imaginary line (if it is past your toes) then you are placing undue stress on the knee and the exercise has been performed incorrectly.",
-      "Begin to raise the bar as you exhale by pushing the floor with the heel of your foot mainly as you straighten your leg again and go back to the starting position.",
-      "Repeat for the recommended amount of repetitions.",
-      "Switch legs and repeat the movement."
-    ],
-    "category": "strength",
-    "images": [
-      "Smith_Single-Leg_Split_Squat/0.jpg",
-      "Smith_Single-Leg_Split_Squat/1.jpg"
-    ],
-    "id": "Smith_Single-Leg_Split_Squat"
   },
   {
     "name": "Snatch",
@@ -18916,34 +16237,6 @@
       "Split_Jerk/1.jpg"
     ],
     "id": "Split_Jerk"
-  },
-  {
-    "name": "Split Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Assume a lunge stance position with one foot forward with the knee bent, and the rear knee nearly touching the ground.",
-      "Ensure that the front knee is over the midline of the foot.",
-      "Extending through both legs, jump as high as possible, swinging your arms to gain lift.",
-      "As you jump, bring your feet together, and move them back to their initial positions as you land.",
-      "Absorb the impact by reverting back to the starting position."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Split_Jump/0.jpg",
-      "Split_Jump/1.jpg"
-    ],
-    "id": "Split_Jump"
   },
   {
     "name": "Split Snatch",
@@ -19897,33 +17190,6 @@
     "id": "Standing_Leg_Curl"
   },
   {
-    "name": "Standing Long Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings"
-    ],
-    "instructions": [
-      "This drill is best done in sand or other soft landing surface. Ensure that you are able to measure distance. Stand in a partial squat stance with feet shoulder width apart.",
-      "Utilizing a big arm swing and a countermovement of the legs, jump forward as far as you can.",
-      "Attempt to land with your feet out in front you, reaching as far as possible with your legs.",
-      "Measure the distance from your landing point to the starting point and track results."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Standing_Long_Jump/0.jpg",
-      "Standing_Long_Jump/1.jpg"
-    ],
-    "id": "Standing_Long_Jump"
-  },
-  {
     "name": "Standing Low-Pulley Deltoid Raise",
     "force": "push",
     "level": "beginner",
@@ -20326,58 +17592,6 @@
     "id": "Standing_Towel_Triceps_Extension"
   },
   {
-    "name": "Standing Two-Arm Overhead Throw",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "shoulders"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "lats"
-    ],
-    "instructions": [
-      "Stand with your feet shoulder width apart holding a medicine ball in both hands. To begin, reach the medicine ball deep behind your head as you bend the knees slightly and lean back.",
-      "Violently throw the ball forward, flexing at the hip and using your whole body to complete the movement.",
-      "The medicine ball can be thrown to a partner or to a wall, receiving it as it bounces back."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Standing_Two-Arm_Overhead_Throw/0.jpg",
-      "Standing_Two-Arm_Overhead_Throw/1.jpg"
-    ],
-    "id": "Standing_Two-Arm_Overhead_Throw"
-  },
-  {
-    "name": "Star Jump",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "body only",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "calves",
-      "glutes",
-      "hamstrings",
-      "shoulders"
-    ],
-    "instructions": [
-      "Begin in a relaxed stance with your feet shoulder width apart and hold your arms close to the body.",
-      "To initiate the move, squat down halfway and explode back up as high as possible. Fully extend your entire body, spreading your legs and arms away from the body.",
-      "As you land, bring your limbs back in and absorb your impact through the legs."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Star_Jump/0.jpg",
-      "Star_Jump/1.jpg"
-    ],
-    "id": "Star_Jump"
-  },
-  {
     "name": "Step-up with Knee Raise",
     "force": "push",
     "level": "beginner",
@@ -20637,34 +17851,6 @@
     "id": "Straight_Raises_on_Incline_Bench"
   },
   {
-    "name": "Stride Jump Crossover",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "other",
-    "primaryMuscles": [
-      "quadriceps"
-    ],
-    "secondaryMuscles": [
-      "abductors",
-      "adductors",
-      "calves",
-      "hamstrings"
-    ],
-    "instructions": [
-      "Stand to the side of a box with your inside foot on top of it, close to the edge.",
-      "Begin by swinging the arms upward as you push through the top leg, jumping upward as high as possible. Attempt to drive the opposite knee upward.",
-      "Land in the opposite position that you started, on the opposite side of the box. The foot that was initially on the box will now be on the ground, with the opposite foot now on the box.",
-      "Repeat the movement, crossing back over to the other side."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Stride_Jump_Crossover/0.jpg",
-      "Stride_Jump_Crossover/1.jpg"
-    ],
-    "id": "Stride_Jump_Crossover"
-  },
-  {
     "name": "Sumo Deadlift",
     "force": "pull",
     "level": "intermediate",
@@ -20785,32 +17971,6 @@
       "Superman/1.jpg"
     ],
     "id": "Superman"
-  },
-  {
-    "name": "Supine Chest Throw",
-    "force": "push",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "medicine ball",
-    "primaryMuscles": [
-      "triceps"
-    ],
-    "secondaryMuscles": [
-      "chest",
-      "shoulders"
-    ],
-    "instructions": [
-      "This drill is great for chest passes when you lack a partner or a wall of sufficient strength. Lay on the ground on your back with your knees bent.",
-      "Begin with the ball on your chest, held with both hands on the bottom.",
-      "Explode up, extending through the elbow to throw the ball directly above you as high as possible.",
-      "Catch the ball with both hands as it comes down."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Supine_Chest_Throw/0.jpg",
-      "Supine_Chest_Throw/1.jpg"
-    ],
-    "id": "Supine_Chest_Throw"
   },
   {
     "name": "Supine One-Arm Overhead Throw",
@@ -21822,33 +18982,6 @@
     "id": "V-Bar_Pullup"
   },
   {
-    "name": "Vertical Swing",
-    "force": "pull",
-    "level": "beginner",
-    "mechanic": "compound",
-    "equipment": "dumbbell",
-    "primaryMuscles": [
-      "hamstrings"
-    ],
-    "secondaryMuscles": [
-      "glutes",
-      "quadriceps",
-      "shoulders"
-    ],
-    "instructions": [
-      "Allow the dumbbell to hang at arms length between your legs, holding it with both hands. Keep your back straight and your head up.",
-      "Swing the dumbbell between your legs, flexing at the hips and bending the knees slightly.",
-      "Powerfully reverse the motion by extending at the hips, knees, and ankles to propel yourself upward, swinging the dumbell over your head.",
-      "As you land, absorb the impact through your legs and draw the dumbbell to your torso before the next repetition."
-    ],
-    "category": "plyometrics",
-    "images": [
-      "Vertical_Swing/0.jpg",
-      "Vertical_Swing/1.jpg"
-    ],
-    "id": "Vertical_Swing"
-  },
-  {
     "name": "Walking, Treadmill",
     "force": null,
     "level": "beginner",
@@ -22217,35 +19350,6 @@
       "Wide-Grip_Lat_Pulldown/1.jpg"
     ],
     "id": "Wide-Grip_Lat_Pulldown"
-  },
-  {
-    "name": "Wide-Grip Pulldown Behind The Neck",
-    "force": "pull",
-    "level": "intermediate",
-    "mechanic": "compound",
-    "equipment": "cable",
-    "primaryMuscles": [
-      "lats"
-    ],
-    "secondaryMuscles": [
-      "biceps",
-      "middle back",
-      "shoulders"
-    ],
-    "instructions": [
-      "Sit down on a pull-down machine with a wide bar attached to the top pulley. Make sure that you adjust the knee pad of the machine to fit your height. These pads will prevent your body from being raised by the resistance attached to the bar.",
-      "Grab the bar with the palms facing forward using the prescribed grip. Note on grips: For a wide grip, your hands need to be spaced out at a distance wider than your shoulder width. For a medium grip, your hands need to be spaced out at a distance equal to your shoulder width and for a close grip at a distance smaller than your shoulder width.",
-      "As you have both arms extended in front of you holding the bar at the chosen grip width, bring your torso and head forward. Think of an imaginary line from the center of the bar down to the back of your neck. This is your starting position.",
-      "As you breathe out, bring the bar down until it touches the back of your neck by drawing the shoulders and the upper arms down and back. Tip: Concentrate on squeezing the back muscles once you reach the full contracted position. The upper torso should remain stationary and only the arms should move. The forearms should do no other work except for holding the bar; therefore do not try to pull down the bar using the forearms.",
-      "After a second on the contracted position squeezing your shoulder blades together, slowly raise the bar back to the starting position when your arms are fully extended and the lats are fully stretched. Inhale during this portion of the movement.",
-      "Repeat this motion for the prescribed amount of repetitions."
-    ],
-    "category": "strength",
-    "images": [
-      "Wide-Grip_Pulldown_Behind_The_Neck/0.jpg",
-      "Wide-Grip_Pulldown_Behind_The_Neck/1.jpg"
-    ],
-    "id": "Wide-Grip_Pulldown_Behind_The_Neck"
   },
   {
     "name": "Wide-Grip Rear Pull-Up",
