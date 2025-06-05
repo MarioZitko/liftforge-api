@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import { ConfigService } from '@nestjs/config';
 import { getVerificationEmailHtml } from './templates/verification-email.template';
 import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
+import { getInvitationEmailHtml } from './templates/invitation-email.template';
 
 @Injectable()
 export class EmailService {
@@ -34,6 +35,18 @@ export class EmailService {
       from: 'LiftForge <onboarding@resend.dev>',
       to,
       subject: 'Reset Your Password – LiftForge',
+      html,
+    });
+  }
+
+  async sendInvitationEmail(to: string, token: string, coachName: string) {
+    const url = `${this.frontendUrl}/register?inviteToken=${token}&email=${to}`;
+    const html = getInvitationEmailHtml(url, coachName);
+
+    await this.resend.emails.send({
+      from: 'LiftForge <onboarding@resend.dev>',
+      to,
+      subject: `You're Invited to LiftForge by ${coachName}`,
       html,
     });
   }

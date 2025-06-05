@@ -3,27 +3,41 @@ import { PrismaService } from '../../prisma/prisma.service';
 import * as bcrypt from 'bcrypt';
 
 export async function seedSuperusers(prisma: PrismaService) {
-  const users = [
+  const usersData = [
     {
       email: 'admin@liftforge.com',
       name: 'Admin',
       password: await bcrypt.hash('admin123', 10),
-      role: Role.ADMIN, // ✅ use the enum value here
+      role: Role.ADMIN,
       emailVerified: true,
     },
     {
       email: 'coach@liftforge.com',
       name: 'Coach',
       password: await bcrypt.hash('coach123', 10),
-      role: Role.COACH, // ✅ also enum
+      role: Role.COACH,
       emailVerified: true,
     },
   ];
 
-  for (const user of users) {
-    const exists = await prisma.user.findUnique({ where: { email: user.email } });
-    if (!exists) {
-      await prisma.user.create({ data: user });
+  for (const userData of usersData) {
+    const user = await prisma.user.upsert({
+      where: { email: userData.email },
+      update: {},
+      create: userData,
+    });
+
+    if (user.role === Role.COACH) {
+      const coach = await prisma.coach.findUnique({
+        where: { userId: user.id },
+      });
+      if (!coach) {
+        await prisma.coach.create({
+          data: {
+            userId: user.id,
+          },
+        });
+      }
     }
   }
 }

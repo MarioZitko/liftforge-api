@@ -27,9 +27,24 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  async register(dto: RegisterDto): Promise<{ message: string }> {
+  async register(dto: RegisterDto, inviteToken?: string): Promise<{ message: string }> {
     const existing = await this.prisma.user.findUnique({ where: { email: dto.email } });
     if (existing) throw new ConflictException('User already exists');
+
+    let coachId: string | undefined;
+    if (inviteToken) {
+      const invitation = await this.prisma.invitation.findUnique({
+        where: { token: inviteToken },
+      });
+
+      if (!invitation || invitation.expiresAt < new Date() || invitation.email !== dto.email) {
+        throw new BadRequestException('Invalid or expired invitation token');
+      }
+      coachId = invitation.coachId;
+
+      // Delete the invitation after successful registration
+      await this.prisma.invitation.delete({ where: { token: inviteToken } });
+    }
 
     const hashedPassword = await bcrypt.hash(dto.password, 10);
     const user = await this.userService.create({
@@ -38,6 +53,21 @@ export class AuthService {
       name: dto.name,
       role: dto.role ?? Role.CLIENT,
     });
+
+    if (coachId) {
+      await this.prisma.client.create({
+        data: {
+          userId: user.id,
+          coachId,
+        },
+      });
+    } else {
+      if (dto.role === Role.CLIENT) {
+        await this.prisma.client.create({ data: { userId: user.id } });
+      } else if (dto.role === Role.COACH) {
+        await this.prisma.coach.create({ data: { userId: user.id } });
+      }
+    }
 
     await this.requestEmailVerification(user.email);
     return { message: 'Registration successful. Please verify your email before logging in.' };
