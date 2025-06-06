@@ -4,14 +4,24 @@ import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-import { PrismaModule } from './prisma/prisma.module';
-import { AuthModule } from './modules/auth/auth.module';
 import { ThrottlerModule } from '@nestjs/throttler';
-import { UserModule } from './modules/user/user.module';
+import { ClsUserMiddleware } from './middleware/cls-user.middleware';
+import { AuthModule } from './modules/auth/auth.module';
 import { ClientModule } from './modules/client/client.module';
 import { CoachModule } from './modules/coach/coach.module';
 import { ExerciseModule } from './modules/exercise/exercise.module';
-import { ClsUserMiddleware } from './middleware/cls-user.middleware';
+import { ProgramController } from './modules/program/program.controller';
+import { ProgramService } from './modules/program/program.service';
+import { TrainingBlockController } from './modules/training-block/training-block.controller';
+import { TrainingBlockService } from './modules/training-block/training-block.service';
+import { TrainingExerciseController } from './modules/training-exercise/training-exercise.controller';
+import { TrainingExerciseService } from './modules/training-exercise/training-exercise.service';
+import { TrainingWeekController } from './modules/training-week/training-week.controller';
+import { TrainingWeekService } from './modules/training-week/training-week.service';
+import { TrainingController } from './modules/training/training.controller';
+import { TrainingService } from './modules/training/training.service';
+import { UserModule } from './modules/user/user.module';
+import { PrismaModule } from './prisma/prisma.module';
 @Module({
   imports: [
     // ✅ Add ClsModule globally
@@ -44,8 +54,22 @@ import { ClsUserMiddleware } from './middleware/cls-user.middleware';
     ExerciseModule,
   ],
 
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [
+    AppController,
+    ProgramController,
+    TrainingController,
+    TrainingBlockController,
+    TrainingWeekController,
+    TrainingExerciseController,
+  ],
+  providers: [
+    AppService,
+    ProgramService,
+    TrainingService,
+    TrainingBlockService,
+    TrainingWeekService,
+    TrainingExerciseService,
+  ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
