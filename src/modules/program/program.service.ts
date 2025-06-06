@@ -1,38 +1,49 @@
-import { Injectable } from '@nestjs/common';
+import { PrismaService } from '@/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { CreateProgramDto } from './dto/create-program.dto';
+import { UpdateProgramDto } from './dto/update-program.dto';
 
 @Injectable()
 export class ProgramService {
-  private programs = []; // Temporary in-memory storage
+  constructor(private readonly prisma: PrismaService) {}
 
-  getAllPrograms() {
-    return this.programs;
+  async create(data: CreateProgramDto) {
+    return this.prisma.program.create({
+      data,
+    });
   }
 
-  getProgramById(id: string) {
-    return this.programs.find((program) => program.id === id);
+  async findAll() {
+    return this.prisma.program.findMany({
+      orderBy: { name: 'asc' },
+    });
   }
 
-  createProgram(createProgramDto: any) {
-    const newProgram = { id: Date.now().toString(), ...createProgramDto };
-    this.programs.push(newProgram);
-    return newProgram;
+  async findOne(id: number) {
+    const program = await this.prisma.program.findUnique({ where: { id } });
+    if (!program) throw new NotFoundException('Program not found');
+    return program;
   }
 
-  updateProgram(id: string, updateProgramDto: any) {
-    const programIndex = this.programs.findIndex((program) => program.id === id);
-    if (programIndex === -1) {
-      throw new Error('Program not found');
-    }
-    this.programs[programIndex] = { ...this.programs[programIndex], ...updateProgramDto };
-    return this.programs[programIndex];
+  async findForCoach(userId: string, onlyMine: boolean) {
+    return this.prisma.program.findMany({
+      where: onlyMine
+        ? { createdById: userId }
+        : {
+            OR: [{ createdById: null }, { createdById: userId }],
+          },
+      orderBy: { name: 'asc' },
+    });
   }
 
-  deleteProgram(id: string) {
-    const programIndex = this.programs.findIndex((program) => program.id === id);
-    if (programIndex === -1) {
-      throw new Error('Program not found');
-    }
-    const deletedProgram = this.programs.splice(programIndex, 1);
-    return deletedProgram[0];
+  async update(id: number, data: UpdateProgramDto) {
+    return this.prisma.program.update({
+      where: { id },
+      data,
+    });
+  }
+
+  async remove(id: number) {
+    return this.prisma.program.delete({ where: { id } });
   }
 }
