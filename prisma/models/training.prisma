@@ -29,6 +29,8 @@ model Coach {
 
   // Relation to ClientPrograms (all programs managed by this coach)
   clientPrograms ClientProgram[] @relation("ClientProgramCoach")
+
+    invitations Invitation[]
 }
 
 model Program {
