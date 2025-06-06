@@ -8,6 +8,7 @@ import {
   Res,
   UnauthorizedException,
   UseGuards,
+  Query,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Throttle } from '@nestjs/throttler';
@@ -30,8 +31,8 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() dto: RegisterDto) {
-    return this.authService.register(dto);
+  async register(@Body() dto: RegisterDto, @Query('inviteToken') inviteToken?: string) {
+    return this.authService.register(dto, inviteToken);
   }
 
   @Post('login')

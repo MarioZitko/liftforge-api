@@ -17,6 +17,5 @@ export enum ExerciseMuscleGroup {
   TRICEPS = 'TRICEPS',
   DELTS = 'DELTS',
   HIP_FLEXORS = 'HIP_FLEXORS',
-  ABS = 'ABS',
   CORE = 'CORE',
 }
