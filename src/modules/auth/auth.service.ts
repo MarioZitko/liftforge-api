@@ -55,18 +55,10 @@ export class AuthService {
     });
 
     if (coachId) {
-      await this.prisma.client.create({
-        data: {
-          userId: user.id,
-          coachId,
-        },
+      await this.prisma.client.update({
+        where: { userId: user.id },
+        data: { coachId },
       });
-    } else {
-      if (dto.role === Role.CLIENT) {
-        await this.prisma.client.create({ data: { userId: user.id } });
-      } else if (dto.role === Role.COACH) {
-        await this.prisma.coach.create({ data: { userId: user.id } });
-      }
     }
 
     await this.requestEmailVerification(user.email);
