@@ -57,7 +57,7 @@ export class AuthService {
     if (coachId) {
       await this.prisma.client.update({
         where: { userId: user.id },
-        data: { coachId },
+        data: { coachId, lookingForCoach: false },
       });
     }
 

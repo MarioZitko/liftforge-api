@@ -71,7 +71,7 @@ export class CoachService {
         // Client record exists, update coachId
         await this.prisma.client.update({
           where: { id: existingUser.client.id },
-          data: { coachId: coach.id },
+          data: { coachId: coach.id, lookingForCoach: false },
         });
       } else {
         // No client record for this user, create one and assign coachId
@@ -79,6 +79,7 @@ export class CoachService {
           data: {
             userId: existingUser.id,
             coachId: coach.id,
+            lookingForCoach: false,
           },
         });
       }
@@ -91,13 +92,8 @@ export class CoachService {
 
       return { message: `Client ${clientEmail} has been directly assigned to you.` };
     } else {
-      // User does not exist, proceed with existing registration invitation flow
-      const existingInvitation = await this.prisma.invitation.findUnique({
-        where: { email: clientEmail },
-      });
-      if (existingInvitation) {
-        throw new ConflictException('An invitation to this email already exists.');
-      }
+      // User does not exist, proceed with registration invitation flow
+      await this.checkIfInvitationExists(clientEmail, coach.id);
 
       const token = randomUUID();
       const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days expiration
@@ -118,6 +114,24 @@ export class CoachService {
       );
 
       return { message: 'Registration invitation sent successfully' };
+    }
+  }
+  /**
+   * Checks if an invitation for a specific email and coach already exists.
+   * Throws a ConflictException if an existing invitation is found.
+   * @param clientEmail The email of the client to check.
+   * @param coachId The ID of the coach.
+   */
+  private async checkIfInvitationExists(clientEmail: string, coachId: string): Promise<void> {
+    const existingInvitation = await this.prisma.invitation.findFirst({
+      where: {
+        email: clientEmail,
+        coachId: coachId,
+      },
+    });
+
+    if (existingInvitation) {
+      throw new ConflictException('An invitation to this email already exists for this coach.');
     }
   }
 }

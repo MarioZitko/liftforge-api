@@ -5,6 +5,7 @@ model Client {
 
   // Example: extra fields for Client
   dateOfBirth DateTime?
+  lookingForCoach Boolean @default(true)
   // Add more client-specific fields here
 
   // Relation to ClientPrograms
