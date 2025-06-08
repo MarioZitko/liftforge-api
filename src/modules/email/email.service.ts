@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { getVerificationEmailHtml } from './templates/verification-email.template';
 import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
 import { getInvitationEmailHtml } from './templates/invitation-email.template';
+import { getCoachAssignmentNotificationHtml } from './templates/coach-assignment-notification';
 
 @Injectable()
 export class EmailService {
@@ -47,6 +48,18 @@ export class EmailService {
       from: 'LiftForge <onboarding@resend.dev>',
       to,
       subject: `You're Invited to LiftForge by ${coachName}`,
+      html,
+    });
+  }
+
+  async sendCoachAssignmentNotification(to: string, coachName: string) {
+    const url = `${this.frontendUrl}/dashboard`; // Assuming a dashboard page for existing clients
+    const html = getCoachAssignmentNotificationHtml(url, coachName);
+
+    await this.resend.emails.send({
+      from: 'LiftForge <onboarding@resend.dev>',
+      to,
+      subject: `You have been assigned a coach on LiftForge – ${coachName}`,
       html,
     });
   }

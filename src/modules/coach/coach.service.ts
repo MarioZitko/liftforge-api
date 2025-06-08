@@ -45,47 +45,93 @@ export class CoachService {
     return coach.clients;
   }
 
-  async inviteClient(coachId: string, clientEmail: string) {
+  async inviteClient(coachUserId: string, clientEmail: string) {
     const coach = await this.prisma.coach.findUnique({
-      where: { userId: coachId },
+      where: { userId: coachUserId },
       include: { user: true },
     });
     if (!coach) {
       throw new NotFoundException('Coach not found');
     }
 
-    const existingInvitation = await this.prisma.invitation.findUnique({
-      where: { email: clientEmail },
-    });
-    if (existingInvitation) {
-      throw new ConflictException('An invitation to this email already exists.');
-    }
-
     const existingUser = await this.prisma.user.findUnique({
       where: { email: clientEmail },
+      include: { client: true }, // Include client relation to check if they have a coach
     });
+
     if (existingUser) {
-      throw new ConflictException('A user with this email already exists.');
-    }
+      // User exists, now check their client status
+      if (existingUser.client && existingUser.client.coachId) {
+        throw new ConflictException('This client is already assigned to a coach.');
+      }
 
-    const token = randomUUID();
-    const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days expiration
+      // If user exists and either no client record or client record without coachId
+      // Assign the coach directly on the backend
+      if (existingUser.client) {
+        // Client record exists, update coachId
+        await this.prisma.client.update({
+          where: { id: existingUser.client.id },
+          data: { coachId: coach.id, lookingForCoach: false },
+        });
+      } else {
+        // No client record for this user, create one and assign coachId
+        await this.prisma.client.create({
+          data: {
+            userId: existingUser.id,
+            coachId: coach.id,
+            lookingForCoach: false,
+          },
+        });
+      }
 
-    await this.prisma.invitation.create({
-      data: {
-        email: clientEmail,
+      // Send a notification email for direct assignment (no registration link)
+      await this.emailService.sendCoachAssignmentNotification(
+        clientEmail,
+        coach.user.name || 'Your Coach',
+      );
+
+      return { message: `Client ${clientEmail} has been directly assigned to you.` };
+    } else {
+      // User does not exist, proceed with registration invitation flow
+      await this.checkIfInvitationExists(clientEmail, coach.id);
+
+      const token = randomUUID();
+      const expiresAt = new Date(Date.now() + 1000 * 60 * 60 * 24 * 7); // 7 days expiration
+
+      await this.prisma.invitation.create({
+        data: {
+          email: clientEmail,
+          token,
+          coachId: coach.id,
+          expiresAt,
+        },
+      });
+
+      await this.emailService.sendInvitationEmail(
+        clientEmail,
         token,
-        coachId: coach.id,
-        expiresAt,
+        coach.user.name || 'Your Coach',
+      );
+
+      return { message: 'Registration invitation sent successfully' };
+    }
+  }
+  /**
+   * Checks if an invitation for a specific email and coach already exists.
+   * Throws a ConflictException if an existing invitation is found.
+   * @param clientEmail The email of the client to check.
+   * @param coachId The ID of the coach.
+   */
+  private async checkIfInvitationExists(clientEmail: string, coachId: string): Promise<void> {
+    const existingInvitation = await this.prisma.invitation.findFirst({
+      where: {
+        email: clientEmail,
+        coachId: coachId,
       },
     });
 
-    await this.emailService.sendInvitationEmail(
-      clientEmail,
-      token,
-      coach.user.name || 'Your Coach',
-    );
-
-    return { message: 'Invitation sent successfully' };
+    if (existingInvitation) {
+      throw new ConflictException('An invitation to this email already exists for this coach.');
+    }
   }
 }
