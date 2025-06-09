@@ -23,6 +23,7 @@ model Coach {
 
   // Example: extra fields for Coach
   certification String?
+  lookingForClients Boolean @default(false)
   // Add more coach-specific fields here
 
   // Relation to Clients

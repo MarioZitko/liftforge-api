@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { CoachService } from './coach.service';
-import { CreateCoachDto, UpdateCoachDto } from './dto';
+import { CreateCoachDto, UpdateCoachDto, CoachWithDetailsDto } from './dto';
 import { InviteClientDto } from './dto/invite-client.dto';
 import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
 import { CurrentUser } from 'src/modules/auth/decorators/current-user.decorator';
@@ -22,8 +22,15 @@ export class CoachController {
   @Get()
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(Role.COACH, Role.ADMIN)
-  async findAll() {
+  async findAll(): Promise<CoachWithDetailsDto[]> {
     return this.coachService.findAll();
+  }
+
+  @Get('available')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.CLIENT, Role.ADMIN)
+  async findAvailableCoaches(): Promise<CoachWithDetailsDto[]> {
+    return this.coachService.findAvailableCoachesWithClientCount();
   }
 
   @Get(':id')

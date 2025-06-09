@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { ClientService } from './client.service';
-import { CreateClientDto, UpdateClientDto } from './dto';
+import { CreateClientDto, UpdateClientDto, ClientWithDetailsDto } from './dto';
 
 @Controller('client')
 export class ClientController {
-  constructor(private readonly clientService: ClientService) { }
+  constructor(private readonly clientService: ClientService) {}
 
   @Post()
   async create(@Body() createClientDto: CreateClientDto) {
@@ -12,12 +12,12 @@ export class ClientController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(): Promise<ClientWithDetailsDto[]> {
     return this.clientService.findAll();
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
+  async findOne(@Param('id') id: string): Promise<ClientWithDetailsDto> {
     return this.clientService.findOne(id);
   }
 

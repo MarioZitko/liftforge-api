@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { PrismaService } from '../../prisma/prisma.service';
-import { CreateCoachDto, UpdateCoachDto } from './dto';
+import { CreateCoachDto, UpdateCoachDto, CoachWithDetailsDto } from './dto';
 import { EmailService } from '../email/email.service';
 import { randomUUID } from 'crypto';
 
@@ -15,8 +15,30 @@ export class CoachService {
     return this.prisma.coach.create({ data });
   }
 
-  async findAll() {
-    return this.prisma.coach.findMany();
+  async findAll(): Promise<CoachWithDetailsDto[]> {
+    return this.prisma.coach
+      .findMany({
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+            },
+          },
+          _count: {
+            select: { clients: true },
+          },
+        },
+      })
+      .then((coaches) =>
+        coaches.map((coach) => ({
+          ...coach,
+          user: {
+            ...coach.user,
+            name: coach.user.name || '', // Ensure name is a string, not null
+          },
+        })),
+      );
   }
 
   async findOne(id: string) {
@@ -133,5 +155,34 @@ export class CoachService {
     if (existingInvitation) {
       throw new ConflictException('An invitation to this email already exists for this coach.');
     }
+  }
+
+  async findAvailableCoachesWithClientCount() {
+    return this.prisma.coach
+      .findMany({
+        where: {
+          lookingForClients: true,
+        },
+        include: {
+          user: {
+            select: {
+              name: true,
+              email: true,
+            },
+          },
+          _count: {
+            select: { clients: true },
+          },
+        },
+      })
+      .then((coaches) =>
+        coaches.map((coach) => ({
+          ...coach,
+          user: {
+            ...coach.user,
+            name: coach.user.name || '', // Ensure name is a string, not null
+          },
+        })),
+      );
   }
 }
