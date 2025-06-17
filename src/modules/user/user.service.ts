@@ -2,7 +2,9 @@ import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto, UpdateUserDto } from './user.dto';
-import { User } from 'generated/prisma';
+import { Role } from 'generated/prisma';
+import { PaginatedRequest, PaginatedResponse } from '@/common/types/pagination';
+import { PaginatedUserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -120,5 +122,68 @@ export class UserService {
     await this.prisma.coach.deleteMany({ where: { userId: id } });
 
     return this.prisma.user.delete({ where: { id } });
+  }
+  async getPaginated(request: PaginatedRequest): Promise<PaginatedResponse<PaginatedUserDto>> {
+    const { pageNumber, pageSize, searchText, orderByProperty, ascending, filters } = request;
+    console.log('PaginatedRequest received:', request);
+
+    const skip = (pageNumber - 1) * pageSize;
+    const take = pageSize;
+
+    const where: any = {};
+    if (searchText) {
+      where.OR = [
+        { email: { contains: searchText, mode: 'insensitive' } },
+        { name: { contains: searchText, mode: 'insensitive' } },
+      ];
+    }
+
+    if (filters) {
+      for (const key in filters) {
+        if (filters.hasOwnProperty(key)) {
+          where[key] = filters[key];
+        }
+      }
+    }
+
+    const orderBy: any = {};
+    if (orderByProperty) {
+      orderBy[orderByProperty] = ascending ? 'asc' : 'desc';
+    } else {
+      orderBy.createdAt = 'desc'; // Default sort
+    }
+
+    const [data, totalCount] = await this.prisma.$transaction([
+      this.prisma.user.findMany({
+        where,
+        skip,
+        take,
+        orderBy,
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          role: true,
+          emailVerified: true,
+          createdAt: true,
+        },
+      }),
+      this.prisma.user.count({ where }),
+    ]);
+
+    return {
+      data: data.map((user) => ({
+        id: user.id,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        emailVerified: user.emailVerified,
+        createdAt: user.createdAt,
+      })),
+      totalCount,
+      pageNumber,
+      pageSize,
+      totalPages: Math.ceil(totalCount / pageSize),
+    };
   }
 }

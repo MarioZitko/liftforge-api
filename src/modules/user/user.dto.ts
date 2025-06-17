@@ -43,3 +43,12 @@ export class UpdateUserDto {
   @IsBoolean()
   emailVerified?: boolean;
 }
+
+export class PaginatedUserDto {
+  id!: string;
+  email!: string;
+  name!: string | null;
+  role!: Role;
+  emailVerified!: boolean;
+  createdAt!: Date;
+}

@@ -10,13 +10,14 @@ import {
   Put,
   Body,
 } from '@nestjs/common';
+import { PaginatedRequest, PaginatedResponse } from '@/common/types/pagination';
 import { UserService } from './user.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { Role } from 'generated/prisma';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
-import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { CreateUserDto, UpdateUserDto, PaginatedUserDto } from './user.dto';
 
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -64,5 +65,11 @@ export class UserController {
   async delete(@Param('id') id: string) {
     console.log('Deleting user:', id); // ✅ Should print UUID
     return this.userService.delete(id);
+  }
+  @Get('paginated')
+  async getPaginated(
+    @Query() request: PaginatedRequest,
+  ): Promise<PaginatedResponse<PaginatedUserDto>> {
+    return this.userService.getPaginated(request);
   }
 }
