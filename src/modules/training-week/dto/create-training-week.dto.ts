@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsBoolean, IsOptional, IsString } from 'class-validator';
+import { IsArray, IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateTrainingDto {
+export class CreateTrainingWeekDto {
   @ApiProperty()
   @IsString()
   name!: string;
@@ -10,6 +10,11 @@ export class CreateTrainingDto {
   @IsOptional()
   @IsString()
   description?: string;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  order?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
@@ -25,5 +30,5 @@ export class CreateTrainingDto {
   @IsOptional()
   @IsArray()
   @IsString({ each: true })
-  exerciseIds?: string[]; // Assuming exercises are referenced by IDs
+  trainingIds?: string[]; // Assuming trainings are referenced by IDs
 }

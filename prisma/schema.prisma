@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -145,6 +146,20 @@ model PasswordResetToken {
   updatedById String?
 }
 
+model Invitation {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  token     String   @unique
+  coach     Coach    @relation(fields: [coachId], references: [id])
+  coachId   String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  createdBy   User?   @relation("InvitationCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?   @relation("InvitationUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+}
+
 
 model Client {
   id        String   @id @default(uuid())
@@ -178,7 +193,7 @@ model Coach {
   // Relation to ClientPrograms (all programs managed by this coach)
   clientPrograms ClientProgram[] @relation("ClientProgramCoach")
 
-  invitations Invitation[]
+    invitations Invitation[]
 }
 
 model Program {
@@ -306,20 +321,5 @@ model Volume {
   createdBy   User?   @relation("VolumeCreatedBy", fields: [createdById], references: [id])
   createdById String?
   updatedBy   User?   @relation("VolumeUpdatedBy", fields: [updatedById], references: [id])
-  updatedById String?
-}
-
-model Invitation {
-  id        String   @id @default(uuid())
-  email     String   @unique
-  token     String   @unique
-  coach     Coach    @relation(fields: [coachId], references: [id])
-  coachId   String
-  expiresAt DateTime
-  createdAt DateTime @default(now())
-
-  createdBy   User?   @relation("InvitationCreatedBy", fields: [createdById], references: [id])
-  createdById String?
-  updatedBy   User?   @relation("InvitationUpdatedBy", fields: [updatedById], references: [id])
   updatedById String?
 }
