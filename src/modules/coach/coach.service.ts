@@ -1,8 +1,8 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
-import { CreateCoachDto, UpdateCoachDto } from './dto';
-import { EmailService } from '../email/email.service';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { randomUUID } from 'crypto';
+import { PrismaService } from '../../prisma/prisma.service';
+import { EmailService } from '../email/email.service';
+import { CreateCoachDto, UpdateCoachDto } from './dto';
 
 @Injectable()
 export class CoachService {
@@ -21,6 +21,12 @@ export class CoachService {
 
   async findOne(id: string) {
     const coach = await this.prisma.coach.findUnique({ where: { id } });
+    if (!coach) throw new NotFoundException('Coach not found');
+    return coach;
+  }
+
+  async findByUserId(userId: string) {
+    const coach = await this.prisma.coach.findUnique({ where: { userId } });
     if (!coach) throw new NotFoundException('Coach not found');
     return coach;
   }

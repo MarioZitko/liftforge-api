@@ -10,6 +10,7 @@ model Client {
 
   // Relation to ClientPrograms
   clientPrograms ClientProgram[] @relation("ClientProgramClient")
+  bio String?
 
   // Relation to Coach (optional, if you want to link to a coach)
   coachId String?
@@ -24,6 +25,8 @@ model Coach {
   // Example: extra fields for Coach
   certification String?
   // Add more coach-specific fields here
+  lookingForClients Boolean @default(true)
+  bio String?
 
   // Relation to Clients
   clients Client[]
@@ -31,7 +34,7 @@ model Coach {
   // Relation to ClientPrograms (all programs managed by this coach)
   clientPrograms ClientProgram[] @relation("ClientProgramCoach")
 
-    invitations Invitation[]
+  invitations Invitation[]
 }
 
 model Program {

@@ -1,12 +1,12 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Role } from 'generated/prisma/client';
+import { CurrentUser } from 'src/modules/auth/decorators/current-user.decorator';
+import { Roles } from 'src/modules/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
+import { RolesGuard } from 'src/modules/auth/guards/roles.guard';
 import { CoachService } from './coach.service';
 import { CreateCoachDto, UpdateCoachDto } from './dto';
 import { InviteClientDto } from './dto/invite-client.dto';
-import { JwtAuthGuard } from 'src/modules/auth/guards/jwt-auth.guard';
-import { CurrentUser } from 'src/modules/auth/decorators/current-user.decorator';
-import { Role } from 'generated/prisma/client';
-import { RolesGuard } from 'src/modules/auth/guards/roles.guard';
-import { Roles } from 'src/modules/auth/decorators/roles.decorator';
 
 @Controller('coach')
 export class CoachController {
@@ -31,6 +31,13 @@ export class CoachController {
   @Roles(Role.COACH, Role.CLIENT, Role.ADMIN)
   async findOne(@Param('id') id: string) {
     return this.coachService.findOne(id);
+  }
+
+  @Get('user/:userId')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(Role.COACH, Role.CLIENT, Role.ADMIN)
+  async findByUserId(@Param('userId') userId: string) {
+    return this.coachService.findByUserId(userId);
   }
 
   @Put(':id')
