@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { Resend } from 'resend';
 import { ConfigService } from '@nestjs/config';
-import { getVerificationEmailHtml } from './templates/verification-email.template';
-import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
-import { getInvitationEmailHtml } from './templates/invitation-email.template';
+import { Resend } from 'resend';
 import { getCoachAssignmentNotificationHtml } from './templates/coach-assignment-notification';
+import { getInvitationEmailHtml } from './templates/invitation-email.template';
+import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
+import { getVerificationEmailHtml } from './templates/verification-email.template';
 
 @Injectable()
 export class EmailService {

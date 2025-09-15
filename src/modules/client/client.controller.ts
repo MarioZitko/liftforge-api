@@ -4,7 +4,7 @@ import { CreateClientDto, UpdateClientDto } from './dto';
 
 @Controller('client')
 export class ClientController {
-  constructor(private readonly clientService: ClientService) { }
+  constructor(private readonly clientService: ClientService) {}
 
   @Post()
   async create(@Body() createClientDto: CreateClientDto) {
@@ -19,6 +19,11 @@ export class ClientController {
   @Get(':id')
   async findOne(@Param('id') id: string) {
     return this.clientService.findOne(id);
+  }
+
+  @Get('user/:userId')
+  async findByUserId(@Param('userId') userId: string) {
+    return this.clientService.findByUserId(userId);
   }
 
   @Put(':id')

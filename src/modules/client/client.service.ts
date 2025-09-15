@@ -41,6 +41,23 @@ export class ClientService {
     return client;
   }
 
+  async findByUserId(userId: string) {
+    const client = await this.prisma.client.findUnique({
+      where: { userId },
+      include: {
+        user: {
+          select: {
+            name: true,
+            email: true,
+            emailVerified: true,
+          },
+        },
+      },
+    });
+    if (!client) throw new NotFoundException('Client not found');
+    return client;
+  }
+
   async update(id: string, data: UpdateClientDto) {
     return this.prisma.client.update({
       where: { id },
