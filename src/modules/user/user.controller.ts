@@ -70,7 +70,7 @@ export class UserController {
   }
 
   @Put(':id')
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.CLIENT, Role.COACH)
   async update(@Param('id') id: string, @Body() dto: UpdateUserDto) {
     return this.userService.update(id, dto);
   }
