@@ -40,6 +40,7 @@ export async function seedValidData(prisma: PrismaService) {
       const clientProgram = await prisma.clientProgram.create({
         data: {
           clientId: client.id,
+          name: `ClientProgram for ${client.id}`,
           programId: program.id,
           coachId: coach.id,
           startDate: new Date(),
@@ -51,6 +52,7 @@ export async function seedValidData(prisma: PrismaService) {
       // Create a TrainingBlock
       const trainingBlock = await prisma.trainingBlock.create({
         data: {
+          name: `Block 1 for ${client.id}`,
           description: `Block for ${client.id}`,
           programId: program.id,
           createdById: coach.userId,
@@ -61,6 +63,7 @@ export async function seedValidData(prisma: PrismaService) {
       for (let weekNum = 1; weekNum <= 4; weekNum++) {
         const trainingWeek = await prisma.trainingWeek.create({
           data: {
+            name: `Week ${weekNum} for ${client.id}`,
             number: weekNum,
             blockId: trainingBlock.id,
             createdById: coach.userId,
@@ -71,6 +74,7 @@ export async function seedValidData(prisma: PrismaService) {
         for (let t = 1; t <= 4; t++) {
           const training = await prisma.training.create({
             data: {
+              name: `Training ${t} for Week ${weekNum} - ${client.id}`,
               date: new Date(Date.now() + ((weekNum - 1) * 7 + t - 1) * 24 * 60 * 60 * 1000),
               weekId: trainingWeek.id,
               createdById: coach.userId,
