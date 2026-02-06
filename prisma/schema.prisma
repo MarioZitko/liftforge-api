@@ -217,6 +217,7 @@ model Program {
 
 model ClientProgram {
 id         Int      @id @default(autoincrement())
+name      String
 client     Client     @relation("ClientProgramClient",fields: [clientId], references: [id])
 clientId   String
 program    Program  @relation(fields: [programId], references: [id])
@@ -231,6 +232,7 @@ coach   Coach?   @relation("ClientProgramCoach",fields: [coachId], references: [
 
 model TrainingBlock {
   id          Int          @id @default(autoincrement())
+  name        String
   description String
   weeks       TrainingWeek[]
   program     Program?      @relation(fields: [programId], references: [id])
@@ -244,6 +246,7 @@ model TrainingBlock {
 
 model TrainingWeek {
   id         Int         @id @default(autoincrement())
+  name      String
   number     Int
   blockId    Int
   block      TrainingBlock @relation(fields: [blockId], references: [id])
@@ -257,6 +260,7 @@ model TrainingWeek {
 
 model Training {
   id                Int               @id @default(autoincrement())
+  name              String
   date              DateTime
   weekId            Int
   week              TrainingWeek      @relation(fields: [weekId], references: [id])
