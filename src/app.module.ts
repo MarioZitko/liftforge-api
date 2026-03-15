@@ -7,6 +7,8 @@ import { AppService } from './app.service';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { ClsUserMiddleware } from './middleware/cls-user.middleware';
 import { AuthModule } from './modules/auth/auth.module';
+import { ClientProgramController } from './modules/client-program/client-program.controller';
+import { ClientProgramService } from './modules/client-program/client-program.service';
 import { ClientModule } from './modules/client/client.module';
 import { CoachModule } from './modules/coach/coach.module';
 import { ExerciseModule } from './modules/exercise/exercise.module';
@@ -57,6 +59,7 @@ import { PrismaModule } from './prisma/prisma.module';
   controllers: [
     AppController,
     ProgramController,
+    ClientProgramController,
     TrainingController,
     TrainingBlockController,
     TrainingWeekController,
@@ -65,6 +68,7 @@ import { PrismaModule } from './prisma/prisma.module';
   providers: [
     AppService,
     ProgramService,
+    ClientProgramService,
     TrainingService,
     TrainingBlockService,
     TrainingWeekService,

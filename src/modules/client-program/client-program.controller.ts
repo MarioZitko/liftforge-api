@@ -25,7 +25,7 @@ import { UpdateClientProgramDto } from './dto/update-client-program.dto';
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Roles(Role.COACH, Role.ADMIN)
-@Controller('ClientPrograms')
+@Controller('client-programs')
 export class ClientProgramController {
   constructor(private readonly service: ClientProgramService) {}
 
