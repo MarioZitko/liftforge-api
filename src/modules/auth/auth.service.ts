@@ -46,10 +46,9 @@ export class AuthService {
       await this.prisma.invitation.delete({ where: { token: inviteToken } });
     }
 
-    const hashedPassword = await bcrypt.hash(dto.password, 10);
     const user = await this.userService.create({
       email: dto.email,
-      password: hashedPassword,
+      password: dto.password,
       name: dto.name,
       role: dto.role ?? Role.CLIENT,
     });

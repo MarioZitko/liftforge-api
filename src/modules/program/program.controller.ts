@@ -55,8 +55,13 @@ export class ProgramController {
   }
 
   @Post()
-  async create(@Body() dto: CreateProgramDto) {
-    return this.service.create(dto);
+  async create(
+    @Body() dto: CreateProgramDto,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    console.log('[Program Create] full user object from @CurrentUser():', user);
+    console.log('[Program Create] user.userId value:', user?.userId);
+    return this.service.create(dto, user.userId!);
   }
 
   @Patch(':id')
