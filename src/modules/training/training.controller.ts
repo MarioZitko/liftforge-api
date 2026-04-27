@@ -1,34 +1,67 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Roles } from '@/modules/auth/decorators/roles.decorator';
+import { JwtAuthGuard } from '@/modules/auth/guards/jwt-auth.guard';
+import { RolesGuard } from '@/modules/auth/guards/roles.guard';
+import { CurrentUser } from '@/modules/auth/decorators/current-user.decorator';
+import { AuthenticatedRequest } from '@/modules/auth/interfaces/auth-request.interface';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { Role } from 'generated/prisma';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 import { TrainingService } from './training.service';
 
+@ApiTags('Trainings')
+@ApiBearerAuth()
+@UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('training')
 export class TrainingController {
-  constructor(private readonly trainingService: TrainingService) { }
+  constructor(private readonly service: TrainingService) {}
 
   @Post()
-  async create(@Body() createTrainingDto: CreateTrainingDto) {
-    return await this.trainingService.create(createTrainingDto);
+  @Roles(Role.COACH, Role.ADMIN)
+  create(
+    @Body() dto: CreateTrainingDto,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.create(dto, user.userId!);
   }
 
   @Get()
-  async findAll() {
-    return await this.trainingService.findAll();
+  @Roles(Role.COACH, Role.ADMIN, Role.CLIENT)
+  findAll(@Query('weekId') weekId?: string) {
+    if (weekId) return this.service.findByWeek(+weekId);
+    return [];
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.trainingService.findOne(id);
+  @Roles(Role.COACH, Role.ADMIN, Role.CLIENT)
+  findOne(@Param('id', ParseIntPipe) id: number) {
+    return this.service.findOne(id);
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() updateTrainingDto: UpdateTrainingDto) {
-    return await this.trainingService.update(id, updateTrainingDto);
+  @Roles(Role.COACH, Role.ADMIN)
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() dto: UpdateTrainingDto,
+  ) {
+    return this.service.update(id, dto);
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.trainingService.remove(id);
+  @Roles(Role.COACH, Role.ADMIN)
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.service.remove(id);
   }
 }

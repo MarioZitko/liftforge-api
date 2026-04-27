@@ -25,20 +25,21 @@ import { ProgramService } from './program.service';
 @ApiTags('Programs')
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
-@Roles(Role.COACH, Role.ADMIN)
 @Controller('programs')
 export class ProgramController {
   constructor(private readonly service: ProgramService) {}
 
   @Get()
+  @Roles(Role.COACH, Role.ADMIN)
   async findAll() {
     return this.service.findAll();
   }
 
   @Get('my')
+  @Roles(Role.COACH, Role.ADMIN)
   async getCoachPrograms(
     @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
-    @Query('onlyMine') onlyMine: string, // expects "true" or "false"
+    @Query('onlyMine') onlyMine: string,
   ) {
     const onlyMyPrograms = onlyMine === 'true';
     if (!user.userId) {
@@ -48,6 +49,7 @@ export class ProgramController {
   }
 
   @Get(':id')
+  @Roles(Role.COACH, Role.ADMIN, Role.CLIENT)
   async findOne(@Param('id') id: string) {
     const program = await this.service.findOne(+id);
     if (!program) throw new NotFoundException('Program not found');
@@ -55,21 +57,22 @@ export class ProgramController {
   }
 
   @Post()
+  @Roles(Role.COACH, Role.ADMIN)
   async create(
     @Body() dto: CreateProgramDto,
     @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
   ) {
-    console.log('[Program Create] full user object from @CurrentUser():', user);
-    console.log('[Program Create] user.userId value:', user?.userId);
     return this.service.create(dto, user.userId!);
   }
 
   @Patch(':id')
+  @Roles(Role.COACH, Role.ADMIN)
   async update(@Param('id') id: string, @Body() dto: UpdateProgramDto) {
     return this.service.update(+id, dto);
   }
 
   @Delete(':id')
+  @Roles(Role.COACH, Role.ADMIN)
   async delete(@Param('id') id: string) {
     return this.service.remove(+id);
   }
