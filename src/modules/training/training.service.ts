@@ -53,6 +53,12 @@ export class TrainingService {
         ...dto,
         ...(dto.date ? { date: new Date(dto.date) } : {}),
       },
+      include: {
+        trainingExercises: {
+          orderBy: { sortOrder: 'asc' },
+          include: { exercise: true },
+        },
+      },
     });
   }
 

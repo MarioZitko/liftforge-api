@@ -18,6 +18,7 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from 'generated/prisma';
 import { CreateTrainingExerciseDto } from './dto/create-training-exercise.dto';
+import { ReorderTrainingExercisesDto } from './dto/reorder-training-exercises.dto';
 import { UpdateTrainingExerciseDto } from './dto/update-training-exercise.dto';
 import { TrainingExerciseService } from './training-exercise.service';
 
@@ -52,8 +53,8 @@ export class TrainingExerciseController {
 
   @Patch('reorder')
   @Roles(Role.COACH, Role.ADMIN)
-  reorder(@Body() body: { trainingId: number; orderedIds: number[] }) {
-    return this.service.reorder(body.trainingId, body.orderedIds);
+  reorder(@Body() dto: ReorderTrainingExercisesDto) {
+    return this.service.reorder(dto.trainingId, dto.orderedIds);
   }
 
   @Patch(':id')
