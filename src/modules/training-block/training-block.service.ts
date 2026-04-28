@@ -29,6 +29,12 @@ export class TrainingBlockService {
           include: {
             trainings: {
               orderBy: { date: 'asc' },
+              include: {
+                trainingExercises: {
+                  orderBy: { sortOrder: 'asc' },
+                  include: { exercise: true, volume: true },
+                },
+              },
             },
           },
         },
