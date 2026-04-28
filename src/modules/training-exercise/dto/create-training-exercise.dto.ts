@@ -1,33 +1,58 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsInt, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateTrainingExerciseDto {
   @ApiProperty()
-  @IsString()
-  name!: string;
+  @IsInt()
+  trainingId!: number;
 
-  @ApiProperty({ required: false })
-  @IsOptional()
-  @IsString()
-  description?: string;
+  @ApiProperty()
+  @IsInt()
+  exerciseId!: number;
+
+  @ApiProperty()
+  @IsInt()
+  sortOrder!: number;
+
+  @ApiProperty()
+  @IsInt()
+  sets!: number;
+
+  @ApiProperty()
+  @IsInt()
+  reps!: number;
+
+  @ApiProperty()
+  @IsNumber()
+  weight!: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsNumber()
-  order?: number;
+  rpePlanned?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
+  @IsNumber()
+  rpeActual?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  intensity?: number;
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsNumber()
+  percentageOfMax?: number;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  trainingId?: string; // Assuming training is referenced by ID
+  note?: string;
 
   @ApiProperty({ required: false })
   @IsOptional()
   @IsString()
-  exerciseId?: string; // Assuming exercise is referenced by ID
+  videoUrl?: string;
 }

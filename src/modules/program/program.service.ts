@@ -7,9 +7,10 @@ import { UpdateProgramDto } from './dto/update-program.dto';
 export class ProgramService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(data: CreateProgramDto) {
+  async create(data: CreateProgramDto, userId: string) {
+    const { name, description, isPublic } = data;
     return this.prisma.program.create({
-      data,
+      data: { name, description, isPublic, createdById: userId },
     });
   }
 

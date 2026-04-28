@@ -1,54 +1,69 @@
+import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingDto } from './dto/create-training.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 
-export interface Training {
-  id: string;
-  name: string;
-  description?: string;
-  isActive?: boolean;
-  trainingBlockId?: string;
-  exerciseIds?: string[];
-}
-
 @Injectable()
 export class TrainingService {
-  private trainings: Training[] = [];
-  private idCounter = 1;
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createTrainingDto: CreateTrainingDto): Training {
-    const training: Training = {
-      id: String(this.idCounter++),
-      ...createTrainingDto,
-    };
-    this.trainings.push(training);
+  async create(dto: CreateTrainingDto, userId: string) {
+    return this.prisma.training.create({
+      data: {
+        name: dto.name,
+        date: new Date(dto.date),
+        weekId: dto.weekId,
+        createdById: userId,
+      },
+    });
+  }
+
+  async findByWeek(weekId: number) {
+    return this.prisma.training.findMany({
+      where: { weekId },
+      orderBy: { date: 'asc' },
+      include: {
+        trainingExercises: {
+          orderBy: { sortOrder: 'asc' },
+          include: { exercise: true },
+        },
+      },
+    });
+  }
+
+  async findOne(id: number) {
+    const training = await this.prisma.training.findUnique({
+      where: { id },
+      include: {
+        trainingExercises: {
+          orderBy: { sortOrder: 'asc' },
+          include: { exercise: true },
+        },
+      },
+    });
+    if (!training) throw new NotFoundException(`Training ${id} not found`);
     return training;
   }
 
-  findAll(): Training[] {
-    return this.trainings;
+  async update(id: number, dto: UpdateTrainingDto) {
+    await this.findOne(id);
+    return this.prisma.training.update({
+      where: { id },
+      data: {
+        ...dto,
+        ...(dto.date ? { date: new Date(dto.date) } : {}),
+      },
+      include: {
+        trainingExercises: {
+          orderBy: { sortOrder: 'asc' },
+          include: { exercise: true },
+        },
+      },
+    });
   }
 
-  findOne(id: string): Training {
-    const training = this.trainings.find(t => t.id === id);
-    if (!training) {
-      throw new NotFoundException(`Training with id ${id} not found`);
-    }
-    return training;
-  }
-
-  update(id: string, updateTrainingDto: UpdateTrainingDto): Training {
-    const training = this.findOne(id);
-    Object.assign(training, updateTrainingDto);
-    return training;
-  }
-
-  remove(id: string): { message: string } {
-    const index = this.trainings.findIndex(t => t.id === id);
-    if (index === -1) {
-      throw new NotFoundException(`Training with id ${id} not found`);
-    }
-    this.trainings.splice(index, 1);
-    return { message: `Training ${id} removed` };
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prisma.training.delete({ where: { id } });
   }
 }

@@ -1,51 +1,50 @@
+import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingWeekDto } from './dto/create-training-week.dto';
 import { UpdateTrainingWeekDto } from './dto/update-training-week.dto';
 
-export interface TrainingWeek {
-  id: string;
-  name: string;
-  description?: string;
-  order?: number;
-  isActive?: boolean;
-  trainingBlockId?: string;
-  trainingIds?: string[];
-}
-
 @Injectable()
 export class TrainingWeekService {
-  private trainingWeeks: TrainingWeek[] = [];
-  private idCounter = 1;
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createDto: CreateTrainingWeekDto): TrainingWeek {
-    const trainingWeek: TrainingWeek = {
-      id: String(this.idCounter++),
-      ...createDto,
-    };
-    this.trainingWeeks.push(trainingWeek);
-    return trainingWeek;
+  async create(dto: CreateTrainingWeekDto, userId: string) {
+    return this.prisma.trainingWeek.create({
+      data: {
+        name: dto.name,
+        number: dto.number,
+        blockId: dto.blockId,
+        createdById: userId,
+      },
+      include: { trainings: true },
+    });
   }
 
-  findAll(): TrainingWeek[] {
-    return this.trainingWeeks;
+  async findByBlock(blockId: number) {
+    return this.prisma.trainingWeek.findMany({
+      where: { blockId },
+      orderBy: { number: 'asc' },
+      include: {
+        trainings: { orderBy: { date: 'asc' } },
+      },
+    });
   }
 
-  findOne(id: string): TrainingWeek {
-    const week = this.trainingWeeks.find(tw => tw.id === id);
-    if (!week) throw new NotFoundException(`TrainingWeek with id ${id} not found`);
+  async findOne(id: number) {
+    const week = await this.prisma.trainingWeek.findUnique({
+      where: { id },
+      include: { trainings: true },
+    });
+    if (!week) throw new NotFoundException(`TrainingWeek ${id} not found`);
     return week;
   }
 
-  update(id: string, updateDto: UpdateTrainingWeekDto): TrainingWeek {
-    const week = this.findOne(id);
-    Object.assign(week, updateDto);
-    return week;
+  async update(id: number, dto: UpdateTrainingWeekDto) {
+    await this.findOne(id);
+    return this.prisma.trainingWeek.update({ where: { id }, data: dto });
   }
 
-  remove(id: string): { message: string } {
-    const idx = this.trainingWeeks.findIndex(tw => tw.id === id);
-    if (idx === -1) throw new NotFoundException(`TrainingWeek with id ${id} not found`);
-    this.trainingWeeks.splice(idx, 1);
-    return { message: `TrainingWeek ${id} removed` };
+  async remove(id: number) {
+    await this.findOne(id);
+    return this.prisma.trainingWeek.delete({ where: { id } });
   }
 }

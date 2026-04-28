@@ -42,6 +42,15 @@ export class ClientProgramController {
     return this.service.findForCoach(user.userId);
   }
 
+  @Get('for-me')
+  @Roles(Role.CLIENT, Role.COACH, Role.ADMIN)
+  async getMyClientPrograms(@CurrentUser() user: NonNullable<AuthenticatedRequest['user']>) {
+    if (!user.userId) {
+      throw new UnauthorizedException('Missing user ID in token.');
+    }
+    return this.service.findForClient(user.userId);
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const clientProgram = await this.service.findOne(+id);

@@ -10,6 +10,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ClientModule } from './modules/client/client.module';
 import { CoachModule } from './modules/coach/coach.module';
 import { ExerciseModule } from './modules/exercise/exercise.module';
+import { ClientProgramController } from './modules/client-program/client-program.controller';
+import { ClientProgramService } from './modules/client-program/client-program.service';
 import { ProgramController } from './modules/program/program.controller';
 import { ProgramService } from './modules/program/program.service';
 import { TrainingBlockController } from './modules/training-block/training-block.controller';
@@ -57,6 +59,7 @@ import { PrismaModule } from './prisma/prisma.module';
   controllers: [
     AppController,
     ProgramController,
+    ClientProgramController,
     TrainingController,
     TrainingBlockController,
     TrainingWeekController,
@@ -65,6 +68,7 @@ import { PrismaModule } from './prisma/prisma.module';
   providers: [
     AppService,
     ProgramService,
+    ClientProgramService,
     TrainingService,
     TrainingBlockService,
     TrainingWeekService,

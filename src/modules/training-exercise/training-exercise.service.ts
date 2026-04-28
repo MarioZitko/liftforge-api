@@ -1,51 +1,109 @@
+import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingExerciseDto } from './dto/create-training-exercise.dto';
 import { UpdateTrainingExerciseDto } from './dto/update-training-exercise.dto';
 
-export interface TrainingExercise {
-  id: string;
-  name: string;
-  description?: string;
-  order?: number;
-  isActive?: boolean;
-  trainingId?: string;
-  exerciseId?: string;
-}
-
 @Injectable()
 export class TrainingExerciseService {
-  private trainingExercises: TrainingExercise[] = [];
-  private idCounter = 1;
+  constructor(private readonly prisma: PrismaService) {}
 
-  create(createDto: CreateTrainingExerciseDto): TrainingExercise {
-    const trainingExercise: TrainingExercise = {
-      id: String(this.idCounter++),
-      ...createDto,
-    };
-    this.trainingExercises.push(trainingExercise);
-    return trainingExercise;
+  async create(dto: CreateTrainingExerciseDto, userId: string) {
+    return this.prisma.$transaction(async (tx) => {
+      const te = await tx.trainingExercise.create({
+        data: {
+          trainingId: dto.trainingId,
+          exerciseId: dto.exerciseId,
+          sortOrder: dto.sortOrder,
+          sets: dto.sets,
+          reps: dto.reps,
+          weight: dto.weight,
+          rpePlanned: dto.rpePlanned,
+          rpeActual: dto.rpeActual,
+          intensity: dto.intensity,
+          percentageOfMax: dto.percentageOfMax,
+          note: dto.note,
+          videoUrl: dto.videoUrl,
+          createdById: userId,
+        },
+        include: { exercise: true },
+      });
+
+      const vol = await tx.volume.create({
+        data: {
+          trainingExerciseId: te.id,
+          volumeTotal: dto.sets * dto.reps * dto.weight,
+          createdById: userId,
+        },
+      });
+
+      await tx.trainingExercise.update({
+        where: { id: te.id },
+        data: { volumeId: vol.id },
+      });
+
+      return { ...te, volume: vol };
+    });
   }
 
-  findAll(): TrainingExercise[] {
-    return this.trainingExercises;
+  async findByTraining(trainingId: number) {
+    return this.prisma.trainingExercise.findMany({
+      where: { trainingId },
+      orderBy: { sortOrder: 'asc' },
+      include: { exercise: true, volume: true },
+    });
   }
 
-  findOne(id: string): TrainingExercise {
-    const exercise = this.trainingExercises.find(te => te.id === id);
-    if (!exercise) throw new NotFoundException(`TrainingExercise with id ${id} not found`);
-    return exercise;
+  async findOne(id: number) {
+    const te = await this.prisma.trainingExercise.findUnique({
+      where: { id },
+      include: { exercise: true, volume: true },
+    });
+    if (!te) throw new NotFoundException(`TrainingExercise ${id} not found`);
+    return te;
   }
 
-  update(id: string, updateDto: UpdateTrainingExerciseDto): TrainingExercise {
-    const exercise = this.findOne(id);
-    Object.assign(exercise, updateDto);
-    return exercise;
+  async update(id: number, dto: UpdateTrainingExerciseDto) {
+    const existing = await this.findOne(id);
+
+    const updated = await this.prisma.trainingExercise.update({
+      where: { id },
+      data: dto,
+      include: { exercise: true, volume: true },
+    });
+
+    // Recompute volume if any of the three volume-affecting fields changed
+    const sets = dto.sets ?? existing.sets;
+    const reps = dto.reps ?? existing.reps;
+    const weight = dto.weight ?? existing.weight;
+    if (dto.sets !== undefined || dto.reps !== undefined || dto.weight !== undefined) {
+      if (existing.volumeId) {
+        await this.prisma.volume.update({
+          where: { id: existing.volumeId },
+          data: { volumeTotal: sets * reps * weight },
+        });
+      }
+    }
+
+    return updated;
   }
 
-  remove(id: string): { message: string } {
-    const idx = this.trainingExercises.findIndex(te => te.id === id);
-    if (idx === -1) throw new NotFoundException(`TrainingExercise with id ${id} not found`);
-    this.trainingExercises.splice(idx, 1);
-    return { message: `TrainingExercise ${id} removed` };
+  async reorder(trainingId: number, orderedIds: number[]) {
+    await Promise.all(
+      orderedIds.map((id, index) =>
+        this.prisma.trainingExercise.update({
+          where: { id },
+          data: { sortOrder: index },
+        }),
+      ),
+    );
+    return this.findByTraining(trainingId);
+  }
+
+  async remove(id: number) {
+    const te = await this.findOne(id);
+    if (te.volumeId) {
+      await this.prisma.volume.delete({ where: { id: te.volumeId } });
+    }
+    return this.prisma.trainingExercise.delete({ where: { id } });
   }
 }
