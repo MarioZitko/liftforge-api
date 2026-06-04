@@ -1,0 +1,56 @@
+services:
+  db:
+    image: postgres:16-alpine
+    env_file: .env.uat
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres-uat-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - liftforge-uat
+
+  api:
+    image: ghcr.io/mariozitko/liftforge-api:uat
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env.uat
+    environment:
+      NODE_ENV: uat
+      PORT: 3000
+    ports:
+      - "3002:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - liftforge-uat
+
+  web:
+    image: ghcr.io/mariozitko/liftforge-web:uat
+    build:
+      context: ../liftforge-web
+      dockerfile: Dockerfile
+      args:
+        VITE_API_BASE_URL: https://api.uat.liftforge.xyz
+    ports:
+      - "4002:80"
+    restart: unless-stopped
+    networks:
+      - liftforge-uat
+
+volumes:
+  postgres-uat-data:
+
+networks:
+  liftforge-uat:
+    driver: bridge
