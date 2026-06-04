@@ -44,7 +44,18 @@ export class TrainingWeekService {
   }
 
   async remove(id: number) {
-    await this.findOne(id);
+    const week = await this.prisma.trainingWeek.findUnique({
+      where: { id },
+      include: { trainings: { include: { trainingExercises: true } } },
+    });
+    if (!week) throw new NotFoundException(`TrainingWeek ${id} not found`);
+
+    const trainingIds = week.trainings.map((t) => t.id);
+    const teIds = week.trainings.flatMap((t) => t.trainingExercises.map((te) => te.id));
+
+    await this.prisma.volume.deleteMany({ where: { trainingExerciseId: { in: teIds } } });
+    await this.prisma.trainingExercise.deleteMany({ where: { trainingId: { in: trainingIds } } });
+    await this.prisma.training.deleteMany({ where: { weekId: id } });
     return this.prisma.trainingWeek.delete({ where: { id } });
   }
 }

@@ -24,6 +24,7 @@ export class TrainingExerciseService {
           note: dto.note,
           videoUrl: dto.videoUrl,
           createdById: userId,
+          volumeId: 0, // will be set in the next step
         },
         include: { exercise: true },
       });
