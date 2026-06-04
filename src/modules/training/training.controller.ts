@@ -18,6 +18,8 @@ import {
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Role } from 'generated/prisma';
 import { CreateTrainingDto } from './dto/create-training.dto';
+import { ScheduleProgramDto } from './dto/schedule-program.dto';
+import { TrainingCalendarItemDto } from './dto/training-calendar-item.dto';
 import { UpdateTrainingDto } from './dto/update-training.dto';
 import { TrainingService } from './training.service';
 
@@ -35,6 +37,32 @@ export class TrainingController {
     @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
   ) {
     return this.service.create(dto, user.userId!);
+  }
+
+  @Post('schedule-program')
+  @Roles(Role.COACH, Role.ADMIN)
+  scheduleProgram(@Body() dto: ScheduleProgramDto) {
+    return this.service.scheduleProgram(dto);
+  }
+
+  @Get('calendar')
+  @Roles(Role.COACH, Role.ADMIN)
+  getCoachCalendar(
+    @Query('dateFrom') dateFrom: string,
+    @Query('dateTo') dateTo: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ): Promise<TrainingCalendarItemDto[]> {
+    return this.service.findForCoachCalendar(user.userId!, dateFrom, dateTo);
+  }
+
+  @Get('my-calendar')
+  @Roles(Role.CLIENT)
+  getClientCalendar(
+    @Query('dateFrom') dateFrom: string,
+    @Query('dateTo') dateTo: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ): Promise<TrainingCalendarItemDto[]> {
+    return this.service.findForClientCalendar(user.userId!, dateFrom, dateTo);
   }
 
   @Get()
