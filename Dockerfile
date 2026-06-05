@@ -28,7 +28,7 @@ ENV NODE_ENV=production
 # We need all deps (including devDeps) because prisma CLI is in devDependencies
 # and is required by the entrypoint to run `prisma migrate deploy`.
 COPY package*.json ./
-RUN npm ci --ignore-scripts
+RUN npm pkg delete scripts.postinstall && npm ci
 
 # Copy compiled application
 COPY --from=builder /app/dist ./dist
