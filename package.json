@@ -25,7 +25,6 @@
     "prisma:migrate": "npm run prisma:migrate:dev",
     "prisma:migrate:dev": "dotenv -e .env.development -- prisma migrate dev",
     "migrate": "npm run prisma:migrate",
-    "postinstall": "npm run prisma:generate",
     "seed": "npm run prisma:generate && dotenv -e .env.development -- ts-node src/seed/seed.ts",
     "seed:staging": "npm run prisma:generate && dotenv -e .env.staging -- ts-node src/seed/seed.ts",
     "seed:prod": "npm run prisma:generate && dotenv -e .env.production -- ts-node src/seed/seed.ts"
