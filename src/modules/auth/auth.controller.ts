@@ -24,6 +24,7 @@ import { ResetPasswordDto } from './dto/reset-password.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
 import { AuthenticatedRequest } from './interfaces/auth-request.interface';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
