@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install dependencies (including devDeps needed for build)
 COPY package*.json ./
-RUN npm ci
+RUN npm pkg delete scripts.postinstall && npm ci
 
 # Copy source
 COPY . .
