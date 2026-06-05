@@ -5,7 +5,7 @@ WORKDIR /app
 
 # Install dependencies (including devDeps needed for build)
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --ignore-scripts
+RUN yarn install --frozen-lockfile
 
 # Copy source
 COPY . .
@@ -28,7 +28,7 @@ ENV NODE_ENV=production
 # We need all deps (including devDeps) because prisma CLI is in devDependencies
 # and is required by the entrypoint to run `prisma migrate deploy`.
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile --ignore-scripts
+RUN yarn install --frozen-lockfile
 
 # Copy compiled application
 COPY --from=builder /app/dist ./dist
