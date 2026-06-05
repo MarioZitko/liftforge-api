@@ -4,8 +4,8 @@ FROM node:24-alpine AS builder
 WORKDIR /app
 
 # Install dependencies (including devDeps needed for build)
-COPY package*.json ./
-RUN npm pkg delete scripts.postinstall && npm ci
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --ignore-scripts
 
 # Copy source
 COPY . .
@@ -27,8 +27,8 @@ ENV NODE_ENV=production
 # is skipped — we copy the pre-built client from the builder stage instead.
 # We need all deps (including devDeps) because prisma CLI is in devDependencies
 # and is required by the entrypoint to run `prisma migrate deploy`.
-COPY package*.json ./
-RUN npm pkg delete scripts.postinstall && npm ci
+COPY package.json yarn.lock ./
+RUN yarn install --frozen-lockfile --ignore-scripts
 
 # Copy compiled application
 COPY --from=builder /app/dist ./dist
