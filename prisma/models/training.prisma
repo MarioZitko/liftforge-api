@@ -1,7 +1,79 @@
+model Client {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @unique
+
+  // Example: extra fields for Client
+  dateOfBirth DateTime?
+  lookingForCoach Boolean @default(true)
+  // Add more client-specific fields here
+
+  // Relation to ClientPrograms
+  clientPrograms ClientProgram[] @relation("ClientProgramClient")
+  bio String?
+
+  // Relation to Coach (optional, if you want to link to a coach)
+  coachId String?
+  coach   Coach?   @relation(fields: [coachId], references: [id])
+}
+
+model Coach {
+  id        String   @id @default(uuid())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String   @unique
+
+  // Example: extra fields for Coach
+  certification String?
+  // Add more coach-specific fields here
+  lookingForClients Boolean @default(true)
+  bio String?
+
+  // Relation to Clients
+  clients Client[]
+
+  // Relation to ClientPrograms (all programs managed by this coach)
+  clientPrograms ClientProgram[] @relation("ClientProgramCoach")
+
+  invitations Invitation[]
+}
+
+model Program {
+  id          Int           @id @default(autoincrement())
+  name        String
+  description String?
+  isPublic    Boolean       @default(false) // optional: allow sharing
+  clientProgram ClientProgram? 
+  trainingBlocks TrainingBlock[]
+
+  createdBy   User?         @relation("ProgramCreatedBy", fields: [createdById], references: [id])
+  createdById String?
+  updatedBy   User?         @relation("ProgramUpdatedBy", fields: [updatedById], references: [id])
+  updatedById String?
+
+}
+
+model ClientProgram {
+id         Int      @id @default(autoincrement())
+name      String
+client     Client     @relation("ClientProgramClient",fields: [clientId], references: [id])
+clientId   String
+program    Program  @relation(fields: [programId], references: [id])
+programId  Int @unique
+startDate  DateTime
+endDate DateTime
+status     String   // "active", "completed", "draft", etc.
+
+coachId String?
+coach   Coach?   @relation("ClientProgramCoach",fields: [coachId], references: [id])
+}
+
 model TrainingBlock {
   id          Int          @id @default(autoincrement())
+  name        String
   description String
   weeks       TrainingWeek[]
+  program     Program?      @relation(fields: [programId], references: [id])
+  programId   Int?
 
   createdBy   User?   @relation("TrainingBlockCreatedBy", fields: [createdById], references: [id])
   createdById String?
@@ -11,6 +83,7 @@ model TrainingBlock {
 
 model TrainingWeek {
   id         Int         @id @default(autoincrement())
+  name      String
   number     Int
   blockId    Int
   block      TrainingBlock @relation(fields: [blockId], references: [id])
@@ -24,6 +97,7 @@ model TrainingWeek {
 
 model Training {
   id                Int               @id @default(autoincrement())
+  name              String
   date              DateTime
   weekId            Int
   week              TrainingWeek      @relation(fields: [weekId], references: [id])
@@ -48,9 +122,12 @@ model TrainingExercise {
   estimated1RM     Float?
   intensity        Float?
   percentageOfMax  Float?
-  volume           Float?
   note             String?
   videoUrl         String?
+  volumeId    Int     @unique
+
+  volume Volume? @relation("TrainingExerciseVolume")
+
 
   training         Training  @relation(fields: [trainingId], references: [id])
   exercise         Exercise  @relation("TrainingExerciseToExercise", fields: [exerciseId], references: [id])
@@ -66,9 +143,9 @@ model Exercise {
   name        String
   description String?
   tutorialUrl String?
-  volumeId    Int     @unique
-
-  volume Volume? @relation("ExerciseVolume")
+  
+  primaryMuscles   String[]
+  secondaryMuscles String[]
 
   trainingExercises TrainingExercise[] @relation("TrainingExerciseToExercise")
 
@@ -80,9 +157,9 @@ model Exercise {
 
 model Volume {
   id         Int      @id @default(autoincrement())
-  exerciseId Int      @unique
+  trainingExerciseId Int      @unique
 
-  exercise   Exercise? @relation("ExerciseVolume", fields: [exerciseId], references: [id])
+  trainingExercise   TrainingExercise? @relation("TrainingExerciseVolume", fields: [trainingExerciseId], references: [id])
 
   volumeTotal Float
 

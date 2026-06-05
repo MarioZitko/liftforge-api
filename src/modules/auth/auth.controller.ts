@@ -1,6 +1,19 @@
-import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
-import { ApiBearerAuth } from '@nestjs/swagger';
+// src/modules/auth/auth.controller.ts
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Req,
+  Res,
+  UnauthorizedException,
+  UseGuards,
+  Query,
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { Throttle } from '@nestjs/throttler';
+import { Response, Request } from 'express';
+import { Role } from 'generated/prisma/client';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { LoginDto } from './dto/login.dto';
@@ -10,6 +23,7 @@ import { RequestPasswordResetDto } from './dto/request-password-reset.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { VerifyEmailDto } from './dto/verify-email.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
+import { AuthenticatedRequest } from './interfaces/auth-request.interface';
 
 @Controller('auth')
 @Throttle({ default: { limit: 5, ttl: 60 } })
@@ -17,21 +31,21 @@ export class AuthController {
   constructor(private authService: AuthService) {}
 
   @Post('register')
-  async register(@Body() dto: RegisterDto, @CurrentUser() user?: { userId: string }) {
-    return this.authService.register(dto);
+  async register(@Body() dto: RegisterDto, @Query('inviteToken') inviteToken?: string) {
+    return this.authService.register(dto, inviteToken);
   }
 
   @Post('login')
-  async login(@Body() dto: LoginDto) {
-    return this.authService.login(dto);
+  async login(@Body() dto: LoginDto, @Res({ passthrough: true }) res: Response) {
+    return this.authService.login(dto, res);
   }
 
   @Post('refresh')
-  async refreshToken(
-    @Body() body: { email: string; refreshToken: string },
-  ): Promise<{ accessToken: string }> {
-    const user = await this.authService.validateRefreshToken(body.email, body.refreshToken);
-    return { accessToken: await this.authService.generateToken(user) };
+  async refreshToken(@Req() req: Request, @Res({ passthrough: true }) res: Response) {
+    const refreshToken = req.cookies['refreshToken'];
+    if (!refreshToken) throw new UnauthorizedException('No refresh token in cookies');
+
+    return this.authService.refreshTokens(res, refreshToken);
   }
 
   @ApiBearerAuth()
@@ -47,7 +61,6 @@ export class AuthController {
   }
 
   @Post('reset-password')
-  @UseGuards(JwtAuthGuard) // Optional: allow logged-in users to reset password
   async resetPassword(@Body() dto: ResetPasswordDto, @CurrentUser() user?: { userId: string }) {
     return this.authService.resetPassword(dto.token, dto.newPassword, user?.userId);
   }
@@ -60,5 +73,45 @@ export class AuthController {
   @Post('verify-email')
   async verifyEmail(@Body() dto: VerifyEmailDto) {
     return this.authService.verifyEmail(dto.token);
+  }
+
+  @Post('logout')
+  logout(@Res({ passthrough: true }) res: Response) {
+    res.clearCookie('token');
+    res.clearCookie('refreshToken');
+    return { message: 'Logged out' };
+  }
+
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  googleLogin() {
+    // handled by passport
+  }
+
+  @Get('google/redirect')
+  @UseGuards(AuthGuard('google'))
+  async googleRedirect(@Req() req: AuthenticatedRequest, @Res() res: Response) {
+    return this.authService.handleOAuthRedirect(req, res);
+  }
+
+  @Get('facebook')
+  @UseGuards(AuthGuard('facebook'))
+  facebookLogin() {
+    // Passport handles the redirect to Facebook
+  }
+
+  @Get('facebook/redirect')
+  @UseGuards(AuthGuard('facebook'))
+  async facebookRedirect(@Req() req: AuthenticatedRequest, @Res() res: Response) {
+    return this.authService.handleOAuthRedirect(req, res);
+  }
+
+  @Post('oauth-finalize')
+  async finalizeOAuth(
+    @Res({ passthrough: true }) res: Response,
+    @Body() dto: { name: string; role: Role },
+    @Req() req: AuthenticatedRequest,
+  ) {
+    return this.authService.finalizeOAuth(req, res, dto.role, dto.name);
   }
 }

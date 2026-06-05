@@ -1,19 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { Resend } from 'resend';
 import { ConfigService } from '@nestjs/config';
-import { getVerificationEmailHtml } from './templates/verification-email.template';
+import { Resend } from 'resend';
+import { getCoachAssignmentNotificationHtml } from './templates/coach-assignment-notification';
+import { getInvitationEmailHtml } from './templates/invitation-email.template';
 import { getPasswordResetEmailHtml } from './templates/password-reset-email.template';
+import { getVerificationEmailHtml } from './templates/verification-email.template';
 
 @Injectable()
 export class EmailService {
   private resend: Resend;
+  private frontendUrl: string;
 
   constructor(private config: ConfigService) {
     this.resend = new Resend(this.config.get<string>('RESEND_API_KEY'));
+    this.frontendUrl = this.config.get<string>('FRONTEND_URL') ?? 'http://localhost:5173';
   }
 
   async sendVerificationEmail(to: string, token: string) {
-    const url = `https://your-frontend.com/verify-email?token=${token}`;
+    const url = `${this.frontendUrl}/confirm-email?token=${token}`;
     const html = getVerificationEmailHtml(url);
 
     await this.resend.emails.send({
@@ -25,13 +29,37 @@ export class EmailService {
   }
 
   async sendPasswordResetEmail(to: string, token: string) {
-    const url = `https://your-frontend.com/reset-password?token=${token}`;
+    const url = `${this.frontendUrl}/reset-password?token=${token}`;
     const html = getPasswordResetEmailHtml(url);
 
     await this.resend.emails.send({
       from: 'LiftForge <onboarding@resend.dev>',
       to,
       subject: 'Reset Your Password – LiftForge',
+      html,
+    });
+  }
+
+  async sendInvitationEmail(to: string, token: string, coachName: string) {
+    const url = `${this.frontendUrl}/register?inviteToken=${token}&email=${to}`;
+    const html = getInvitationEmailHtml(url, coachName);
+
+    await this.resend.emails.send({
+      from: 'LiftForge <onboarding@resend.dev>',
+      to,
+      subject: `You're Invited to LiftForge by ${coachName}`,
+      html,
+    });
+  }
+
+  async sendCoachAssignmentNotification(to: string, coachName: string) {
+    const url = `${this.frontendUrl}/dashboard`; // Assuming a dashboard page for existing clients
+    const html = getCoachAssignmentNotificationHtml(url, coachName);
+
+    await this.resend.emails.send({
+      from: 'LiftForge <onboarding@resend.dev>',
+      to,
+      subject: `You have been assigned a coach on LiftForge – ${coachName}`,
       html,
     });
   }
