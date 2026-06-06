@@ -62,12 +62,13 @@ jobs:
         with:
           context: .
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ghcr.io/${{ steps.env.outputs.IMAGE_OWNER }}/liftforge-api:${{ steps.env.outputs.ENV }}
             ghcr.io/${{ steps.env.outputs.IMAGE_OWNER }}/liftforge-api:${{ github.sha }}
           # Layer cache stored in GitHub Actions cache — speeds up subsequent builds
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          cache-from: type=gha,scope=${{ github.ref_name }}-api
+          cache-to: type=gha,mode=max,scope=${{ github.ref_name }}-api
 
       # ── 4. Deploy to VPS ─────────────────────────────────────────────────────
       - name: Deploy to VPS
