@@ -13,6 +13,9 @@ jobs:
   build-and-deploy:
     name: Build & Deploy (${{ github.ref_name }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
 
     # Maps branch → GitHub Environment (lets you add protection rules / approvals in the repo settings)
     environment: ${{ github.ref_name == 'main' && 'production' || github.ref_name }}
