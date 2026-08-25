@@ -22,30 +22,22 @@ If you're touching any of the above, wrap them in `$transaction`. For new multi-
 "if step 2 fails after step 1 succeeded, is the DB now in a bad state?" — if yes, use
 `$transaction`.
 
-## Audit fields (`createdBy`/`updatedBy`) — know this is currently broken
+## Audit fields (`createdBy`/`updatedBy`)
 
-There's a Prisma Client Extension at `src/prisma/extensions/base-entity.extension.ts` that's
-*supposed* to auto-populate `createdById`/`updatedById` from CLS (`ClsService`) on every
-create/update. **It doesn't actually work**: `ClsUserMiddleware` runs as Express middleware
-(registered `forRoutes('*')` in `app.module.ts`), which executes *before* `JwtAuthGuard` in Nest's
-request lifecycle — so `req.user` (which the middleware reads to populate CLS) is undefined when
-the middleware runs. The extension is a silent no-op.
+There is no request-scoped/CLS mechanism for this (the CLS-based Prisma Client Extension that used
+to attempt it, `src/prisma/extensions/base-entity.extension.ts`, was removed in Issue 63 — it was a
+silent no-op because `ClsUserMiddleware` ran before `JwtAuthGuard` in Nest's request lifecycle, so
+`req.user` was always undefined when it tried to populate CLS).
 
-**In practice, every service that needs `createdById` takes an explicit `userId` parameter passed
-down from the controller's `@CurrentUser()`** — that's the pattern that's actually load-bearing,
-not the CLS extension. Follow it for new code: pass `userId` explicitly into service methods that
-need to stamp `createdById`, don't rely on the CLS extension populating it for you.
-
-**Known gap:** `update()` methods across `training`, `program`, `training-block`,
-`training-week`, `training-exercise` services take no `userId` parameter at all today, so
-`updatedById` is never actually populated on updates anywhere. If you're touching any `update()`
-method in these services, add the `userId` parameter and set `updatedById` explicitly — don't
-assume the extension will do it.
-
-Fixing the CLS wiring itself (so the extension actually works, e.g. by moving user-resolution
-earlier or having the extension read `AsyncLocalStorage` populated by a guard instead of
-middleware) is tracked as a real fix in [refactor-backlog.md](04-refactor-backlog.md) — it's a
-bigger, deliberate change, not something to patch inline while doing unrelated work.
+**Every service that needs `createdById`/`updatedById` takes an explicit `userId` (or the fuller
+`RequestingUser`, for services that also do ownership checks) parameter passed down from the
+controller's `@CurrentUser()`**, and stamps it directly on the Prisma `create`/`update` call. This
+is the only mechanism — follow it for any new `create()`/`update()` method that needs audit fields.
+`program`, `training`, `training-block`, `training-week`, `training-exercise` all do this correctly
+for both `create()` and `update()`; `exercise`, `client-program`, `user`, `client`, `coach` don't
+currently set these fields at all on create/update (they never did — the removed extension was
+non-functional for them same as everywhere else), which is a gap worth closing if you're touching
+those services, not something newly introduced by removing the extension.
 
 ## Auth-specific: refresh token lookup
 
