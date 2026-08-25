@@ -1,11 +1,9 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ClsModule } from 'nestjs-cls';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { ThrottlerModule } from '@nestjs/throttler';
-import { ClsUserMiddleware } from './middleware/cls-user.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { ClientModule } from './modules/client/client.module';
 import { CoachModule } from './modules/coach/coach.module';
@@ -26,12 +24,6 @@ import { UserModule } from './modules/user/user.module';
 import { PrismaModule } from './prisma/prisma.module';
 @Module({
   imports: [
-    // ✅ Add ClsModule globally
-    // This module is used for request-scoped storage, useful for storing user sessions
-    ClsModule.forRoot({
-      middleware: { mount: true },
-    }),
-
     // ✅ Add ConfigModule globally
     ConfigModule.forRoot({
       isGlobal: true,
@@ -75,8 +67,4 @@ import { PrismaModule } from './prisma/prisma.module';
     TrainingExerciseService,
   ],
 })
-export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ClsUserMiddleware).forRoutes('*'); // ✅ apply the middleware globally
-  }
-}
+export class AppModule {}

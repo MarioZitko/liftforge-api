@@ -21,15 +21,14 @@ is the "why we think this" narrative; that file is where to check status/DoD/dep
    `training-exercise`, `client-program` services to add `resource.coachId === userId` (or
    equivalent) checks.
 
-2. **CLS-based audit field extension (`src/prisma/extensions/base-entity.extension.ts`) is a
-   silent no-op.** `ClsUserMiddleware` runs before `JwtAuthGuard` in the request lifecycle, so
-   `req.user` is undefined when it tries to read it — meaning the documented "CLS auto-populates
-   createdBy/updatedBy" pattern in the root `CLAUDE.md` doesn't actually work. Services work around
-   this by threading `userId` through explicitly for creates, but **no `update()` method
-   anywhere populates `updatedById`** — it's simply never set on any update, across every module.
-   Fix options: move user-resolution earlier (a guard/interceptor that populates CLS before
-   services run, rather than middleware), or drop the CLS extension entirely and standardize on
-   explicit `userId` params for both create and update (already the de facto pattern for create).
+2. **~~CLS-based audit field extension is a silent no-op~~ — fixed in Issue 63.** The extension
+   (`src/prisma/extensions/base-entity.extension.ts`), `ClsUserMiddleware`, and all `nestjs-cls`
+   wiring were removed; `program`, `training`, `training-block`, `training-week`,
+   `training-exercise` now stamp `updatedById` explicitly in `update()`, matching the explicit-param
+   pattern already used for `create()`. See [coding-standards.md](01-coding-standards.md) for the
+   current pattern. Remaining gap (not this ticket's scope): `exercise`, `client-program`, `user`,
+   `client`, `coach` still don't set `createdById`/`updatedById` on create/update at all — same as
+   before, not a regression from the removal.
 
 3. **Jest suite is 100% broken beyond the placeholder root controller** — 20 of 21 spec suites
    fail (missing `@/` alias mapping in Jest config + specs that don't supply real/mocked

@@ -15,7 +15,6 @@ NestJS 11 REST API for LiftForge, a coaching platform that lets coaches create t
 | OAuth | Google and Facebook via passport-google-oauth20 / passport-facebook |
 | Email | Resend |
 | Rate limiting | @nestjs/throttler (10 req / 60s per IP) |
-| Request-scoped storage | nestjs-cls |
 | Validation | class-validator + class-transformer |
 | API docs | Swagger at `/api` |
 | Testing | Jest + Supertest |
@@ -26,8 +25,6 @@ NestJS 11 REST API for LiftForge, a coaching platform that lets coaches create t
 src/
   app.module.ts          # root module — imports all feature modules
   main.ts                # bootstrap: CORS, cookie-parser, global filters/interceptors, Swagger
-  middleware/
-    cls-user.middleware.ts  # stores userId in CLS after JWT auth
   common/
     filters/
       http-exception.filter.ts   # AllExceptionsFilter — catches everything, returns structured JSON
@@ -78,7 +75,7 @@ prisma/
 2. **Refresh** → `POST /auth/refresh` exchanges cookie for new access token
 3. **Guard** → `JwtAuthGuard` validates Bearer token on protected routes
 4. **Roles** → `RolesGuard` + `@Roles()` decorator enforces `CLIENT | COACH | ADMIN`
-5. **CLS** → `ClsUserMiddleware` stores `userId` from the JWT payload in CLS after Passport resolves it; services read `cls.get('userId')` for audit fields
+5. **Audit fields** → controllers pass `@CurrentUser()`'s `userId` explicitly into service methods, which stamp `createdById`/`updatedById` directly on the Prisma call — there is no request-scoped/CLS mechanism for this
 6. **OAuth** → Google and Facebook strategies redirect to `/auth/google` and `/auth/facebook`; callback at `/auth/google/callback` etc.
 7. **Email verification** — required before login is permitted; token stored in `VerificationToken`
 8. **Password reset** — token stored in `PasswordResetToken`, emailed via Resend
@@ -164,10 +161,17 @@ findAll() { ... }
 @CurrentUser() user: JwtPayload
 ```
 
-**Getting userId in a service (via CLS):**
+**Getting userId in a service (pass it in explicitly from the controller):**
 ```typescript
-constructor(private cls: ClsService) {}
-const userId = this.cls.get('userId');
+// controller
+create(@Body() dto: CreateProgramDto, @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>) {
+  return this.service.create(dto, user.userId!);
+}
+
+// service
+async create(data: CreateProgramDto, userId: string) {
+  return this.prisma.program.create({ data: { ...data, createdById: userId } });
+}
 ```
 
 **Standard DTO pattern:**

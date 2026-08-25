@@ -153,14 +153,35 @@ Pick one approach and record the decision:
 **(b) is recommended** — it matches what already works for `create()`, needs no lifecycle
 surgery, and is simpler to reason about than fixing Nest's middleware/guard ordering.
 
+**Decision: (b).** Matches `create()`'s existing pattern and needed no lifecycle surgery.
+Additionally:
+- The `update()` methods in all five services already take the `RequestingUser` param (added
+  incidentally by Issue 62's ownership work) and already stamp `updatedById: user.userId`
+  explicitly — that part of this ticket was effectively done by the time this was picked up.
+  Verified it's actually correct (see below), not just present.
+- `getUserIdFromContext`/CLS was confirmed dead for **every** model, not just the five services
+  in scope — `ClsUserMiddleware` never successfully populates CLS (the underlying timing bug),
+  so the extension's `create` hook was equally a no-op for `exercise`, `client-program`, `user`,
+  `client`, and `coach`, none of which set `createdById`/`updatedById` explicitly. Removing the
+  extension doesn't regress those modules; they get the same (already-broken) behavior as before.
+  Fixing audit-field coverage for those modules is out of scope here (not in "Files to touch").
+- Removed, not left partially dead: `base-entity.extension.ts` and `extensions/utils.ts` (deleted),
+  `extendedPrismaClient.ts` (deleted — `PrismaService` now extends `PrismaClient` directly),
+  `cls-user.middleware.ts` (deleted), and all `ClsModule`/`ClsService` wiring in `app.module.ts`
+  and `prisma.module.ts`. Confirmed via grep that nothing else in `src/` used CLS. Left the
+  `nestjs-cls` package in `package.json` uninstalled-but-unused rather than touching the
+  dependency tree — not in this ticket's file list.
+
 ### Definition of Done
 
-- [ ] Decision recorded (a or b) with reasoning.
-- [ ] Every `update()` method across the five services above sets `updatedById` correctly via the
+- [x] Decision recorded (a or b) with reasoning.
+- [x] Every `update()` method across the five services above sets `updatedById` correctly via the
   chosen mechanism.
-- [ ] Verified with a real update call that `updatedById` populates in the DB (not just that the
-  code compiles).
-- [ ] If (b): the now-dead `base-entity.extension.ts` (or the parts of it that only handled
+- [x] Verified with a real update call that `updatedById` populates in the DB (not just that the
+  code compiles) — booted the API against the local dev DB, registered+verified a coach, created
+  a `Program`, `PATCH`ed it, and confirmed `updatedById` populated with the coach's user id in the
+  response and DB.
+- [x] If (b): the now-dead `base-entity.extension.ts` (or the parts of it that only handled
   update) removed, not left as unreferenced dead code.
 
 ---
