@@ -1,3 +1,4 @@
+import { assertNoReparenting, assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingDto } from './dto/create-training.dto';
@@ -33,7 +34,7 @@ export class TrainingService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: RequestingUser) {
     const training = await this.prisma.training.findUnique({
       where: { id },
       include: {
@@ -41,19 +42,27 @@ export class TrainingService {
           orderBy: { sortOrder: 'asc' },
           include: { exercise: true },
         },
+        week: { select: { block: { select: { programId: true } } } },
       },
     });
     if (!training) throw new NotFoundException(`Training ${id} not found`);
+    await assertProgramAccess(
+      this.prisma,
+      { programId: training.week.block.programId, fallbackCreatedById: training.createdById },
+      user,
+    );
     return training;
   }
 
-  async update(id: number, dto: UpdateTrainingDto) {
-    await this.findOne(id);
+  async update(id: number, dto: UpdateTrainingDto, user: RequestingUser) {
+    const training = await this.findOne(id, user);
+    assertNoReparenting('weekId', dto.weekId, training.weekId, user);
     return this.prisma.training.update({
       where: { id },
       data: {
         ...dto,
         ...(dto.date ? { date: new Date(dto.date) } : {}),
+        updatedById: user.userId,
       },
       include: {
         trainingExercises: {
@@ -253,12 +262,20 @@ export class TrainingService {
     return dates;
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: RequestingUser) {
     const training = await this.prisma.training.findUnique({
       where: { id },
-      include: { trainingExercises: true },
+      include: {
+        trainingExercises: true,
+        week: { select: { block: { select: { programId: true } } } },
+      },
     });
     if (!training) throw new NotFoundException(`Training ${id} not found`);
+    await assertProgramAccess(
+      this.prisma,
+      { programId: training.week.block.programId, fallbackCreatedById: training.createdById },
+      user,
+    );
 
     const teIds = training.trainingExercises.map((te) => te.id);
     await this.prisma.volume.deleteMany({ where: { trainingExerciseId: { in: teIds } } });

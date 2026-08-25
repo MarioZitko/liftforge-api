@@ -1,3 +1,8 @@
+import {
+  assertClientProgramAccess,
+  assertNoReparenting,
+  RequestingUser,
+} from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClientProgramDto } from './dto/create-client-program.dto';
@@ -30,12 +35,13 @@ export class ClientProgramService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: RequestingUser) {
     const clientProgram = await this.prisma.clientProgram.findUnique({
       where: { id },
       include: clientProgramIncludes,
     });
     if (!clientProgram) throw new NotFoundException('Client Program not found');
+    await assertClientProgramAccess(this.prisma, clientProgram, user);
     return clientProgram;
   }
 
@@ -59,7 +65,13 @@ export class ClientProgramService {
     });
   }
 
-  async update(id: number, data: UpdateClientProgramDto) {
+  async update(id: number, data: UpdateClientProgramDto, user: RequestingUser) {
+    const existing = await this.prisma.clientProgram.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException('Client Program not found');
+    await assertClientProgramAccess(this.prisma, existing, user);
+    assertNoReparenting('clientId', data.clientId, existing.clientId, user);
+    assertNoReparenting('programId', data.programId, existing.programId, user);
+    assertNoReparenting('coachId', data.coachId, existing.coachId, user);
     return this.prisma.clientProgram.update({
       where: { id },
       data,
@@ -67,7 +79,10 @@ export class ClientProgramService {
     });
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: RequestingUser) {
+    const existing = await this.prisma.clientProgram.findUnique({ where: { id } });
+    if (!existing) throw new NotFoundException('Client Program not found');
+    await assertClientProgramAccess(this.prisma, existing, user);
     return this.prisma.clientProgram.delete({ where: { id } });
   }
 }

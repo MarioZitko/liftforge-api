@@ -1,3 +1,4 @@
+import { assertNoReparenting, assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingExerciseDto } from './dto/create-training-exercise.dto';
@@ -54,21 +55,31 @@ export class TrainingExerciseService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: RequestingUser) {
     const te = await this.prisma.trainingExercise.findUnique({
       where: { id },
-      include: { exercise: true, volume: true },
+      include: {
+        exercise: true,
+        volume: true,
+        training: { select: { week: { select: { block: { select: { programId: true } } } } } },
+      },
     });
     if (!te) throw new NotFoundException(`TrainingExercise ${id} not found`);
+    await assertProgramAccess(
+      this.prisma,
+      { programId: te.training.week.block.programId, fallbackCreatedById: te.createdById },
+      user,
+    );
     return te;
   }
 
-  async update(id: number, dto: UpdateTrainingExerciseDto) {
-    const existing = await this.findOne(id);
+  async update(id: number, dto: UpdateTrainingExerciseDto, user: RequestingUser) {
+    const existing = await this.findOne(id, user);
+    assertNoReparenting('trainingId', dto.trainingId, existing.trainingId, user);
 
     const updated = await this.prisma.trainingExercise.update({
       where: { id },
-      data: dto,
+      data: { ...dto, updatedById: user.userId },
       include: { exercise: true, volume: true },
     });
 
@@ -100,8 +111,8 @@ export class TrainingExerciseService {
     return this.findByTraining(trainingId);
   }
 
-  async remove(id: number) {
-    const te = await this.findOne(id);
+  async remove(id: number, user: RequestingUser) {
+    const te = await this.findOne(id, user);
     if (te.volumeId) {
       await this.prisma.volume.delete({ where: { id: te.volumeId } });
     }

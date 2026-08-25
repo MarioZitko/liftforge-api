@@ -1,3 +1,4 @@
+import { assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProgramDto } from './dto/create-program.dto';
@@ -20,9 +21,10 @@ export class ProgramService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: RequestingUser) {
     const program = await this.prisma.program.findUnique({ where: { id } });
     if (!program) throw new NotFoundException('Program not found');
+    await assertProgramAccess(this.prisma, { programId: program.id }, user);
     return program;
   }
 
@@ -37,14 +39,20 @@ export class ProgramService {
     });
   }
 
-  async update(id: number, data: UpdateProgramDto) {
+  async update(id: number, data: UpdateProgramDto, user: RequestingUser) {
+    const program = await this.prisma.program.findUnique({ where: { id } });
+    if (!program) throw new NotFoundException('Program not found');
+    await assertProgramAccess(this.prisma, { programId: program.id }, user);
     return this.prisma.program.update({
       where: { id },
-      data,
+      data: { ...data, updatedById: user.userId },
     });
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: RequestingUser) {
+    const program = await this.prisma.program.findUnique({ where: { id } });
+    if (!program) throw new NotFoundException('Program not found');
+    await assertProgramAccess(this.prisma, { programId: program.id }, user);
     return this.prisma.program.delete({ where: { id } });
   }
 }
