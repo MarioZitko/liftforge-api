@@ -50,8 +50,11 @@ export class ProgramController {
 
   @Get(':id')
   @Roles(Role.COACH, Role.ADMIN, Role.CLIENT)
-  async findOne(@Param('id') id: string) {
-    const program = await this.service.findOne(+id);
+  async findOne(
+    @Param('id') id: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    const program = await this.service.findOne(+id, { userId: user.userId!, role: user.role! });
     if (!program) throw new NotFoundException('Program not found');
     return program;
   }
@@ -67,13 +70,20 @@ export class ProgramController {
 
   @Patch(':id')
   @Roles(Role.COACH, Role.ADMIN)
-  async update(@Param('id') id: string, @Body() dto: UpdateProgramDto) {
-    return this.service.update(+id, dto);
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateProgramDto,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.update(+id, dto, { userId: user.userId!, role: user.role! });
   }
 
   @Delete(':id')
   @Roles(Role.COACH, Role.ADMIN)
-  async delete(@Param('id') id: string) {
-    return this.service.remove(+id);
+  async delete(
+    @Param('id') id: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.remove(+id, { userId: user.userId!, role: user.role! });
   }
 }

@@ -52,8 +52,14 @@ export class ClientProgramController {
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const clientProgram = await this.service.findOne(+id);
+  async findOne(
+    @Param('id') id: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    const clientProgram = await this.service.findOne(+id, {
+      userId: user.userId!,
+      role: user.role!,
+    });
     if (!clientProgram) throw new NotFoundException('ClientProgram not found');
     return clientProgram;
   }
@@ -64,12 +70,19 @@ export class ClientProgramController {
   }
 
   @Patch(':id')
-  async update(@Param('id') id: string, @Body() dto: UpdateClientProgramDto) {
-    return this.service.update(+id, dto);
+  async update(
+    @Param('id') id: string,
+    @Body() dto: UpdateClientProgramDto,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.update(+id, dto, { userId: user.userId!, role: user.role! });
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: string) {
-    return this.service.remove(+id);
+  async delete(
+    @Param('id') id: string,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.remove(+id, { userId: user.userId!, role: user.role! });
   }
 }

@@ -47,8 +47,11 @@ export class TrainingExerciseController {
 
   @Get(':id')
   @Roles(Role.COACH, Role.ADMIN, Role.CLIENT)
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.service.findOne(id);
+  findOne(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.findOne(id, { userId: user.userId!, role: user.role! });
   }
 
   @Patch('reorder')
@@ -62,13 +65,17 @@ export class TrainingExerciseController {
   update(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: UpdateTrainingExerciseDto,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
   ) {
-    return this.service.update(id, dto);
+    return this.service.update(id, dto, { userId: user.userId!, role: user.role! });
   }
 
   @Delete(':id')
   @Roles(Role.COACH, Role.ADMIN)
-  remove(@Param('id', ParseIntPipe) id: number) {
-    return this.service.remove(id);
+  remove(
+    @Param('id', ParseIntPipe) id: number,
+    @CurrentUser() user: NonNullable<AuthenticatedRequest['user']>,
+  ) {
+    return this.service.remove(id, { userId: user.userId!, role: user.role! });
   }
 }

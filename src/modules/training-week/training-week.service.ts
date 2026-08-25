@@ -1,3 +1,4 @@
+import { assertNoReparenting, assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingWeekDto } from './dto/create-training-week.dto';
@@ -29,26 +30,43 @@ export class TrainingWeekService {
     });
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user: RequestingUser) {
     const week = await this.prisma.trainingWeek.findUnique({
       where: { id },
-      include: { trainings: true },
+      include: { trainings: true, block: { select: { programId: true } } },
     });
     if (!week) throw new NotFoundException(`TrainingWeek ${id} not found`);
+    await assertProgramAccess(
+      this.prisma,
+      { programId: week.block.programId, fallbackCreatedById: week.createdById },
+      user,
+    );
     return week;
   }
 
-  async update(id: number, dto: UpdateTrainingWeekDto) {
-    await this.findOne(id);
-    return this.prisma.trainingWeek.update({ where: { id }, data: dto });
+  async update(id: number, dto: UpdateTrainingWeekDto, user: RequestingUser) {
+    const week = await this.findOne(id, user);
+    assertNoReparenting('blockId', dto.blockId, week.blockId, user);
+    return this.prisma.trainingWeek.update({
+      where: { id },
+      data: { ...dto, updatedById: user.userId },
+    });
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: RequestingUser) {
     const week = await this.prisma.trainingWeek.findUnique({
       where: { id },
-      include: { trainings: { include: { trainingExercises: true } } },
+      include: {
+        trainings: { include: { trainingExercises: true } },
+        block: { select: { programId: true } },
+      },
     });
     if (!week) throw new NotFoundException(`TrainingWeek ${id} not found`);
+    await assertProgramAccess(
+      this.prisma,
+      { programId: week.block.programId, fallbackCreatedById: week.createdById },
+      user,
+    );
 
     const trainingIds = week.trainings.map((t) => t.id);
     const teIds = week.trainings.flatMap((t) => t.trainingExercises.map((te) => te.id));

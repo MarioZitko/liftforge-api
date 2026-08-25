@@ -196,3 +196,18 @@ The API runs as a Docker container alongside a PostgreSQL container and an nginx
 - Run `prisma migrate deploy` (not `migrate dev`) on container startup in production
 - Read env vars from Docker secrets or an env file mounted at runtime
 - The built output is `dist/main.js`; production start command is `node dist/main`
+
+## Detailed guides
+
+Deeper reference material lives in [`.claude/docs/`](.claude/docs/README.md) (index there). These
+are loaded automatically as part of this file's context — read them, don't just skim the headings:
+
+@.claude/docs/01-coding-standards.md
+@.claude/docs/02-modules-and-dtos.md
+@.claude/docs/03-testing.md
+@.claude/docs/04-refactor-backlog.md
+
+## Ticket structure
+
+Feature/fix work is tracked as tickets under [`docs/`](docs/README.md) (`docs/phase-N-tickets.md`),
+following a fixed convention — see [`docs/README.md`](docs/README.md).
