@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
 import { Response } from 'express';
-import { Role } from 'generated/prisma/client';
+import { Role, User } from 'generated/prisma/client';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { setAuthCookies } from './helpers/set-auth-cookies';
@@ -110,14 +110,17 @@ export class AuthService {
     return user;
   }
 
-  private async generateRefreshToken(user: any): Promise<string> {
-    const rawToken = randomUUID();
-    const hashed = await bcrypt.hash(rawToken, 10);
+  private async generateRefreshToken(user: User): Promise<string> {
+    const lookupId = randomUUID();
+    const secret = randomUUID();
+    const hashed = await bcrypt.hash(secret, 10);
+
     await this.prisma.user.update({
       where: { id: user.id },
-      data: { hashedRefreshToken: hashed },
+      data: { hashedRefreshToken: hashed, refreshTokenId: lookupId },
     });
-    return rawToken;
+
+    return `${lookupId}.${secret}`;
   }
 
   async requestEmailVerification(email: string) {
@@ -186,45 +189,33 @@ export class AuthService {
   }
 
   async refreshTokens(res: Response, refreshToken: string): Promise<{ message: string }> {
-    const users = await this.prisma.user.findMany({
-      where: { hashedRefreshToken: { not: null } },
-    });
+    const user = await this.getUserFromRefreshToken(refreshToken);
 
-    for (const user of users) {
-      if (!user.hashedRefreshToken) continue;
-
-      const isValid = await bcrypt.compare(refreshToken, user.hashedRefreshToken);
-      if (isValid) {
-        const accessToken = await this.generateToken(user);
-        const newRefreshToken = await this.generateRefreshToken(user);
-        setAuthCookies(res, accessToken, newRefreshToken);
-        return { message: 'Token refreshed' };
-      }
-    }
-
-    throw new UnauthorizedException('Invalid refresh token');
+    const accessToken = await this.generateToken(user);
+    const newRefreshToken = await this.generateRefreshToken(user);
+    setAuthCookies(res, accessToken, newRefreshToken);
+    return { message: 'Token refreshed' };
   }
 
-  private async generateToken(user: any): Promise<string> {
+  private async generateToken(user: User): Promise<string> {
     return this.jwtService.signAsync(
       { sub: user.id, email: user.email, role: user.role },
       { expiresIn: '15m' },
     );
   }
 
-  async getUserFromRefreshToken(token: string) {
-    const users = await this.prisma.user.findMany({
-      where: { hashedRefreshToken: { not: null } },
-    });
-
-    for (const user of users) {
-      if (!user.hashedRefreshToken) continue;
-
-      const isValid = await bcrypt.compare(token, user.hashedRefreshToken);
-      if (isValid) return user;
+  async getUserFromRefreshToken(token: string): Promise<User> {
+    const [lookupId, secret] = token.split('.');
+    if (!lookupId || !secret) {
+      throw new UnauthorizedException('Invalid refresh token');
     }
 
-    throw new UnauthorizedException('User not found for refresh token');
+    const user = await this.prisma.user.findUnique({ where: { refreshTokenId: lookupId } });
+    if (!user?.hashedRefreshToken || !(await bcrypt.compare(secret, user.hashedRefreshToken))) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
+
+    return user;
   }
 
   async handleOAuthRedirect(req: AuthenticatedRequest, res: Response) {
