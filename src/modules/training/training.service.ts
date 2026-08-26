@@ -1,4 +1,8 @@
-import { assertNoReparenting, assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
+import {
+  assertNoReparenting,
+  assertProgramAccess,
+  RequestingUser,
+} from '@/common/auth/ownership.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingDto } from './dto/create-training.dto';

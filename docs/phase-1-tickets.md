@@ -244,10 +244,12 @@ so ESLint 9's flat config actually matches source files.
 
 ### Definition of Done
 
-- [ ] `npm run lint` completes (exits 0, or reports real findings — not a config error).
-- [ ] Whatever real lint findings this surfaces are triaged: either fixed here, or explicitly
+- [x] `npm run lint` completes (exits 0, or reports real findings — not a config error).
+- [x] Whatever real lint findings this surfaces are triaged: either fixed here, or explicitly
   listed and deferred to a follow-up ticket — don't let a newly-revealed backlog get silently
-  ignored just because it wasn't visible before.
+  ignored just because it wasn't visible before. (All findings were Prettier-fixable formatting
+  issues — trailing commas, quote style, missing final newlines — across 18 files; `--fix` resolved
+  them all, no remaining errors/warnings.)
 
 ---
 

@@ -10,7 +10,10 @@ export class ScheduleProgramDto {
   @IsDateString()
   startDate!: string;
 
-  @ApiProperty({ type: [Number], description: 'Day-of-week indices to train on (0=Sun, 1=Mon, ..., 6=Sat)' })
+  @ApiProperty({
+    type: [Number],
+    description: 'Day-of-week indices to train on (0=Sun, 1=Mon, ..., 6=Sat)',
+  })
   @IsArray()
   @IsInt({ each: true })
   @Min(0, { each: true })
