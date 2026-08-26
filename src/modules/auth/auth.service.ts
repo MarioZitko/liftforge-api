@@ -75,7 +75,7 @@ export class AuthService {
 
   async loginOAuthUser(profile: { email: string; name?: string }, res: Response) {
     const email = profile.email;
-    let user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
       // ⚠️ Do NOT create yet — wait for frontend to call /auth/oauth-finalize
@@ -179,7 +179,7 @@ export class AuthService {
     const hashed = await bcrypt.hash(newPassword, 10);
     await this.prisma.user.update({
       where: { id: record.userId },
-      data: { password: hashed },
+      data: { password: hashed, updatedById: modifierUserId },
     });
 
     await this.prisma.passwordResetToken.delete({ where: { token } });
@@ -232,8 +232,8 @@ export class AuthService {
       return res.status(400).send('OAuth user info not found');
     }
 
-    const { email, name } = req.user;
-    let user = await this.prisma.user.findUnique({ where: { email } });
+    const { email } = req.user;
+    const user = await this.prisma.user.findUnique({ where: { email } });
 
     if (!user) {
       res.cookie('pending_oauth_email', email, {

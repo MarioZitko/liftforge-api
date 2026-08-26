@@ -1,7 +1,4 @@
 import { PrismaService } from '@/prisma/prisma.service';
-import { PrismaClient } from '../../../generated/prisma';
-
-const prisma = new PrismaClient();
 
 export async function seedValidData(prisma: PrismaService) {
   const coaches = await prisma.coach.findMany();
@@ -37,7 +34,7 @@ export async function seedValidData(prisma: PrismaService) {
       });
 
       // Create a ClientProgram linking client, coach, and program
-      const clientProgram = await prisma.clientProgram.create({
+      await prisma.clientProgram.create({
         data: {
           clientId: client.id,
           name: `ClientProgram for ${client.id}`,

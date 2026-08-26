@@ -13,11 +13,15 @@ export default tseslint.config(
   // ✅ Base ESLint recommended config
   eslint.configs.recommended,
 
+  // ✅ TypeScript-aware rules + registers the @typescript-eslint plugin/parser
+  ...tseslint.configs.recommended,
+
   // ✅ Prettier formatting
   eslintPluginPrettierRecommended,
 
   // ✅ Type-aware config — scoped only to TS files
   {
+    files: ['**/*.ts'],
     languageOptions: {
       globals: {
         ...globals.node,
@@ -26,7 +30,7 @@ export default tseslint.config(
       sourceType: 'module',
       parserOptions: {
         project: ['./tsconfig.json'],
-        tsconfigRootDir: new URL('.', import.meta.url).pathname,
+        tsconfigRootDir: import.meta.dirname,
         ecmaVersion: 'latest',
       },
     },
