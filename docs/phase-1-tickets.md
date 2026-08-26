@@ -18,6 +18,13 @@ not just read from code.
 - Ticket 82 (module-registration cleanup) is intentionally the largest/lowest-priority item here —
   it's real, but per the backlog doc's own note, it shouldn't be done incidentally alongside
   unrelated work.
+- **Ticket 62's ownership checks had already landed by the time ticket 64 (fix Jest) was picked
+  up** — `assertProgramAccess`/`assertClientProgramAccess`/`assertNoReparenting` already exist in
+  `src/common/auth/ownership.util.ts`. Ticket 64's new specs for `program`, `training-block`,
+  `training-week`, `training`, and `client-program` assert the owner-succeeds /
+  non-owner-`ForbiddenException` behavior directly, so ticket 62's DoD is now partially satisfied
+  by tests that didn't exist when that ticket's DoD was written — see the note on ticket 62's DoD
+  below. No admin-bypass test was added anywhere, so that DoD bullet stays unchecked.
 
 ## Build order
 
@@ -113,10 +120,11 @@ Shared logic lives in `src/common/auth/ownership.util.ts`:
 - [x] Ownership failure throws `ForbiddenException` (403) — decided against `NotFoundException`
   (404); see decisions above. Applied consistently across all six services.
 - [x] `ADMIN` bypass behavior decided and implemented consistently.
-- [ ] Tests (once Issue 64 lands, or written alongside if you're comfortable fixing that spec's DI
-  first) cover: owner succeeds, non-owner is rejected, admin succeeds regardless of ownership. Not
-  done here — the whole suite is DI-broken (Issue 64) and fixing that is explicitly out of scope
-  for this ticket per its own build-order note.
+- [ ] Tests cover: owner succeeds, non-owner is rejected, admin succeeds regardless of ownership.
+  **Partially done as a side effect of ticket 64** (fix Jest): `program`, `training-block`,
+  `training-week`, `training`, and `client-program`'s specs now assert owner-succeeds and
+  non-owner-`ForbiddenException`, but no test exercises the `ADMIN`-bypasses-ownership path
+  anywhere — leaving this unchecked until that's covered too.
 - [ ] Manual smoke test: existing coach/client flows in the app still work end to end. Not run —
   needs a live DB + a real coach/client/admin session; flag for whoever picks this up for review.
 
@@ -217,11 +225,48 @@ make sense to mock (e.g. `EmailService` when testing `AuthService`).
 
 ### Definition of Done
 
-- [ ] `moduleNameMapper` added; `@/`-import specs no longer fail on module resolution.
-- [ ] All 21 existing spec files pass, each asserting real behavior for at least the primary CRUD
+- [x] `moduleNameMapper` added; `@/`-import specs no longer fail on module resolution.
+- [x] All 21 existing spec files pass, each asserting real behavior for at least the primary CRUD
   path of the class under test — not just `toBeDefined()`.
-- [ ] `user` and `email` modules get real spec files where they previously had none.
-- [ ] `npm run test` is a trustworthy command again (currently isn't).
+- [x] `user` and `email` modules get real spec files where they previously had none.
+- [x] `npm run test` is a trustworthy command again (currently isn't).
+
+**Decisions/findings recorded during this pass:**
+- **A second, undocumented module-resolution gap was found and fixed alongside the `@/` one**:
+  every controller imports `Role` from the bare specifier `generated/prisma` (resolved today only
+  via `tsconfig.json`'s `baseUrl`, not a `paths` entry), and `coach.controller.ts`/`coach.module.ts`
+  additionally import from the bare `src/...` specifier. Neither resolves under Jest's default
+  resolver either, so both needed their own `moduleNameMapper` entries
+  (`^generated/(.*)$` → `<rootDir>/../generated/$1`, `^src/(.*)$` → `<rootDir>/$1`) — without them,
+  every controller spec still failed to compile even after the `@/` mapping alone.
+- **`npm run test`/`test:watch`/`test:cov` now run under `dotenv -e .env.development --`**, matching
+  the existing convention used by `dev`/`seed`/etc. Real-DB specs need `DATABASE_URL` (and other env
+  vars) in `process.env`, and nothing previously loaded `.env.development` for a bare `jest` run.
+- **Per-service split: real `PrismaModule` for services, mocked service for controllers.** Every
+  controller in this codebase only delegates to its service (no direct Prisma access), so
+  controller specs mock the service and assert delegation (correct args, id coercion, DTO
+  passthrough) — that's "the dependency that makes sense to mock" for a controller. Every service
+  spec imports the real `PrismaModule` and runs against the real dev DB (`.env.development`'s
+  `DATABASE_URL`), per the root `CLAUDE.md`'s "use real DB, don't mock Prisma" rule. `EmailService`
+  is mocked in `auth.service.spec.ts`/`coach.service.spec.ts` (genuinely external — Resend) and
+  `email.service.spec.ts` mocks the `resend` package itself so no real email is sent.
+  `auth.service.spec.ts` uses a real `JwtModule.register({ secret: 'test-jwt-secret' })` rather than
+  mocking `JwtService`, since token issuance is exactly the behavior worth exercising.
+- **Added `src/test-utils/db-test.helper.ts`** (`createDbTestingModule`, `createTestUser`,
+  `deleteTestUser`, `uniqueTag`) shared across every real-DB service spec, to avoid re-deriving the
+  same `PrismaModule`-wired `TestingModule` boilerplate and unique-fixture-naming logic in ~15
+  files. Every row a spec creates is tagged via `uniqueTag()` (`spec-test-...`) and deleted in
+  `afterAll` — verified post-run that no `spec-test-` rows remain in the dev DB. Ownership-checks
+  interaction with ticket 62 is noted in this file's top-of-file Reconciliation notes.
+- **`afterAll` cleanup is guarded against unset fixture ids.** `deleteTestUser` and every inline
+  `deleteMany({ where: { id: someId } })` in a chained-fixture spec (`training-block`,
+  `training-week`, `training`, `training-exercise`, `client-program`, `client`) checks the id is
+  defined before deleting — a bare scalar id filter in Prisma treats `undefined` as "no filter,"
+  so an unguarded call after a `beforeAll` failure partway through a fixture chain would otherwise
+  delete every row in that table, not just the spec's own rows. Every real-DB spec's `afterAll`
+  also calls `module.close()` instead of `prisma.$disconnect()` directly, so Nest's own
+  `onModuleDestroy` teardown (which includes the `$disconnect()`) runs for every provider, not just
+  `PrismaService`.
 
 ---
 
