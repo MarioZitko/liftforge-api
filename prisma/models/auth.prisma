@@ -28,6 +28,7 @@ model User {
   sessions            Session[]
   verificationTokens  VerificationToken[]
   hashedRefreshToken  String?
+  refreshTokenId      String?               @unique
   passwordResetTokens PasswordResetToken[]
 
   // Reverse auditing relations

@@ -276,9 +276,18 @@ the single matched row — not a scan-and-compare against every user.
 
 ### Definition of Done
 
-- [ ] Refresh-token lookup is O(1) via an indexed column/identifier, not a linear scan.
-- [ ] Existing login → refresh → logout flow still works end to end.
-- [ ] A Prisma migration is written and applied if a schema change is needed.
+- [x] Refresh-token lookup is O(1) via an indexed column/identifier, not a linear scan. (Added
+  `User.refreshTokenId` — a unique, indexed, non-secret lookup id issued alongside the bcrypt-hashed
+  secret; the cookie carries `${lookupId}.${secret}`, so lookup is a `findUnique` by
+  `refreshTokenId` with `bcrypt.compare` run once against the matched row.)
+- [x] Existing login → refresh → logout flow still works end to end. (Verified manually against the
+  dev DB: register → verify → login → refresh — old token rejected, new one rotated in — →
+  `/auth/me` → logout. Jest suite is still broken per Issue 64, so this couldn't be verified via
+  `npm test`.)
+- [x] A Prisma migration is written and applied if a schema change is needed.
+  (`20260826214432_add_refresh_token_lookup_id`; applied directly against the local dev DB rather
+  than via `migrate dev`, which refused to run due to a pre-existing, unrelated drift on
+  `TrainingExercise.volumeId` — not introduced by this change, flagging separately.)
 
 ---
 
