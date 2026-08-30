@@ -16,7 +16,8 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { RolesGuard } from '../auth/guards/roles.guard';
-import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 import { UserService } from './user.service';
 
 @ApiTags('Users')
@@ -78,7 +79,6 @@ export class UserController {
   @Delete(':id')
   @Roles(Role.ADMIN)
   async delete(@Param('id') id: string) {
-    console.log('Deleting user:', id); // ✅ Should print UUID
     return this.userService.delete(id);
   }
 }

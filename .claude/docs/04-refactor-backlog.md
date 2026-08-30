@@ -81,10 +81,11 @@ is the "why we think this" narrative; that file is where to check status/DoD/dep
 
 ## Low priority / hygiene
 
-12. Leftover debug statements: `user.controller.ts` (`console.log('Deleting user:', id)`),
-    `jwt.strategy.ts` (`console.log('✅ JWT payload received:', payload)` — logs decoded JWT
-    claims on every authenticated request, a minor info-leak into prod logs). Remove; use
-    `Logger` if logging is actually needed there.
+12. Leftover debug statements: ~~`user.controller.ts` (`console.log('Deleting user:', id)`)~~ —
+    removed while touching that file for Issue 71. Remaining: `jwt.strategy.ts`
+    (`console.log('✅ JWT payload received:', payload)` — logs decoded JWT claims on every
+    authenticated request, a minor info-leak into prod logs). Remove; use `Logger` if logging is
+    actually needed there.
 13. `http-exception.filter.ts` uses `console.error` instead of Nest's `Logger`.
 14. No pagination on any `findAll()` (`coach`, `program`, `exercise`, `client-program`) — fine at
     current data volume, but add `skip`/`take` for new list endpoints rather than perpetuating
