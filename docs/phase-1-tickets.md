@@ -314,9 +314,14 @@ uses) — update the controller's import, then delete `user.dto.ts`.
 
 ### Definition of Done
 
-- [ ] Only one `CreateUserDto`/`UpdateUserDto` pair exists.
-- [ ] `user.controller.ts` imports from `dto/`.
-- [ ] `@ApiProperty()`/`@ApiPropertyOptional()` present on every field.
+- [x] Only one `CreateUserDto`/`UpdateUserDto` pair exists. (Deleted `user.dto.ts`; the surviving
+  `dto/create-user.dto.ts`/`update-user.dto.ts` pair was rewritten to match the actual `User`
+  Prisma model (`email`, `password`, `name`, `role`, `emailVerified`) — the old `dto/` pair had
+  stale fields, `username`/`firstName`/`lastName`/`isActive`, that don't exist on the model and
+  were never used.)
+- [x] `user.controller.ts` imports from `dto/`. (`user.service.ts` updated too, since it imported
+  from the same deleted flat file.)
+- [x] `@ApiProperty()`/`@ApiPropertyOptional()` present on every field.
 
 ---
 
