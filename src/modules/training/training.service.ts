@@ -3,6 +3,7 @@ import {
   assertProgramAccess,
   RequestingUser,
 } from '@/common/auth/ownership.util';
+import { resolveClientId, resolveCoachId } from '@/common/scoped-query.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateTrainingDto } from './dto/create-training.dto';
@@ -82,8 +83,8 @@ export class TrainingService {
     dateFrom: string,
     dateTo: string,
   ): Promise<TrainingCalendarItemDto[]> {
-    const coach = await this.prisma.coach.findUnique({ where: { userId } });
-    if (!coach) return [];
+    const coachId = await resolveCoachId(this.prisma, userId);
+    if (!coachId) return [];
 
     const trainings = await this.prisma.training.findMany({
       where: {
@@ -92,7 +93,7 @@ export class TrainingService {
           block: {
             program: {
               clientProgram: {
-                client: { coachId: coach.id },
+                client: { coachId },
               },
             },
           },
@@ -148,8 +149,8 @@ export class TrainingService {
     dateFrom: string,
     dateTo: string,
   ): Promise<TrainingCalendarItemDto[]> {
-    const client = await this.prisma.client.findUnique({ where: { userId } });
-    if (!client) return [];
+    const clientId = await resolveClientId(this.prisma, userId);
+    if (!clientId) return [];
 
     const trainings = await this.prisma.training.findMany({
       where: {
@@ -157,7 +158,7 @@ export class TrainingService {
         week: {
           block: {
             program: {
-              clientProgram: { clientId: client.id },
+              clientProgram: { clientId },
             },
           },
         },

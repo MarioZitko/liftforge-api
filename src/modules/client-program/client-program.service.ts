@@ -3,6 +3,7 @@ import {
   assertNoReparenting,
   RequestingUser,
 } from '@/common/auth/ownership.util';
+import { resolveClientId, resolveCoachId } from '@/common/scoped-query.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClientProgramDto } from './dto/create-client-program.dto';
@@ -46,20 +47,20 @@ export class ClientProgramService {
   }
 
   async findForCoach(userId: string) {
-    const coach = await this.prisma.coach.findUnique({ where: { userId } });
-    if (!coach) return [];
+    const coachId = await resolveCoachId(this.prisma, userId);
+    if (!coachId) return [];
     return this.prisma.clientProgram.findMany({
-      where: { coachId: coach.id },
+      where: { coachId },
       orderBy: { name: 'asc' },
       include: clientProgramIncludes,
     });
   }
 
   async findForClient(userId: string) {
-    const client = await this.prisma.client.findUnique({ where: { userId } });
-    if (!client) return [];
+    const clientId = await resolveClientId(this.prisma, userId);
+    if (!clientId) return [];
     return this.prisma.clientProgram.findMany({
-      where: { clientId: client.id },
+      where: { clientId },
       orderBy: { name: 'asc' },
       include: { program: true },
     });

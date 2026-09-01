@@ -1,4 +1,5 @@
 import { assertProgramAccess, RequestingUser } from '@/common/auth/ownership.util';
+import { buildOnlyMineFilter } from '@/common/scoped-query.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProgramDto } from './dto/create-program.dto';
@@ -30,11 +31,7 @@ export class ProgramService {
 
   async findForCoach(userId: string, onlyMine: boolean) {
     return this.prisma.program.findMany({
-      where: onlyMine
-        ? { createdById: userId }
-        : {
-            OR: [{ createdById: null }, { createdById: userId }],
-          },
+      where: buildOnlyMineFilter(userId, onlyMine),
       orderBy: { name: 'asc' },
     });
   }

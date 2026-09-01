@@ -383,11 +383,12 @@ listed above.
 
 ### Definition of Done
 
-- [ ] One shared helper for profile resolution, used by both `training.service.ts` and
-  `client-program.service.ts`.
-- [ ] One shared helper for the "onlyMine" filter, used by `program.service.ts` and
-  `exercise.service.ts`.
-- [ ] No behavior change — existing calendar/list endpoints return the same results as before.
+- [x] One shared helper for profile resolution, used by both `training.service.ts` and
+  `client-program.service.ts`. (`resolveCoachId`/`resolveClientId` in new
+  `src/common/scoped-query.util.ts`.)
+- [x] One shared helper for the "onlyMine" filter, used by `program.service.ts` and
+  `exercise.service.ts`. (`buildOnlyMineFilter` in the same file.)
+- [x] No behavior change — existing calendar/list endpoints return the same results as before.
 
 ---
 
