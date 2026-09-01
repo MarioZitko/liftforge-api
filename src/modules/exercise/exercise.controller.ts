@@ -12,7 +12,6 @@ import {
   Patch,
   Post,
   Query,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -43,10 +42,7 @@ export class ExerciseController {
     @Query('onlyMine') onlyMine: string, // expects "true" or "false"
   ) {
     const onlyMyExercises = onlyMine === 'true';
-    if (!user.userId) {
-      throw new UnauthorizedException('Missing user ID in token.');
-    }
-    return this.service.findForCoach(user.userId, onlyMyExercises);
+    return this.service.findForCoach(user.userId!, onlyMyExercises);
   }
 
   @Get(':id')

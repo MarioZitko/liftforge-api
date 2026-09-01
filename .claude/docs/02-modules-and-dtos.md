@@ -51,14 +51,11 @@ are good references) — don't grow the loose-registration list further.
 
 ## Authorization pattern
 
-- `@CurrentUser()` on a controller method gives you the JWT payload. Several controllers
-  (`program`, `exercise`, `client-program`) repeat the same guard clause:
-  ```ts
-  if (!user.userId) { throw new UnauthorizedException('Missing user ID in token.'); }
-  ```
-  This is redundant given `JwtAuthGuard` already guarantees `user.userId` is present — don't add a
-  fourth copy of this check to a new controller; it's dead weight (tracked for consolidation in
-  [refactor-backlog.md](04-refactor-backlog.md)).
+- `@CurrentUser()` on a controller method gives you the JWT payload. `program`, `exercise`, and
+  `client-program` used to each repeat a redundant `if (!user.userId) { throw new
+  UnauthorizedException(...) }` guard clause even though `JwtAuthGuard` already guarantees
+  `user.userId` is present — removed in Issue 74. Don't add it to a new controller; use
+  `user.userId!` directly, matching every other method in these controllers.
 - **There is currently no resource-ownership check anywhere** — e.g. nothing stops one coach from
   fetching or mutating another coach's `Program`/`TrainingBlock`/`Client` by guessing/incrementing
   an ID; services only check existence (`NotFoundException`), never ownership

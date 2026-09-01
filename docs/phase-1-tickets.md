@@ -412,8 +412,10 @@ Delete the redundant check in each affected controller method.
 
 ### Definition of Done
 
-- [ ] Guard clause removed from all three controllers.
-- [ ] No new TypeScript errors from `user.userId` being treated as possibly undefined downstream.
+- [x] Guard clause removed from all three controllers.
+- [x] No new TypeScript errors from `user.userId` being treated as possibly undefined downstream
+  (call sites now use `user.userId!`, matching the pattern already used by every other method in
+  these same controllers).
 
 ---
 
