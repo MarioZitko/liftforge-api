@@ -67,7 +67,15 @@ export class UserController {
   @Post()
   @Roles(Role.ADMIN)
   async create(@Body() dto: CreateUserDto) {
-    return this.userService.create(dto);
+    const user = await this.userService.create(dto);
+    return {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      role: user.role,
+      emailVerified: user.emailVerified,
+      createdAt: user.createdAt,
+    };
   }
 
   @Put(':id')
