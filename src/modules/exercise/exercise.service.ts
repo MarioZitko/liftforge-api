@@ -1,5 +1,6 @@
 // src/modules/exercise/exercise.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { buildOnlyMineFilter } from '@/common/scoped-query.util';
 import { PrismaService } from '@/prisma/prisma.service';
 import { CreateExerciseDto } from './dto/create-exercise.dto';
 import { UpdateExerciseDto } from './dto/update-exercise.dto';
@@ -28,11 +29,7 @@ export class ExerciseService {
 
   async findForCoach(userId: string, onlyMine: boolean) {
     return this.prisma.exercise.findMany({
-      where: onlyMine
-        ? { createdById: userId }
-        : {
-            OR: [{ createdById: null }, { createdById: userId }],
-          },
+      where: buildOnlyMineFilter(userId, onlyMine),
       orderBy: { name: 'asc' },
     });
   }

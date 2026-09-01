@@ -59,11 +59,15 @@ is the "why we think this" narrative; that file is where to check status/DoD/dep
    detail; `training-exercise.service.ts` `create()` and `training.service.ts`
    `scheduleProgram()` already show the correct pattern to copy.
 
-8. **Duplicated "resolve profile by userId, then query" logic** copy-pasted rather than
-   extracted: `training.service.ts`'s `findForCoachCalendar`/`findForClientCalendar` (~65-line
-   near-identical blocks), `client-program.service.ts`'s `findForCoach`/`findForClient`, and the
-   `createdById ? {...} : {OR:[...]}` "onlyMine" filter repeated verbatim in `program.service.ts`
-   and `exercise.service.ts`. Worth a shared helper if touching any of these again.
+8. ~~**Duplicated "resolve profile by userId, then query" logic**~~ — **resolved in Issue 73.**
+   `resolveCoachId`/`resolveClientId` (`src/common/scoped-query.util.ts`) now back
+   `training.service.ts`'s `findForCoachCalendar`/`findForClientCalendar` and
+   `client-program.service.ts`'s `findForCoach`/`findForClient`; `buildOnlyMineFilter` (same file)
+   backs the `createdById ? {...} : {OR:[...]}` filter in `program.service.ts` and
+   `exercise.service.ts`. Note: the rest of the ~65-line near-identical `select`/`map` blocks in
+   `training.service.ts`'s two calendar methods (beyond the id-resolution portion) is still
+   duplicated — out of scope for Issue 73, which only covered profile resolution + the onlyMine
+   filter.
 
 9. **Redundant `if (!user.userId) throw new UnauthorizedException(...)` guard** repeated in
    `program.controller.ts`, `exercise.controller.ts`, `client-program.controller.ts` — `userId` is
