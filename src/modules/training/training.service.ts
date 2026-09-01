@@ -282,8 +282,11 @@ export class TrainingService {
     );
 
     const teIds = training.trainingExercises.map((te) => te.id);
-    await this.prisma.volume.deleteMany({ where: { trainingExerciseId: { in: teIds } } });
-    await this.prisma.trainingExercise.deleteMany({ where: { trainingId: id } });
-    return this.prisma.training.delete({ where: { id } });
+    const [, , deleted] = await this.prisma.$transaction([
+      this.prisma.volume.deleteMany({ where: { trainingExerciseId: { in: teIds } } }),
+      this.prisma.trainingExercise.deleteMany({ where: { trainingId: id } }),
+      this.prisma.training.delete({ where: { id } }),
+    ]);
+    return deleted;
   }
 }

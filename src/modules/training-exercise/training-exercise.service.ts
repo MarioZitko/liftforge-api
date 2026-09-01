@@ -104,7 +104,7 @@ export class TrainingExerciseService {
   }
 
   async reorder(trainingId: number, orderedIds: number[]) {
-    await Promise.all(
+    await this.prisma.$transaction(
       orderedIds.map((id, index) =>
         this.prisma.trainingExercise.update({
           where: { id },

@@ -49,32 +49,34 @@ export class UserService {
 
   async create(dto: CreateUserDto) {
     const hashedPassword = await bcrypt.hash(dto.password, 10);
-    const user = await this.prisma.user.create({
-      data: {
-        email: dto.email,
-        password: hashedPassword,
-        name: dto.name,
-        role: dto.role,
-      },
-    });
+    return this.prisma.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          email: dto.email,
+          password: hashedPassword,
+          name: dto.name,
+          role: dto.role,
+        },
+      });
 
-    // Create Client or Coach profile based on role
-    if (dto.role === 'CLIENT') {
-      await this.prisma.client.create({
-        data: {
-          userId: user.id,
-          // Add other client fields from dto if needed
-        },
-      });
-    } else if (dto.role === 'COACH') {
-      await this.prisma.coach.create({
-        data: {
-          userId: user.id,
-          // Add other coach fields from dto if needed
-        },
-      });
-    }
-    return user;
+      // Create Client or Coach profile based on role
+      if (dto.role === 'CLIENT') {
+        await tx.client.create({
+          data: {
+            userId: user.id,
+            // Add other client fields from dto if needed
+          },
+        });
+      } else if (dto.role === 'COACH') {
+        await tx.coach.create({
+          data: {
+            userId: user.id,
+            // Add other coach fields from dto if needed
+          },
+        });
+      }
+      return user;
+    });
   }
 
   async update(id: string, dto: UpdateUserDto) {
@@ -116,9 +118,22 @@ export class UserService {
 
   async delete(id: string) {
     // Delete related Client or Coach profile if exists
-    await this.prisma.client.deleteMany({ where: { userId: id } });
-    await this.prisma.coach.deleteMany({ where: { userId: id } });
+    const [, , deleted] = await this.prisma.$transaction([
+      this.prisma.client.deleteMany({ where: { userId: id } }),
+      this.prisma.coach.deleteMany({ where: { userId: id } }),
+      this.prisma.user.delete({
+        where: { id },
+        select: {
+          id: true,
+          email: true,
+          name: true,
+          role: true,
+          emailVerified: true,
+          createdAt: true,
+        },
+      }),
+    ]);
 
-    return this.prisma.user.delete({ where: { id } });
+    return deleted;
   }
 }
