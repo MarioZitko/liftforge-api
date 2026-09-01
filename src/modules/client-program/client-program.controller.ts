@@ -10,7 +10,6 @@ import {
   Param,
   Patch,
   Post,
-  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
@@ -36,19 +35,13 @@ export class ClientProgramController {
 
   @Get('my')
   async getCoachClientPrograms(@CurrentUser() user: NonNullable<AuthenticatedRequest['user']>) {
-    if (!user.userId) {
-      throw new UnauthorizedException('Missing user ID in token.');
-    }
-    return this.service.findForCoach(user.userId);
+    return this.service.findForCoach(user.userId!);
   }
 
   @Get('for-me')
   @Roles(Role.CLIENT, Role.COACH, Role.ADMIN)
   async getMyClientPrograms(@CurrentUser() user: NonNullable<AuthenticatedRequest['user']>) {
-    if (!user.userId) {
-      throw new UnauthorizedException('Missing user ID in token.');
-    }
-    return this.service.findForClient(user.userId);
+    return this.service.findForClient(user.userId!);
   }
 
   @Get(':id')

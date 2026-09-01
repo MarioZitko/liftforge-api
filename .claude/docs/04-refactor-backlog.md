@@ -69,9 +69,10 @@ is the "why we think this" narrative; that file is where to check status/DoD/dep
    duplicated — out of scope for Issue 73, which only covered profile resolution + the onlyMine
    filter.
 
-9. **Redundant `if (!user.userId) throw new UnauthorizedException(...)` guard** repeated in
-   `program.controller.ts`, `exercise.controller.ts`, `client-program.controller.ts` — `userId` is
-   already guaranteed by `JwtAuthGuard`. Low-risk cleanup, not urgent.
+9. ~~**Redundant `if (!user.userId) throw new UnauthorizedException(...)` guard**~~ — **resolved
+   in Issue 74.** Removed from `program.controller.ts`, `exercise.controller.ts`, and
+   `client-program.controller.ts`; call sites now use `user.userId!`, matching the pattern already
+   used by every other method in these controllers.
 
 10. **`.prettierrc` has a structurally invalid nested `"rules"` key** — the intended
     `endOfLine: "auto"` never applies, so `prettier --check` currently flags ~120 files (CRLF vs.

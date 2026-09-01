@@ -5,7 +5,10 @@ import { PrismaService } from '@/prisma/prisma.service';
  * profile. Used anywhere a service needs to scope a query to "resources belonging to this
  * coach" starting from a JWT `userId`.
  */
-export async function resolveCoachId(prisma: PrismaService, userId: string): Promise<string | null> {
+export async function resolveCoachId(
+  prisma: PrismaService,
+  userId: string,
+): Promise<string | null> {
   const coach = await prisma.coach.findUnique({ where: { userId }, select: { id: true } });
   return coach?.id ?? null;
 }
@@ -15,7 +18,10 @@ export async function resolveCoachId(prisma: PrismaService, userId: string): Pro
  * profile. Used anywhere a service needs to scope a query to "resources belonging to this
  * client" starting from a JWT `userId`.
  */
-export async function resolveClientId(prisma: PrismaService, userId: string): Promise<string | null> {
+export async function resolveClientId(
+  prisma: PrismaService,
+  userId: string,
+): Promise<string | null> {
   const client = await prisma.client.findUnique({ where: { userId }, select: { id: true } });
   return client?.id ?? null;
 }
