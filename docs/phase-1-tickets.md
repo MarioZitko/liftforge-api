@@ -450,11 +450,16 @@ Remove the nested `"rules"` object entirely.
 
 ### Definition of Done
 
-- [ ] `.prettierrc` is valid (no "ignored unknown option" warning from Prettier).
-- [ ] `npx prettier --check "src/**/*.ts"` result is understood and reported honestly — this
+- [x] `.prettierrc` is valid (no "ignored unknown option" warning from Prettier).
+- [x] `npx prettier --check "src/**/*.ts"` result is understood and reported honestly — this
   ticket fixes the *config*, not necessarily every file; decide separately (and note the decision
   here) whether a one-time repo-wide `prettier --write` is worth its own, separate, reviewed
   change.
+
+**Decision (recorded):** with the invalid `"rules"` key removed and `endOfLine` moved to a
+top-level key, `npx prettier --check "src/**/*.ts"` now passes cleanly with zero files flagged —
+the ~120-file discrepancy was entirely caused by the broken config (CRLF vs. Prettier's default
+LF), not by actual formatting drift in the code. No repo-wide `prettier --write` is needed.
 
 ---
 
