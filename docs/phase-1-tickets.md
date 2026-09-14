@@ -509,8 +509,8 @@ Delete both `console.log` calls. If logging is genuinely wanted here, use Nest's
 
 ### Definition of Done
 
-- [ ] Both `console.log` calls removed.
-- [ ] No decoded JWT payload logged anywhere by default.
+- [x] Both `console.log` calls removed.
+- [x] No decoded JWT payload logged anywhere by default.
 
 ---
 
