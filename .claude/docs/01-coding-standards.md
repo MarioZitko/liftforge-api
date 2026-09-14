@@ -61,11 +61,8 @@ endpoints even though older ones don't have it yet.
 ## Logging
 
 - Use Nest's built-in `Logger`, not `console.log`/`console.error`. `src/common/filters/http-exception.filter.ts`
-  currently uses `console.error`, and there's a leftover debug statement in `jwt.strategy.ts`
-  (`console.log('✅ JWT payload received:', payload)` — logs decoded JWT claims on every
-  authenticated request, which is an unnecessary info-leak into prod logs). Don't add new
-  `console.log` debug statements; use `Logger` if you need to add logging, and remove that one if
-  you're touching that file anyway.
+  currently uses `console.error` (tracked as Issue 80). Don't add new `console.log` debug
+  statements; use `Logger` if you need to add logging.
 
 ## `any` usage
 
